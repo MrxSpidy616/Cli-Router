@@ -47,24 +47,51 @@
       <section class="panel input-panel">
         <div class="panel-heading">
           <h2>Describe how you feel</h2>
-          <p>Choose a common example or describe your symptoms in your own words.</p>
+          <p>Tap a body area below to pick symptoms, or type in your own words.</p>
         </div>
 
-        <!-- Quick Example Chips -->
-        <div class="chips-group">
-          <span class="chips-label">Quick Examples:</span>
-          <div class="chips-list">
-            <button type="button" class="chip-btn" data-case="respiratory">Cough & Mild Fever</button>
-            <button type="button" class="chip-btn" data-case="cardiac">Chest Pressure</button>
-            <button type="button" class="chip-btn" data-case="abdominal">Stomach Pain & Nausea</button>
-            <button type="button" class="chip-btn" data-case="headache">Throbbing Headache</button>
+        <!-- Minimalist Body Area Selector -->
+        <div class="body-zone-section">
+          <label class="label">Where is your discomfort located?</label>
+          <div class="body-zones-grid">
+            <button type="button" class="zone-btn active" data-zone="head">
+              <span class="zone-icon">🧠</span>
+              <span class="zone-name">Head & Senses</span>
+            </button>
+            <button type="button" class="zone-btn" data-zone="chest">
+              <span class="zone-icon">🫁</span>
+              <span class="zone-name">Chest & Lungs</span>
+            </button>
+            <button type="button" class="zone-btn" data-zone="stomach">
+              <span class="zone-icon">🩹</span>
+              <span class="zone-name">Stomach & Gut</span>
+            </button>
+            <button type="button" class="zone-btn" data-zone="joints">
+              <span class="zone-icon">🦴</span>
+              <span class="zone-name">Joints & Spine</span>
+            </button>
+            <button type="button" class="zone-btn" data-zone="general">
+              <span class="zone-icon">⚡</span>
+              <span class="zone-name">Skin & Fever</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Contextual Symptom Tags for Active Zone -->
+          <div id="zone-symptoms-container" class="zone-symptoms-box">
+            <span class="symptoms-box-hint">Tap to add symptoms:</span>
+            <div id="zone-symptoms-list" class="zone-symptoms-list">
+              <!-- Dynamically populated tags based on selected body zone -->
+            </div>
           </div>
         </div>
 
         <form id="symptom-form">
           <div class="input-block">
-            <label for="symptoms-input" class="label">What symptoms are you experiencing?</label>
-            <textarea id="symptoms-input" rows="4" placeholder="Example: I've had a sore throat, runny nose, and feeling unusually tired for the past 3 days..." required></textarea>
+            <div class="textarea-header">
+              <label for="symptoms-input" class="label">Your Symptoms Description</label>
+              <button type="button" id="btn-clear-symptoms" class="btn-clear-text" title="Clear text">Clear</button>
+            </div>
+            <textarea id="symptoms-input" rows="4" placeholder="Select tags above or type your symptoms here (e.g. I have a sore throat, runny nose, and feel tired)..." required></textarea>
           </div>
 
           <div class="input-row">
@@ -114,7 +141,7 @@
         <div id="results-empty" class="empty-state">
           <div class="empty-illustration">🌿</div>
           <h3>Ready when you are</h3>
-          <p>Fill in your symptoms on the left and click <strong>"Review My Symptoms"</strong> to get a clear, easy-to-read explanation.</p>
+          <p>Pick your body area or describe symptoms on the left, then click <strong>"Review My Symptoms"</strong>.</p>
           <div class="features-list">
             <div class="feature-item"><span>✓</span> Plain English guidance</div>
             <div class="feature-item"><span>✓</span> Percentage likelihoods</div>

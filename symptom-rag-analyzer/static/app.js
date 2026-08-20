@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const historyInput = document.getElementById("history-input");
   const severityRange = document.getElementById("severity-range");
   const severityVal = document.getElementById("severity-val");
+  const btnClearSymptoms = document.getElementById("btn-clear-symptoms");
   
   const resultsEmpty = document.getElementById("results-empty");
   const resultsLoading = document.getElementById("results-loading");
@@ -17,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const rankingsList = document.getElementById("rankings-list");
   const markdownOutput = document.getElementById("markdown-output");
   const doctorEvidenceList = document.getElementById("doctor-evidence-list");
+
+  // Body Zone Elements
+  const zoneButtons = document.querySelectorAll(".zone-btn");
+  const zoneSymptomsList = document.getElementById("zone-symptoms-list");
 
   // View Switchers
   const btnViewPatient = document.getElementById("btn-view-patient");
@@ -55,53 +60,104 @@ document.addEventListener("DOMContentLoaded", () => {
     doctorViewContainer.classList.remove("hidden");
   });
 
-  // Everyday Case Presets
-  const PRESETS = {
-    respiratory: {
-      symptoms: "Deep wet cough with yellow phlegm for 4 days, mild fever of 100°F, feeling tired and sore in the chest.",
-      age: "62",
-      duration: "4 days",
-      history: "Seasonal allergies",
-      severity: 5
-    },
-    cardiac: {
-      symptoms: "Heavy tight pressure in the center of the chest spreading to the left arm, broke into a cold sweat, short of breath.",
-      age: "65",
-      duration: "45 minutes",
-      history: "High blood pressure",
-      severity: 9
-    },
-    abdominal: {
-      symptoms: "Constant dull ache around belly button that moved to the lower right side, hurts when walking, feeling sick to stomach.",
-      age: "28",
-      duration: "1 day",
-      history: "None",
-      severity: 7
-    },
-    headache: {
-      symptoms: "Pounding headache on one side of my head, seeing shimmering lights, sensitive to bright sunlight and feeling nauseous.",
-      age: "45",
-      duration: "6 hours",
-      history: "Occasional headaches",
-      severity: 6
-    }
+  // Clear Textarea Handler
+  btnClearSymptoms?.addEventListener("click", () => {
+    symptomsInput.value = "";
+    document.querySelectorAll(".symptom-tag-btn").forEach(b => b.classList.remove("added"));
+    symptomsInput.focus();
+  });
+
+  // Body Area Symptom Catalogs
+  const BODY_ZONE_SYMPTOMS = {
+    head: [
+      "Throbbing Headache",
+      "Dizziness & Lightheaded",
+      "Sore Scratchy Throat",
+      "Vision Shimmering / Aura",
+      "Runny / Stuffy Nose",
+      "Ear Ache or Ringing"
+    ],
+    chest: [
+      "Wet Cough with Phlegm",
+      "Dry Persistent Cough",
+      "Tight Chest Pressure",
+      "Shortness of Breath",
+      "Wheezing & Whistling Breath",
+      "Sharp Pain when Breathing In"
+    ],
+    stomach: [
+      "Dull Upper Belly Ache",
+      "Sharp Lower Right Pain",
+      "Burning Acid Heartburn",
+      "Nausea & Sick to Stomach",
+      "Bloating & Discomfort",
+      "Loose Stools / Diarrhea"
+    ],
+    joints: [
+      "Stiff Morning Joints",
+      "Lower Back Pain",
+      "Swollen Knee or Ankle",
+      "Muscle Aches & Soreness",
+      "Shooting Pain down Leg",
+      "Neck Stiffness"
+    ],
+    general: [
+      "Mild Fever & Chills",
+      "Unusual Fatigue & Tiredness",
+      "Itchy Red Skin Rash",
+      "Night Sweats",
+      "Loss of Taste or Smell",
+      "Unexplained Weight Loss"
+    ]
   };
 
-  // Preset Chips Listener
-  document.querySelectorAll(".chip-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const caseKey = btn.dataset.case;
-      const data = PRESETS[caseKey];
-      if (data) {
-        symptomsInput.value = data.symptoms;
-        ageInput.value = data.age;
-        durationInput.value = data.duration;
-        historyInput.value = data.history;
-        severityRange.value = data.severity;
-        updateSeverityLabel(data.severity);
+  // Render Symptom Tags for Active Body Zone
+  function renderZoneSymptoms(zoneKey) {
+    if (!zoneSymptomsList) return;
+    zoneSymptomsList.innerHTML = "";
+    const symptoms = BODY_ZONE_SYMPTOMS[zoneKey] || [];
+    
+    symptoms.forEach(sym => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "symptom-tag-btn";
+      
+      // Check if already in input
+      if (symptomsInput.value.toLowerCase().includes(sym.toLowerCase())) {
+        btn.classList.add("added");
       }
+      
+      btn.textContent = `+ ${sym}`;
+      
+      btn.addEventListener("click", () => {
+        let currentText = symptomsInput.value.trim();
+        if (currentText) {
+          if (!currentText.toLowerCase().includes(sym.toLowerCase())) {
+            symptomsInput.value = `${currentText}, ${sym}`;
+            btn.classList.add("added");
+          }
+        } else {
+          symptomsInput.value = `I am experiencing ${sym.toLowerCase()}`;
+          btn.classList.add("added");
+        }
+      });
+      
+      zoneSymptomsList.appendChild(btn);
+    });
+  }
+
+  // Zone Button Listeners
+  zoneButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      zoneButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const zoneKey = btn.dataset.zone;
+      renderZoneSymptoms(zoneKey);
     });
   });
+
+  // Initial render with 'head'
+  renderZoneSymptoms("head");
 
   // Severity Slider
   severityRange.addEventListener("input", (e) => {
