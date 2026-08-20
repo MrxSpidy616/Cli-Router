@@ -1,0 +1,164 @@
+[
+  {
+    "case_id": "CASE-EV-001",
+    "timestamp": "2026-08-10T14:22:10Z",
+    "patient_demographics": "34yo Male, Non-smoker",
+    "presented_symptoms": [
+      "sharp right lower abdominal pain",
+      "low grade fever",
+      "anorexia for 18 hours"
+    ],
+    "retrieved_evidence": [
+      "KB-007 (Acute Appendicitis)",
+      "WSES Jerusalem Guidelines"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Acute Appendicitis",
+        "percentage": 78
+      },
+      {
+        "condition": "Mesenteric Adenitis",
+        "percentage": 14
+      },
+      {
+        "condition": "Nephrolithiasis (Renal Colic)",
+        "percentage": 8
+      }
+    ],
+    "outcome_validation": "Confirmatory CT scan showed 9mm inflamed appendix without perforation. Laparoscopic appendectomy confirmed acute uncomplicated appendicitis.",
+    "clinical_takeaway": "Rapid progression of periumbilical pain shifting to right lower quadrant with positive rebound tenderness yields high pre-test probability for appendicitis."
+  },
+  {
+    "case_id": "CASE-EV-002",
+    "timestamp": "2026-08-15T09:15:33Z",
+    "patient_demographics": "58yo Female, Diabetic, Hypertensive",
+    "presented_symptoms": [
+      "burning retrosternal chest pain after meals",
+      "occasional radiation to throat",
+      "worse lying down"
+    ],
+    "retrieved_evidence": [
+      "KB-004 (GERD)",
+      "KB-003 (Acute Coronary Syndrome)"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Gastroesophageal Reflux Disease (GERD)",
+        "percentage": 58
+      },
+      {
+        "condition": "Atypical Cardiac Ischemia (ACS in Diabetic)",
+        "percentage": 32
+      },
+      {
+        "condition": "Esophageal Spasm",
+        "percentage": 10
+      }
+    ],
+    "outcome_validation": "Urgent ECG and serial troponins were negative. Patient improved on high-dose PPI; followup endoscopy confirmed Grade B reflux esophagitis.",
+    "clinical_takeaway": "In diabetics, atypical presentations of myocardial ischemia must be ruled out with ECG/troponin even when symptoms strongly suggest benign acid reflux."
+  },
+  {
+    "case_id": "CASE-EV-003",
+    "timestamp": "2026-08-20T17:58:53.109417Z",
+    "patient_demographics": "55yo Maleyo, History: Hypertension, Hyperlipidemia",
+    "presented_symptoms": [
+      "sharp chest pain radiating to left arm and cold sweats"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Acute Coronary Syndrome (Myocardial Infarction / Angina)",
+        "icd10": "I21.9",
+        "system": "Cardiovascular",
+        "percentage": 71
+      },
+      {
+        "condition": "Community-Acquired Pneumonia",
+        "icd10": "J18.9",
+        "system": "Respiratory",
+        "percentage": 29
+      }
+    ],
+    "clinical_takeaway": "### 🚨 Clinical Triage & Risk Assessment\n- **Triage Priority:** Standard Ambulatory / Urgent Primary Care Review.\n- **Red Flag Monitoring:** Monitor for acute shortness of breath, sustained fever >38.5°C, or severe focal pain.\n\n### 📊 Differential Diagnosis & Probability Ranking\n- **Acute Coronary Syn",
+    "outcome_validation": "AI CDS analysis generated with RAG mode."
+  },
+  {
+    "case_id": "CASE-EV-004",
+    "timestamp": "2026-08-20T17:59:11.737343Z",
+    "patient_demographics": "35yo Femaleyo, History: No major chronic illnesses",
+    "presented_symptoms": [
+      "persistent productive cough with yellow phlegm",
+      "low fever 38C",
+      "fatigue for 5 days"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Primary Clinical Differential",
+        "percentage": 65
+      },
+      {
+        "condition": "Secondary Differential",
+        "percentage": 25
+      },
+      {
+        "condition": "Alternative / Benign Etiology",
+        "percentage": 10
+      }
+    ],
+    "clinical_takeaway": "## 🚨 Triage & Emergency Warning\n\n* **Current Status:** **MODERATE RISK / NON-EMERGENCY** (at presentation)\n* **Urgent Care Red Flags:** Although your current presentation indicates a moderate, non-emergent lower respiratory pattern, you must seek **IMMEDIATE EMERGENCY MEDICAL CARE (call 911 or visit",
+    "outcome_validation": "AI CDS analysis generated with RAG mode."
+  },
+  {
+    "case_id": "CASE-EV-005",
+    "timestamp": "2026-08-20T17:59:26.665607Z",
+    "patient_demographics": "Adult",
+    "presented_symptoms": [
+      "productive cough",
+      "low fever",
+      "fatigue"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Primary Clinical Differential",
+        "percentage": 65
+      },
+      {
+        "condition": "Secondary Differential",
+        "percentage": 25
+      },
+      {
+        "condition": "Alternative / Benign Etiology",
+        "percentage": 10
+      }
+    ],
+    "clinical_takeaway": "<medical_knowledge_context>\n- Productive cough, low-grade fever, and fatigue in an adult without chronic medical history present a classic lower respiratory tract symptom complex.\n- Primary diagnostic differentiation centers between self-limiting viral/post-viral lower respiratory inflammation (Acut",
+    "outcome_validation": "AI CDS analysis generated with RAG mode."
+  },
+  {
+    "case_id": "CASE-EV-006",
+    "timestamp": "2026-08-20T17:59:43.570172Z",
+    "patient_demographics": "Adult",
+    "presented_symptoms": [
+      "productive cough",
+      "low fever",
+      "fatigue"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Primary Clinical Differential",
+        "percentage": 65
+      },
+      {
+        "condition": "Secondary Differential",
+        "percentage": 25
+      },
+      {
+        "condition": "Alternative / Benign Etiology",
+        "percentage": 10
+      }
+    ],
+    "clinical_takeaway": "---\n\n### 1. 🚨 Triage & Emergency Warning\n\n* **Current Triage Status:** **MODERATE RISK / NON-EMERGENCY** (At Present Presentation)\n* **Urgent Care Red Flag Alert:** While the current reported presentation (productive cough, low fever, fatigue, severity 5/10) does not indicate an immediate life-threa",
+    "outcome_validation": "AI CDS analysis generated with RAG mode."
+  }
+]

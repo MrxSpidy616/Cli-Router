@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Decision Support (CDS) — AI Symptom RAG Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation & Governance Bar -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo-area">
+        <div class="medical-cross-icon">⚕️</div>
+        <div>
+          <h1>AegisMed CDS <span class="badge-cds">RAG + Long-Context</span></h1>
+          <p class="subtitle">AI-Powered Symptom Analysis & Clinical Decision Support Architecture</p>
+        </div>
+      </div>
+
+      <div class="header-metrics">
+        <div class="metric-pill" title="Authoritative Clinical Practice Guidelines">
+          <span class="dot green"></span>
+          <span class="label">Clinical KB:</span>
+          <strong id="stat-kb-count">-</strong>
+        </div>
+        <div class="metric-pill" title="Historical cases in self-evolving prompt memory">
+          <span class="dot purple"></span>
+          <span class="label">Evolving Cases:</span>
+          <strong id="stat-evolving-count">-</strong>
+        </div>
+        <div class="metric-pill" title="Live research reports cached">
+          <span class="dot blue"></span>
+          <span class="label">Research Cache:</span>
+          <strong id="stat-research-count">-</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mandatory FDA/WHO Regulatory Disclaimer Banner -->
+  <div class="safety-banner">
+    <div class="banner-inner">
+      <span class="banner-icon">⚖️</span>
+      <span class="banner-text">
+        <strong>Clinical Decision Support (CDS) Notice:</strong> This software is engineered under <strong>FDA CDS Guidance</strong> and <strong>WHO AI Healthcare Ethics</strong>. All percentage outputs are algorithmic estimates for clinical reference, not autonomous medical diagnoses. Immediate emergency care is required for red-flag symptoms.
+      </span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="main-grid">
+
+      <!-- Left Column: Input Form & Configuration -->
+      <section class="card input-panel">
+        <div class="panel-header">
+          <h2>🩺 Patient Symptom Input</h2>
+          <span class="panel-subtitle">Enter clinical presentation for differential ranking</span>
+        </div>
+
+        <!-- Quick Sample Presets -->
+        <div class="sample-presets">
+          <span class="preset-label">Quick Clinical Cases:</span>
+          <button type="button" class="btn-preset" data-case="respiratory">🫁 Acute Bronchitis / Cough</button>
+          <button type="button" class="btn-preset" data-case="cardiac">❤️ Retrosternal Chest Pain</button>
+          <button type="button" class="btn-preset" data-case="abdominal">🩹 RLQ Abdominal Pain</button>
+          <button type="button" class="btn-preset" data-case="headache">🧠 Unilateral Migraine</button>
+        </div>
+
+        <form id="symptom-form">
+          <div class="form-group">
+            <label for="symptoms-input">Presenting Symptoms <span class="required">*</span></label>
+            <textarea id="symptoms-input" rows="4" placeholder="Describe symptoms in detail (e.g., persistent dry cough for 5 days, low grade fever, mild chest discomfort, fatigue)..." required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="age-input">Age / Demographics</label>
+              <input type="text" id="age-input" placeholder="e.g., 42yo Male">
+            </div>
+            <div class="form-group col-half">
+              <label for="duration-input">Symptom Duration</label>
+              <input type="text" id="duration-input" placeholder="e.g., 4 days, sudden onset">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="history-input">Past Medical History / Comorbidities</label>
+            <input type="text" id="history-input" placeholder="e.g., Hypertension, Type 2 Diabetes, Non-smoker">
+          </div>
+
+          <div class="form-group">
+            <div class="severity-header">
+              <label for="severity-range">Symptom Severity Score:</label>
+              <span id="severity-val" class="severity-badge">5 / 10 (Moderate)</span>
+            </div>
+            <input type="range" id="severity-range" min="1" max="10" value="5" class="slider">
+          </div>
+
+          <!-- Architecture & Retrieval Mode Toggle -->
+          <div class="form-group architecture-box">
+            <label class="section-title">🏗️ Architectural Mode Selection</label>
+            <div class="toggle-group">
+              <label class="toggle-option selected" id="opt-rag">
+                <input type="radio" name="mode-select" value="rag" checked>
+                <div class="option-content">
+                  <strong>RAG (Targeted Retrieval)</strong>
+                  <small>BM25 Semantic snippets from WHO/NIH KB + top evolving cases (Low compute, high precision)</small>
+                </div>
+              </label>
+              <label class="toggle-option" id="opt-long">
+                <input type="radio" name="mode-select" value="long_context">
+                <div class="option-content">
+                  <strong>Long-Context (No-Stack Stack)</strong>
+                  <small>Stuffs complete medical catalog into 1M context prompt (Global reasoning without vector DB)</small>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Model & Key Options (Accordion) -->
+          <details class="settings-accordion">
+            <summary>⚙️ LLM Provider & Web Research Settings</summary>
+            <div class="settings-content">
+              <div class="form-group">
+                <label for="provider-select">Inference Provider</label>
+                <select id="provider-select">
+                  <option value="auto">Auto (Default Provider / Free Tier)</option>
+                  <option value="openrouter">OpenRouter (Free Community Models)</option>
+                  <option value="gemini">Google Gemini (Native Google AI Studio)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="model-select">Model Identifier</label>
+                <input type="text" id="model-select" value="meta-llama/llama-3.3-70b-instruct:free" placeholder="e.g. meta-llama/llama-3.3-70b-instruct:free or gemini-3.6-flash">
+                <small class="helper-text">Free OpenRouter options: <code>meta-llama/llama-3.3-70b-instruct:free</code>, <code>deepseek/deepseek-r1:free</code>, <code>google/gemini-2.0-flash-thinking-exp:free</code></small>
+              </div>
+
+              <div class="form-group">
+                <label for="apikey-override">API Key Override (Optional)</label>
+                <input type="password" id="apikey-override" placeholder="Optional: sk-or-v1-... or AIzaSy...">
+              </div>
+
+              <div class="callout-info">
+                ℹ️ <strong>Custom Web Research Token:</strong> When the model outputs <code>[WEB_SEARCH: &lt;URL&gt;]</code>, the backend intercepts the token, fetches authoritative pages (WHO, NIH, CDC), parses them into Markdown, and injects fresh evidence back into context.
+              </div>
+            </div>
+          </details>
+
+          <button type="submit" id="btn-submit" class="btn-primary">
+            <span class="btn-icon">⚡</span> Run Symptom Analysis & RAG Differential
+          </button>
+        </form>
+      </section>
+
+      <!-- Right Column: Analysis Results & Differential Breakdown -->
+      <section class="card results-panel">
+        <div class="panel-header">
+          <h2>📊 Differential Diagnosis & Clinical Reasoning</h2>
+          <span class="panel-subtitle">AI probability estimates & grounding evidence</span>
+        </div>
+
+        <!-- Initial Placeholder State -->
+        <div id="results-empty" class="results-placeholder">
+          <div class="placeholder-icon">🔬</div>
+          <h3>Ready for Clinical Analysis</h3>
+          <p>Enter patient symptoms on the left and select an architectural retrieval mode to generate percentage-based differential diagnoses.</p>
+          <div class="feature-tags">
+            <span class="tag">📊 Percentage Rankings</span>
+            <span class="tag">📚 WHO/NIH RAG Grounding</span>
+            <span class="tag">🧠 Self-Evolving Case Loop</span>
+            <span class="tag">🌐 Token Web Research</span>
+          </div>
+        </div>
+
+        <!-- Progress Spinner -->
+        <div id="results-loading" class="results-loading hidden">
+          <div class="spinner"></div>
+          <h3 id="loading-stage">Retrieving Authoritative Knowledge...</h3>
+          <p id="loading-subtext">Executing semantic search across clinical guidelines and historical case memory.</p>
+        </div>
+
+        <!-- Populated Results Container -->
+        <div id="results-content" class="results-content hidden">
+
+          <!-- Probability Ranking Bar Chart Widget -->
+          <div class="ranking-card">
+            <div class="ranking-header">
+              <h3>📈 Statistical Probability Ranking</h3>
+              <span id="badge-mode" class="badge-mode">RAG MODE</span>
+            </div>
+            <div id="rankings-list" class="rankings-list">
+              <!-- Dynamically populated percentage progress bars -->
+            </div>
+          </div>
+
+          <!-- Result Tabs -->
+          <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-reasoning">🩺 Full Reasoning</button>
+            <button class="tab-btn" data-tab="tab-rag">📚 Evidence Chunks (<span id="count-rag">0</span>)</button>
+            <button class="tab-btn" data-tab="tab-web">🌐 Web Research (<span id="count-web">0</span>)</button>
+            <button class="tab-btn" data-tab="tab-evolving">🧠 Evolving Case (<span id="case-id-badge">-</span>)</button>
+          </div>
+
+          <!-- Tab 1: Synthesized Clinical Reasoning -->
+          <div id="tab-reasoning" class="tab-pane active">
+            <div id="markdown-output" class="markdown-body">
+              <!-- Rendered Markdown HTML -->
+            </div>
+          </div>
+
+          <!-- Tab 2: Retrieved RAG Knowledge Chunks -->
+          <div id="tab-rag" class="tab-pane">
+            <div id="rag-chunks-container" class="chunks-container">
+              <!-- Chunks list -->
+            </div>
+          </div>
+
+          <!-- Tab 3: Web Research Interceptor Logs -->
+          <div id="tab-web" class="tab-pane">
+            <div id="web-research-container" class="web-research-container">
+              <!-- Web research results -->
+            </div>
+          </div>
+
+          <!-- Tab 4: Self-Evolving Case Memory -->
+          <div id="tab-evolving" class="tab-pane">
+            <div class="evolving-box">
+              <h4>🧠 Self-Evolving Knowledge Loop Activated</h4>
+              <p>This diagnosis and reasoning trail has been indexed into the persistent knowledge layer. Future queries with overlapping symptoms will automatically retrieve this case for continuous learning.</p>
+              <div id="evolving-case-details" class="code-box"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Bottom Knowledge & Research Inspector Section -->
+    <section class="card explorer-panel">
+      <div class="panel-header">
+        <h2>🗂️ Knowledge Layer & Historical Archives</h2>
+        <div class="explorer-tabs">
+          <button class="btn-subtab active" id="btn-show-kb">Clinical Guidelines (<span id="stat-kb-tab">10</span>)</button>
+          <button class="btn-subtab" id="btn-show-cases">Evolving Cases (<span id="stat-cases-tab">2</span>)</button>
+          <button class="btn-subtab" id="btn-show-cache">Web Research Reports (<span id="stat-cache-tab">0</span>)</button>
+        </div>
+      </div>
+      <div id="explorer-content" class="explorer-content">
+        <div class="loading-inline">Loading knowledge base...</div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>Built with <strong>Python + Flask + OpenRouter/Gemini</strong> | Self-Evolving Clinical Decision Support System</p>
+      <div class="compliance-badges">
+        <span>FDA CDS Draft Guidance</span>
+        <span>WHO AI Health Ethics</span>
+        <span>NIST AI RMF</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
