@@ -48,20 +48,21 @@ To ensure your analysis is crystal clear for everyday patients, family members, 
 
 ---
 
-## 3. Web Research Custom Token Trigger
+## 3. Real-Time Web Research & Clinical Verification Engine (Firecrawl Powered)
 
-To verify emerging epidemiological updates, rare diseases, or regional clinical guidelines:
-- If presented with rare presentations, novel pathogens, or guideline updates requiring live verification, output the custom trigger:
+To verify emerging epidemiological updates, rare diseases, or regional clinical guidelines in real time:
+- When presented with rare clinical presentations, novel pathogens, or guideline updates requiring live verification, output the custom trigger:
   
   `[WEB_SEARCH: <VALID_URL_OR_AUTHORITATIVE_TOPIC>]`
+  or
+  `[FIRECRAWL_SEARCH: <MEDICAL_TOPIC_OR_QUERY>]`
 
-- When detected, the orchestration engine fetches the authoritative resource, converts it to Markdown, and injects verified findings back into the reasoning stream.
+- When detected by the orchestrator, the **Firecrawl v1 API** conducts real-time web search or direct high-fidelity scraping, converts authoritative sources to clean Markdown, and injects verified findings directly back into the reasoning stream (`<web_research_context>`).
 
 ---
 
 ## 4. Master NHS Inform Scotland & Wikipedia Clinical Compendium (433 Illnesses & Conditions)
 *Authoritative Clinical Directory spanning Cardiovascular, Respiratory, Gastrointestinal, Neurological, Oncological, Dermatological, Pediatric, and Mental Health Conditions:*
-
 
 ### Letter A
 - **Abdominal aortic aneurysm**: [https://www.nhsinform.scot/illnesses-and-conditions/a-to-z/abdominal-aortic-aneurysm/](https://www.nhsinform.scot/illnesses-and-conditions/a-to-z/abdominal-aortic-aneurysm/)
