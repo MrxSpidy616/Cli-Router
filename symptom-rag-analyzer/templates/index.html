@@ -3,256 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Health & Symptom Assistant — Simple AI Medical Guidance</title>
+  <title>Health Assistant — Calm, Simple Symptom Guidance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-  <!-- Top Navigation & Header -->
-  <header class="app-header">
-    <div class="header-content">
-      <div class="logo-area">
-        <div class="medical-heart-icon">🩺</div>
-        <div>
-          <h1>Easy Health Assistant</h1>
-          <p class="subtitle">Clear, simple symptom guidance powered by medical AI & clinical knowledge</p>
+  <!-- Minimal Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">🩺</span>
+        <div class="brand-text">
+          <h1>Health Assistant</h1>
+          <p>Clear, gentle guidance for your symptoms</p>
         </div>
       </div>
-
-      <div class="header-actions">
-        <!-- Live Firecrawl Web Research Button -->
-        <button type="button" id="btn-open-research" class="btn-header-action" title="Research any medical condition or guideline live via Firecrawl">
-          <span class="action-icon">🔥</span>
-          <span>Live Firecrawl Research</span>
-        </button>
-
-        <!-- Text Size Controls for Seniors -->
-        <div class="font-resizer" title="Adjust text size for easier reading">
-          <span class="resizer-label">Text Size:</span>
-          <button type="button" id="btn-font-normal" class="btn-resizer active">A</button>
-          <button type="button" id="btn-font-large" class="btn-resizer">A+</button>
+      <div class="header-controls">
+        <div class="font-toggle" title="Adjust text size for easier reading">
+          <span class="toggle-label">Text</span>
+          <button type="button" id="btn-font-normal" class="btn-text-size active" aria-label="Normal text size">A</button>
+          <button type="button" id="btn-font-large" class="btn-text-size" aria-label="Large text size">A+</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Friendly Medical Notice Banner -->
-  <div class="friendly-banner">
-    <div class="banner-inner">
-      <span class="banner-icon">ℹ️</span>
-      <span>
-        <strong>Helpful Guidance:</strong> This assistant helps you understand possible reasons for your symptoms. It does not replace a doctor. If you have severe trouble breathing or crushing chest pain, call <strong>911</strong> immediately.
-      </span>
+  <!-- Reassuring Safety Note -->
+  <div class="notice-strip">
+    <div class="notice-inner">
+      <span class="notice-icon">🛡️</span>
+      <p>This tool helps you understand your symptoms and prepare for a doctor's visit. <strong>If you have severe chest pain or trouble breathing, please call 911 immediately.</strong></p>
     </div>
   </div>
 
-  <main class="container">
-    <div class="main-grid">
+  <!-- Main Experience -->
+  <main class="page-container">
+    <div class="app-layout">
 
-      <!-- Left Column: Simple & Friendly Symptom Input Form -->
-      <section class="card input-card">
-        <div class="card-header">
-          <h2>1. Tell Us How You Are Feeling</h2>
-          <p class="card-subtitle">Select a common symptom or type your own words below.</p>
+      <!-- Left: Input Form -->
+      <section class="panel input-panel">
+        <div class="panel-heading">
+          <h2>Describe how you feel</h2>
+          <p>Choose a common example or describe your symptoms in your own words.</p>
         </div>
 
-        <!-- Quick 1-Click Common Health Issues -->
-        <div class="quick-presets-section">
-          <label class="field-label">Quick Examples (Click to Fill):</label>
-          <div class="preset-buttons-grid">
-            <button type="button" class="btn-preset" data-case="respiratory">
-              <span class="preset-icon">🫁</span>
-              <span class="preset-text">Cough, Phlegm & Fever</span>
-            </button>
-            <button type="button" class="btn-preset" data-case="cardiac">
-              <span class="preset-icon">❤️</span>
-              <span class="preset-text">Chest Tightness & Sweats</span>
-            </button>
-            <button type="button" class="btn-preset" data-case="abdominal">
-              <span class="preset-icon">🩹</span>
-              <span class="preset-text">Belly Pain & Nausea</span>
-            </button>
-            <button type="button" class="btn-preset" data-case="headache">
-              <span class="preset-icon">🧠</span>
-              <span class="preset-text">Throbbing Headache & Vision</span>
-            </button>
+        <!-- Quick Example Chips -->
+        <div class="chips-group">
+          <span class="chips-label">Quick Examples:</span>
+          <div class="chips-list">
+            <button type="button" class="chip-btn" data-case="respiratory">Cough & Mild Fever</button>
+            <button type="button" class="chip-btn" data-case="cardiac">Chest Pressure</button>
+            <button type="button" class="chip-btn" data-case="abdominal">Stomach Pain & Nausea</button>
+            <button type="button" class="chip-btn" data-case="headache">Throbbing Headache</button>
           </div>
         </div>
 
         <form id="symptom-form">
-          <div class="form-group">
-            <label for="symptoms-input" class="field-label">Describe your symptoms <span class="required">*</span></label>
-            <textarea id="symptoms-input" rows="4" placeholder="Example: I have had a bad cough with yellow mucus for 5 days, a mild fever of 100°F, and feel tired..." required></textarea>
+          <div class="input-block">
+            <label for="symptoms-input" class="label">What symptoms are you experiencing?</label>
+            <textarea id="symptoms-input" rows="4" placeholder="Example: I've had a sore throat, runny nose, and feeling unusually tired for the past 3 days..." required></textarea>
           </div>
 
-          <div class="form-row">
-            <div class="form-group col-half">
-              <label for="age-input" class="field-label">Your Age</label>
-              <input type="text" id="age-input" placeholder="e.g., 68 years old">
+          <div class="input-row">
+            <div class="input-block half">
+              <label for="age-input" class="label">Age</label>
+              <input type="text" id="age-input" placeholder="e.g. 55">
             </div>
-            <div class="form-group col-half">
-              <label for="duration-input" class="field-label">How long has it lasted?</label>
-              <input type="text" id="duration-input" placeholder="e.g., 4 days">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="history-input" class="field-label">Any other health conditions you have? (Optional)</label>
-            <input type="text" id="history-input" placeholder="e.g., High blood pressure, Diabetes, Non-smoker">
-          </div>
-
-          <div class="form-group">
-            <div class="severity-header">
-              <label for="severity-range" class="field-label">How severe does it feel right now?</label>
-              <span id="severity-val" class="severity-badge">5 / 10 (Moderate)</span>
-            </div>
-            <input type="range" id="severity-range" min="1" max="10" value="5" class="slider">
-            <div class="slider-labels">
-              <span>🟢 Mild (1-3)</span>
-              <span>🟡 Moderate (4-6)</span>
-              <span>🔴 Severe (7-10)</span>
+            <div class="input-block half">
+              <label for="duration-input" class="label">How long?</label>
+              <input type="text" id="duration-input" placeholder="e.g. 3 days">
             </div>
           </div>
 
-          <!-- Advanced / Clinician Settings (Collapsible) -->
-          <details class="settings-accordion">
-            <summary>⚙️ Advanced & Doctor Settings (Optional)</summary>
-            <div class="settings-content">
-              <div class="form-group">
-                <label class="field-label">AI Diagnostic Knowledge Mode:</label>
-                <div class="radio-row">
-                  <label class="radio-label">
-                    <input type="radio" name="mode-select" value="rag" checked>
-                    <span><strong>RAG Mode</strong> (Targeted Medical Guidelines)</span>
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="mode-select" value="long_context">
-                    <span><strong>Long-Context</strong> (Full Medical Catalog)</span>
-                  </label>
-                </div>
-              </div>
+          <div class="input-block">
+            <label for="history-input" class="label">Other health conditions <span class="optional">(optional)</span></label>
+            <input type="text" id="history-input" placeholder="e.g. High blood pressure, Diabetes, Asthma">
+          </div>
 
-              <div class="form-group">
-                <label for="provider-select" class="field-label">AI Engine Provider</label>
-                <select id="provider-select">
-                  <option value="cliproxy" selected>🚀 CliProxy Render (cliproxyapi-zvr2.onrender.com)</option>
-                  <option value="gemini">Google Gemini AI</option>
-                  <option value="openrouter">OpenRouter Free Community</option>
-                  <option value="openai_compatible">OpenAI-Compatible Custom Endpoint</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="baseurl-input" class="field-label">API Base URL</label>
-                <input type="text" id="baseurl-input" value="https://cliproxyapi-zvr2.onrender.com/v1">
-                <div class="endpoint-chips">
-                  <button type="button" class="btn-chip" data-base="https://cliproxyapi-zvr2.onrender.com/v1" data-model="gemini-3.6-flash-high" data-key="aravind616">🚀 CliProxy</button>
-                  <button type="button" class="btn-chip" data-base="http://localhost:11434/v1" data-model="llama3.1:latest">🦙 Ollama Local</button>
-                  <button type="button" class="btn-chip" data-base="https://api.openai.com/v1" data-model="gpt-4o">🟢 OpenAI</button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="model-select" class="field-label">Model Name</label>
-                <input type="text" id="model-select" value="gemini-3.6-flash-high">
-              </div>
-
-              <div class="form-group">
-                <label for="apikey-override" class="field-label">API Key</label>
-                <input type="password" id="apikey-override" value="aravind616">
-              </div>
-
-              <div class="firecrawl-status-badge">
-                <span>🔥 Web Research Engine: <strong>Firecrawl v1 Active (Key Configured)</strong></span>
-              </div>
+          <div class="input-block">
+            <div class="slider-header">
+              <label for="severity-range" class="label">Discomfort level</label>
+              <span id="severity-val" class="severity-tag moderate">5 / 10 (Moderate)</span>
             </div>
-          </details>
+            <input type="range" id="severity-range" min="1" max="10" value="5" class="custom-slider">
+            <div class="slider-ticks">
+              <span>Mild</span>
+              <span>Moderate</span>
+              <span>Severe</span>
+            </div>
+          </div>
 
-          <button type="submit" id="btn-submit" class="btn-submit-main">
-            <span>Check My Symptoms Now</span>
-            <span class="btn-arrow">➔</span>
+          <button type="submit" id="btn-submit" class="primary-btn">
+            <span>Review My Symptoms</span>
+            <span class="btn-arrow">→</span>
           </button>
         </form>
       </section>
 
-      <!-- Right Column: Simple & Clear Results Display -->
-      <section class="card results-card">
-        <div class="card-header">
-          <h2>2. What Your Symptoms Likely Mean</h2>
-          <p class="card-subtitle">Clear explanations in plain English, with percentages and next steps.</p>
+      <!-- Right: Results Display -->
+      <section class="panel results-panel">
+        <div class="panel-heading">
+          <h2>Your Health Summary</h2>
+          <p>Personalized breakdown of likely causes and next steps.</p>
         </div>
 
         <!-- Initial Blank State -->
-        <div id="results-empty" class="results-empty-state">
-          <div class="empty-icon">🌱</div>
-          <h3>Ready to Help You</h3>
-          <p>Please enter your symptoms on the left and tap <strong>"Check My Symptoms Now"</strong>.</p>
-          <div class="help-pills">
-            <span>✓ Easy to understand</span>
-            <span>✓ Clear percentage ratings</span>
-            <span>✓ Actionable next steps</span>
+        <div id="results-empty" class="empty-state">
+          <div class="empty-illustration">🌿</div>
+          <h3>Ready when you are</h3>
+          <p>Fill in your symptoms on the left and click <strong>"Review My Symptoms"</strong> to get a clear, easy-to-read explanation.</p>
+          <div class="features-list">
+            <div class="feature-item"><span>✓</span> Plain English guidance</div>
+            <div class="feature-item"><span>✓</span> Percentage likelihoods</div>
+            <div class="feature-item"><span>✓</span> Simple home care steps</div>
           </div>
         </div>
 
-        <!-- Loading Animation with Large Readable Text -->
-        <div id="results-loading" class="results-loading-state hidden">
-          <div class="big-spinner"></div>
-          <h3 id="loading-stage">Reviewing Medical Knowledge...</h3>
-          <p id="loading-subtext">Analyzing your symptoms against trusted WHO, NIH & clinical health guides.</p>
+        <!-- Loading State -->
+        <div id="results-loading" class="loading-state hidden">
+          <div class="loading-spinner"></div>
+          <h3 id="loading-stage">Reviewing clinical guides...</h3>
+          <p id="loading-subtext">Evaluating your symptom patterns against verified medical sources.</p>
         </div>
 
-        <!-- Populated Results Area -->
-        <div id="results-content" class="results-content-area hidden">
+        <!-- Populated Results -->
+        <div id="results-content" class="results-body hidden">
 
-          <!-- View Mode Switcher: Simple (Patient) vs Detailed (Doctor) -->
-          <div class="view-mode-bar">
-            <span class="view-mode-title">Result View:</span>
-            <div class="view-toggle-buttons">
-              <button type="button" class="btn-view-toggle active" id="btn-view-patient">👤 Simple Patient View</button>
-              <button type="button" class="btn-view-toggle" id="btn-view-doctor">🩺 Detailed Doctor View</button>
+          <!-- View Toggle -->
+          <div class="view-switch">
+            <button type="button" id="btn-view-patient" class="view-btn active">👤 Patient Summary</button>
+            <button type="button" id="btn-view-doctor" class="view-btn">🩺 Clinical Notes</button>
+          </div>
+
+          <!-- Likelihood Cards -->
+          <div class="cards-section">
+            <h3 class="section-title">Possible Explanations</h3>
+            <div id="rankings-list" class="rankings-grid">
+              <!-- Dynamically populated clean percentage cards -->
             </div>
           </div>
 
-          <!-- Section 1: Probability Percentage Cards (Big & Clean) -->
-          <div class="probability-section">
-            <h3 class="section-heading">📊 Possible Conditions & Likelihood</h3>
-            <div id="rankings-list" class="simple-rankings-list">
-              <!-- Dynamically populated large clean percentage bars -->
+          <!-- Patient Explanation -->
+          <div id="patient-view-container" class="markdown-container active">
+            <div id="markdown-output" class="patient-text">
+              <!-- Rendered markdown explanation -->
             </div>
           </div>
 
-          <!-- Section 2: Patient-Friendly Main Explanation Area -->
-          <div id="patient-view-container" class="view-container active">
-            <div id="markdown-output" class="patient-markdown-body">
-              <!-- Formatted explanation -->
-            </div>
-          </div>
-
-          <!-- Section 3: Technical Doctor & Evidence Tabs (Visible when Detailed Doctor View is on) -->
-          <div id="doctor-view-container" class="view-container hidden">
-            <div class="tabs-nav">
-              <button class="tab-btn active" data-tab="tab-rag">📚 Clinical Evidence Chunks (<span id="count-rag">0</span>)</button>
-              <button class="tab-btn" data-tab="tab-web">🌐 Firecrawl Research (<span id="count-web">0</span>)</button>
-              <button class="tab-btn" data-tab="tab-evolving">🧠 Case Memory Archive</button>
-            </div>
-
-            <div id="tab-rag" class="tab-pane active">
-              <div id="rag-chunks-container" class="chunks-container"></div>
-            </div>
-
-            <div id="tab-web" class="tab-pane">
-              <div id="web-research-container" class="web-research-container"></div>
-            </div>
-
-            <div id="tab-evolving" class="tab-pane">
-              <div class="evolving-box">
-                <h4>🧠 Self-Evolving Case Memory</h4>
-                <p>This case has been indexed into the knowledge archive for future differential reasoning.</p>
-                <div id="evolving-case-details" class="code-box"></div>
-              </div>
+          <!-- Clinical Notes (for Doctor Reference) -->
+          <div id="doctor-view-container" class="doctor-container hidden">
+            <div class="doctor-card">
+              <h4>🩺 Clinical Decision Support Reference</h4>
+              <p class="doctor-intro">Standard differential distribution grounded in ICD-10 medical reference profiles.</p>
+              <div id="doctor-evidence-list" class="evidence-list"></div>
             </div>
           </div>
 
@@ -262,48 +168,11 @@
     </div>
   </main>
 
-  <!-- Live Firecrawl Medical Web Research Modal -->
-  <div id="research-modal" class="modal-backdrop hidden">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <div class="modal-title">
-          <span class="modal-icon">🔥</span>
-          <h3>Live Medical Web Research (Firecrawl)</h3>
-        </div>
-        <button type="button" id="btn-close-research" class="btn-close-modal" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p class="modal-desc">Search for any disease, symptom, or treatment, or paste a medical link (NHS Inform, WHO, CDC, PubMed) for real-time high-fidelity extraction.</p>
-        <form id="direct-research-form" class="research-input-form">
-          <div class="research-input-row">
-            <input type="text" id="research-query-input" placeholder="e.g. NHS Inform Scotland stroke signs or https://www.nhsinform.scot/..." required>
-            <button type="submit" id="btn-do-research" class="btn-research-submit">
-              <span>Research</span>
-            </button>
-          </div>
-        </form>
-
-        <div id="research-modal-loading" class="research-modal-loading hidden">
-          <div class="spinner-small"></div>
-          <span>Conducting deep web research via Firecrawl API...</span>
-        </div>
-
-        <div id="research-modal-result" class="research-modal-result hidden">
-          <div class="result-meta-bar">
-            <span id="research-engine-badge" class="badge-engine">Firecrawl</span>
-            <span id="research-url-display" class="url-display"></span>
-          </div>
-          <div id="research-markdown-display" class="research-markdown-content"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Simple Footer -->
-  <footer class="app-footer">
-    <div class="footer-inner">
-      <p><strong>Easy Health Assistant</strong> — Built for clarity, accessibility, and clinical decision support.</p>
-      <p class="footer-note">Compliant with FDA Clinical Decision Support (CDS) & WHO AI Health Ethics Principles. Powered by Firecrawl for web research.</p>
+  <!-- Minimal Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p><strong>Health Assistant</strong> is an informational clinical decision support tool designed for clarity and peace of mind.</p>
+      <p class="footer-sub">Complies with FDA CDS and WHO healthcare ethics principles. Always consult a qualified medical professional for diagnosis.</p>
     </div>
   </footer>
 

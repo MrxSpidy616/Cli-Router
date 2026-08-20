@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const historyInput = document.getElementById("history-input");
   const severityRange = document.getElementById("severity-range");
   const severityVal = document.getElementById("severity-val");
-  const providerSelect = document.getElementById("provider-select");
-  const modelSelect = document.getElementById("model-select");
-  const baseurlInput = document.getElementById("baseurl-input");
-  const apikeyOverride = document.getElementById("apikey-override");
   
   const resultsEmpty = document.getElementById("results-empty");
   const resultsLoading = document.getElementById("results-loading");
@@ -20,12 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const rankingsList = document.getElementById("rankings-list");
   const markdownOutput = document.getElementById("markdown-output");
-  const ragChunksContainer = document.getElementById("rag-chunks-container");
-  const webResearchContainer = document.getElementById("web-research-container");
-  const evolvingDetails = document.getElementById("evolving-case-details");
-  
-  const countRag = document.getElementById("count-rag");
-  const countWeb = document.getElementById("count-web");
+  const doctorEvidenceList = document.getElementById("doctor-evidence-list");
 
   // View Switchers
   const btnViewPatient = document.getElementById("btn-view-patient");
@@ -37,19 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnFontNormal = document.getElementById("btn-font-normal");
   const btnFontLarge = document.getElementById("btn-font-large");
 
-  // Live Firecrawl Modal Elements
-  const btnOpenResearch = document.getElementById("btn-open-research");
-  const btnCloseResearch = document.getElementById("btn-close-research");
-  const researchModal = document.getElementById("research-modal");
-  const directResearchForm = document.getElementById("direct-research-form");
-  const researchQueryInput = document.getElementById("research-query-input");
-  const researchModalLoading = document.getElementById("research-modal-loading");
-  const researchModalResult = document.getElementById("research-modal-result");
-  const researchEngineBadge = document.getElementById("research-engine-badge");
-  const researchUrlDisplay = document.getElementById("research-url-display");
-  const researchMarkdownDisplay = document.getElementById("research-markdown-display");
-
-  // Font Resizer Handlers
   btnFontNormal.addEventListener("click", () => {
     document.body.classList.remove("large-text");
     btnFontNormal.classList.add("active");
@@ -77,104 +55,40 @@ document.addEventListener("DOMContentLoaded", () => {
     doctorViewContainer.classList.remove("hidden");
   });
 
-  // Firecrawl Modal Listeners
-  if (btnOpenResearch && researchModal) {
-    btnOpenResearch.addEventListener("click", () => {
-      researchModal.classList.remove("hidden");
-      setTimeout(() => researchQueryInput?.focus(), 100);
-    });
-
-    btnCloseResearch?.addEventListener("click", () => {
-      researchModal.classList.add("hidden");
-    });
-
-    researchModal.addEventListener("click", (e) => {
-      if (e.target === researchModal) {
-        researchModal.classList.add("hidden");
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !researchModal.classList.contains("hidden")) {
-        researchModal.classList.add("hidden");
-      }
-    });
-
-    // Execute Direct Firecrawl Web Research
-    directResearchForm?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const q = researchQueryInput.value.trim();
-      if (!q) return;
-
-      researchModalResult.classList.add("hidden");
-      researchModalLoading.classList.remove("hidden");
-
-      try {
-        const resp = await fetch("/api/research", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query_or_url: q })
-        });
-
-        const data = await resp.json();
-        researchModalLoading.classList.add("hidden");
-        researchModalResult.classList.remove("hidden");
-
-        if (data.success) {
-          researchEngineBadge.textContent = data.engine || "Firecrawl v1";
-          researchEngineBadge.className = "badge-engine " + (data.engine?.includes("Firecrawl") ? "firecrawl" : "fallback");
-          researchUrlDisplay.textContent = data.url || q;
-          researchMarkdownDisplay.textContent = data.markdown || "No content extracted.";
-        } else {
-          researchEngineBadge.textContent = "Error";
-          researchEngineBadge.className = "badge-engine fallback";
-          researchUrlDisplay.textContent = q;
-          researchMarkdownDisplay.textContent = `Error: ${data.error || 'Failed to research topic.'}`;
-        }
-      } catch (err) {
-        researchModalLoading.classList.add("hidden");
-        researchModalResult.classList.remove("hidden");
-        researchEngineBadge.textContent = "Network Error";
-        researchEngineBadge.className = "badge-engine fallback";
-        researchMarkdownDisplay.textContent = `Network error: ${err.message}`;
-      }
-    });
-  }
-
-  // Sample Presets (Everyday Words)
+  // Everyday Case Presets
   const PRESETS = {
     respiratory: {
-      symptoms: "I have had a deep wet cough with yellow phlegm for 5 days, a mild fever of 100.2°F, chest soreness when coughing, and feel tired.",
-      age: "62 years old",
-      duration: "5 days",
-      history: "Seasonal allergies, Non-smoker",
+      symptoms: "Deep wet cough with yellow phlegm for 4 days, mild fever of 100°F, feeling tired and sore in the chest.",
+      age: "62",
+      duration: "4 days",
+      history: "Seasonal allergies",
       severity: 5
     },
     cardiac: {
-      symptoms: "Heavy pressure and squeezing in the center of my chest that spreads to my left arm and neck, broke into a cold sweat, short of breath.",
-      age: "65 years old",
+      symptoms: "Heavy tight pressure in the center of the chest spreading to the left arm, broke into a cold sweat, short of breath.",
+      age: "65",
       duration: "45 minutes",
-      history: "High blood pressure, High cholesterol",
+      history: "High blood pressure",
       severity: 9
     },
     abdominal: {
-      symptoms: "Ache around belly button that moved to the lower right side, hurts when I walk, lost my appetite and feel nauseous.",
-      age: "28 years old",
+      symptoms: "Constant dull ache around belly button that moved to the lower right side, hurts when walking, feeling sick to stomach.",
+      age: "28",
       duration: "1 day",
       history: "None",
       severity: 7
     },
     headache: {
-      symptoms: "Pounding headache on one side of my head, seeing shimmering zigzag lights, sensitive to bright sunlight and feel sick to my stomach.",
-      age: "45 years old",
+      symptoms: "Pounding headache on one side of my head, seeing shimmering lights, sensitive to bright sunlight and feeling nauseous.",
+      age: "45",
       duration: "6 hours",
       history: "Occasional headaches",
       severity: 6
     }
   };
 
-  // Preset Buttons Listener
-  document.querySelectorAll(".btn-preset").forEach(btn => {
+  // Preset Chips Listener
+  document.querySelectorAll(".chip-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const caseKey = btn.dataset.case;
       const data = PRESETS[caseKey];
@@ -196,57 +110,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateSeverityLabel(val) {
     let desc = "Mild";
-    if (val >= 4 && val <= 6) desc = "Moderate";
-    else if (val >= 7 && val <= 8) desc = "Severe";
-    else if (val >= 9) desc = "Critical / Red Flag";
-    severityVal.textContent = `${val} / 10 (${desc})`;
-    severityVal.style.color = val >= 7 ? "#ef4444" : (val >= 4 ? "#f59e0b" : "#10b981");
-  }
-
-  // Quick Endpoint Chips
-  document.querySelectorAll(".btn-chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      if (chip.dataset.base.includes("cliproxy")) {
-        providerSelect.value = "cliproxy";
-      } else {
-        providerSelect.value = "openai_compatible";
-      }
-      if (baseurlInput) baseurlInput.value = chip.dataset.base;
-      modelSelect.value = chip.dataset.model;
-      if (chip.dataset.key) {
-        apikeyOverride.value = chip.dataset.key;
-      }
-    });
-  });
-
-  // Provider Selection Helper
-  providerSelect.addEventListener("change", (e) => {
-    if (e.target.value === "cliproxy") {
-      if (baseurlInput) baseurlInput.value = "https://cliproxyapi-zvr2.onrender.com/v1";
-      modelSelect.value = "gemini-3.6-flash-high";
-      apikeyOverride.value = "aravind616";
-    } else if (e.target.value === "gemini") {
-      modelSelect.value = "gemini-2.0-flash";
-    } else if (e.target.value === "openrouter") {
-      modelSelect.value = "meta-llama/llama-3.3-70b-instruct:free";
-    } else if (e.target.value === "openai_compatible") {
-      if (!modelSelect.value || modelSelect.value.includes("gemini")) {
-        modelSelect.value = "gpt-4o";
-      }
+    let cssClass = "mild";
+    if (val >= 4 && val <= 6) {
+      desc = "Moderate";
+      cssClass = "moderate";
+    } else if (val >= 7) {
+      desc = "Severe / Alert";
+      cssClass = "severe";
     }
-  });
-
-  // Tabs for Doctor View
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
-      btn.classList.add("active");
-      const target = btn.dataset.tab;
-      const targetEl = document.getElementById(target);
-      if (targetEl) targetEl.classList.add("active");
-    });
-  });
+    severityVal.textContent = `${val} / 10 (${desc})`;
+    severityVal.className = `severity-tag ${cssClass}`;
+  }
 
   // Form Submission
   form.addEventListener("submit", async (e) => {
@@ -255,14 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const symptoms = symptomsInput.value.trim();
     if (!symptoms) return;
 
-    const modeRadio = document.querySelector("input[name='mode-select']:checked");
-    const mode = modeRadio ? modeRadio.value : "rag";
-    const provider = providerSelect.value;
-    const model = modelSelect.value.trim();
-    const apiKey = apikeyOverride.value.trim();
-    const baseUrl = baseurlInput ? baseurlInput.value.trim() : null;
-
-    // UI Loading State
+    // Loading State
     resultsEmpty.classList.add("hidden");
     resultsContent.classList.add("hidden");
     resultsLoading.classList.remove("hidden");
@@ -279,11 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
           duration: durationInput.value.trim(),
           history: historyInput.value.trim(),
           severity: severityVal.textContent,
-          mode,
-          provider,
-          model,
-          base_url: baseUrl,
-          api_key: apiKey
+          mode: "rag",
+          provider: "cliproxy"
         })
       });
 
@@ -291,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await resp.json();
 
       if (!resp.ok || data.error) {
-        throw new Error(data.error || "Analysis failed");
+        throw new Error(data.error || "Could not complete review.");
       }
 
       renderResults(data);
@@ -299,15 +163,15 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(progressTimer);
       resultsLoading.classList.add("hidden");
       resultsEmpty.classList.remove("hidden");
-      alert(`Could not complete review: ${err.message}`);
+      alert(`Could not review symptoms: ${err.message}`);
     }
   });
 
   function startLoadingAnimation() {
     const stages = [
-      { main: "Reviewing Medical Knowledge...", sub: "Checking trusted guidelines from WHO, NIH, and doctors." },
-      { main: "Evaluating Symptoms & Patterns...", sub: "Looking at what is most likely causing how you feel." },
-      { main: "Preparing Clear Next Steps...", sub: "Organizing simple home care steps and safety alerts." }
+      { main: "Reviewing clinical guides...", sub: "Evaluating your symptom patterns against verified medical sources." },
+      { main: "Organizing likely explanations...", sub: "Comparing against primary care and emergency triage protocols." },
+      { main: "Preparing plain-English next steps...", sub: "Summarizing practical care instructions and warning signs." }
     ];
     let idx = 0;
     loadingStage.textContent = stages[0].main;
@@ -317,23 +181,23 @@ document.addEventListener("DOMContentLoaded", () => {
       idx = (idx + 1) % stages.length;
       loadingStage.textContent = stages[idx].main;
       loadingSubtext.textContent = stages[idx].sub;
-    }, 2000);
+    }, 1800);
   }
 
   function renderResults(data) {
     resultsLoading.classList.add("hidden");
     resultsContent.classList.remove("hidden");
 
-    // 1. Render Large, Accessible Percentage Cards
+    // 1. Render Likelihood Percentage Cards
     rankingsList.innerHTML = "";
     if (data.rankings && data.rankings.length > 0) {
       data.rankings.forEach((r, idx) => {
         const card = document.createElement("div");
-        card.className = "simple-rank-card" + (idx === 0 ? " top-pick" : "");
+        card.className = "rank-card" + (idx === 0 ? " top" : "");
         
         let pillClass = "low";
         let labelText = `${r.percentage}% Possible`;
-        let barColor = "#64748b";
+        let barColor = "#94a3b8";
 
         if (r.percentage >= 50) {
           pillClass = "high";
@@ -346,80 +210,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         card.innerHTML = `
-          <div class="rank-title-row">
-            <span class="rank-condition-name">${idx === 0 ? '⭐ ' : ''}${r.condition}</span>
-            <span class="rank-pct-pill ${pillClass}">${labelText}</span>
+          <div class="rank-header">
+            <span class="condition-name">${idx === 0 ? '⭐ ' : ''}${r.condition}</span>
+            <span class="pct-badge ${pillClass}">${labelText}</span>
           </div>
-          <div class="progress-bar-track">
-            <div class="progress-bar-fill" style="width: ${r.percentage}%; background-color: ${barColor};"></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: ${r.percentage}%; background-color: ${barColor};"></div>
           </div>
         `;
         rankingsList.appendChild(card);
       });
     }
 
-    // 2. Render Patient-Friendly Main Explanation
+    // 2. Render Patient Explanation
     markdownOutput.innerHTML = data.analysis_html;
 
-    // 3. Populate Doctor Tab Chunks (for Clinicians)
+    // 3. Render Doctor Reference Notes
     const kbChunks = data.retrieved_context?.kb_chunks || [];
-    const evolvingChunks = data.retrieved_context?.evolving_cases || [];
-    const totalChunks = kbChunks.length + evolvingChunks.length;
-    if (countRag) countRag.textContent = totalChunks;
-
-    if (ragChunksContainer) {
-      ragChunksContainer.innerHTML = "";
-      if (totalChunks === 0) {
-        ragChunksContainer.innerHTML = `<p class="helper-text">No isolated chunks retrieved.</p>`;
+    if (doctorEvidenceList) {
+      doctorEvidenceList.innerHTML = "";
+      if (kbChunks.length === 0) {
+        doctorEvidenceList.innerHTML = `<p class="evidence-desc">General primary care clinical differential applied.</p>`;
       } else {
         kbChunks.forEach(c => {
           const div = document.createElement("div");
-          div.className = "chunk-card";
+          div.className = "evidence-item";
           div.innerHTML = `
-            <div class="chunk-header">
-              <span class="chunk-title">${c.condition}</span>
-              <span class="rank-pct-pill low">${c.icd10 || 'ICD-10'}</span>
-            </div>
-            <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 0.4rem;"><strong>Source:</strong> ${c.source || 'Medical Guidelines'}</p>
-            <p style="font-size: 0.88rem; color: #94a3b8;"><strong>Typical Symptoms:</strong> ${(c.typical_symptoms || []).join(', ')}</p>
+            <div class="evidence-title">${c.condition} (${c.icd10 || 'ICD-10'})</div>
+            <div class="evidence-desc"><strong>Guideline:</strong> ${c.source || 'Medical Clinical Guidelines'}</div>
+            <div class="evidence-desc"><strong>Typical Presentation:</strong> ${(c.typical_symptoms || []).join(', ')}</div>
           `;
-          ragChunksContainer.appendChild(div);
+          doctorEvidenceList.appendChild(div);
         });
       }
-    }
-
-    // 4. Web Research Interceptor Logs (Firecrawl Powered)
-    const webItems = data.web_research || [];
-    if (countWeb) countWeb.textContent = webItems.length;
-    if (webResearchContainer) {
-      webResearchContainer.innerHTML = "";
-      if (webItems.length === 0) {
-        webResearchContainer.innerHTML = `<p class="helper-text">No external Firecrawl web search token was needed for this standard presentation.</p>`;
-      } else {
-        webItems.forEach(item => {
-          const div = document.createElement("div");
-          div.className = "research-card";
-          const engineTag = item.engine || "Firecrawl";
-          div.innerHTML = `
-            <div class="research-header">
-              <span class="chunk-title">🔥 Firecrawl Research: ${item.url}</span>
-              <span class="rank-pct-pill ${item.success ? 'high' : 'medium'}">${engineTag}</span>
-            </div>
-            <div class="code-box">${item.markdown ? item.markdown.substring(0, 500) + '...' : 'No content'}</div>
-          `;
-          webResearchContainer.appendChild(div);
-        });
-      }
-    }
-
-    // 5. Evolving Case Memory
-    if (evolvingDetails) {
-      evolvingDetails.textContent = JSON.stringify({
-        saved_case_id: data.saved_case_id,
-        mode: data.mode_used,
-        provider: data.provider_used,
-        timestamp: new Date().toISOString()
-      }, null, 2);
     }
   }
 });
