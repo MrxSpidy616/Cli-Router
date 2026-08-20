@@ -87,6 +87,47 @@ body {
   color: var(--text-muted);
 }
 
+/* Header Controls & Speed Dial */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-emergency-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  padding: 0.45rem 0.95rem;
+  border-radius: 30px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-emergency-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.5);
+  text-decoration: none;
+}
+
+.btn-emergency-pill.secondary {
+  background: var(--bg-input);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+  box-shadow: none;
+}
+
+.btn-emergency-pill.secondary:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ffffff;
+}
+
 /* Senior Text Size Toggle */
 .font-toggle {
   display: flex;
@@ -124,8 +165,8 @@ body {
 
 /* Notice Strip */
 .notice-strip {
-  background: rgba(14, 165, 233, 0.07);
-  border-bottom: 1px solid rgba(14, 165, 233, 0.18);
+  background: rgba(239, 68, 68, 0.08);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2);
   padding: 0.75rem 1.5rem;
 }
 
@@ -137,6 +178,70 @@ body {
   gap: 0.75rem;
   font-size: 0.92rem;
   color: var(--text-sub);
+}
+
+.emergency-link {
+  color: #f87171;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.emergency-link:hover {
+  color: #ffffff;
+}
+
+.notice-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* India Emergency Helpline Box */
+.india-helpline-box {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.helpline-title {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #f87171;
+  margin-bottom: 0.6rem;
+}
+
+.helpline-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn-helpline {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-sub);
+  padding: 0.45rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.btn-helpline.primary {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+.btn-helpline:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-1px);
 }
 
 .notice-icon {

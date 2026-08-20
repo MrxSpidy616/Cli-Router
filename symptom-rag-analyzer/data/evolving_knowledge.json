@@ -316,5 +316,69 @@
     ],
     "clinical_takeaway": "### 👤 Section A: Plain-Language Summary (For Patients & Family)\n\n* **Urgency Level:** 🟡 **Moderate Risk** — Non-emergency, but you should consult a doctor or healthcare provider if symptoms persist.\n* **Most Likely Cause:** **Acute Coronary Syndrome (Myocardial Infarction / Angina)** (~60% likely ba",
     "outcome_validation": "AI CDS analysis generated with RAG mode."
+  },
+  {
+    "case_id": "CASE-EV-013",
+    "timestamp": "2026-08-20T18:51:33.959501Z",
+    "patient_demographics": "64 years oldyo, History: Type 2 diabetes, Non-smoker",
+    "presented_symptoms": [
+      "Deep rattling cough for 4 days with green phlegm",
+      "fever 101.5F",
+      "sharp pain on left side when breathing in"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Community-Acquired Pneumonia",
+        "icd10": "J18.9",
+        "system": "Respiratory",
+        "percentage": 60
+      },
+      {
+        "condition": "Type 2 Diabetes Mellitus (New Onset / Hyperglycemia)",
+        "icd10": "E11.9",
+        "system": "Endocrine / Metabolic",
+        "percentage": 25
+      },
+      {
+        "condition": "Acute Bronchitis",
+        "icd10": "J20.9",
+        "system": "Respiratory",
+        "percentage": 15
+      }
+    ],
+    "clinical_takeaway": "### 👤 Section A: Plain-Language Summary (For Patients & Family)\n\n* **Urgency Level:** 🟡 **Moderate Risk** — Non-emergency, but you should consult a doctor or healthcare provider if symptoms persist.\n* **Most Likely Cause:** **Community-Acquired Pneumonia** (~60% likely based on your reported symptom",
+    "outcome_validation": "AI CDS analysis generated with RAG mode."
+  },
+  {
+    "case_id": "CASE-EV-014",
+    "timestamp": "2026-08-20T19:03:25.216231Z",
+    "patient_demographics": "70yo",
+    "presented_symptoms": [
+      "Feeling dizzy",
+      "mild dehydration",
+      "light headache"
+    ],
+    "differential_ranking": [
+      {
+        "condition": "Migraine Headache with/without Aura",
+        "icd10": "G43.9",
+        "system": "Neurological",
+        "percentage": 60
+      },
+      {
+        "condition": "Hand, Foot, and Mouth Disease",
+        "icd10": "B08.4",
+        "system": "Pediatrics / Dermatology",
+        "percentage": 25
+      },
+      {
+        "condition": "Conjunctivitis (Pink Eye)",
+        "icd10": "H10.9",
+        "system": "Ophthalmology",
+        "percentage": 15
+      }
+    ],
+    "clinical_takeaway": "### 👤 Section A: Plain-Language Summary (For Patients & Family)\n\n* **Urgency Level:** 🟡 **Moderate Risk** — Non-emergency, but you should consult a doctor or healthcare provider if symptoms persist.\n* **Most Likely Cause:** **Migraine Headache with/without Aura** (~60% likely based on your reported ",
+    "outcome_validation": "AI CDS analysis generated with RAG mode."
   }
 ]

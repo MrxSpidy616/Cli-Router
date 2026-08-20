@@ -140,15 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function initTodoList(primaryCondition, severityText) {
     // Generate smart recovery tasks based on diagnosis
     activeTasks = [
-      { id: "task_1", text: "Rest and stay well-hydrated with warm broths, water, or herbal teas", tag: "Home Care", done: false },
-      { id: "task_2", text: "Monitor and record temperature twice daily (morning & evening)", tag: "Monitoring", done: false },
-      { id: "task_3", text: "Note down any new changes in pain, breathing, or energy levels", tag: "Tracking", done: false }
+      { id: "task_1", text: "Rest and stay well-hydrated with clean water, ORS (oral rehydration), or warm fluids", tag: "Home Care", done: false },
+      { id: "task_2", text: "Monitor and record body temperature and pulse twice daily (morning & evening)", tag: "Monitoring", done: false },
+      { id: "task_3", text: "Note down any new changes in breathing, chest sensation, or alertness", tag: "Tracking", done: false }
     ];
 
-    if (severityText.includes("Severe") || severityText.includes("9") || severityText.includes("10")) {
-      activeTasks.unshift({ id: "task_em", text: "Seek urgent emergency medical evaluation or call 911 immediately", tag: "🔴 Urgent", done: false });
+    if (severityText.includes("Severe") || severityText.includes("9") || severityText.includes("10") || severityText.includes("Alert")) {
+      activeTasks.unshift({ id: "task_em", text: "🚨 Seek urgent emergency care — Dial 108 (Ambulance Service - India) or 112 immediately", tag: "🔴 Urgent (108)", done: false });
     } else {
-      activeTasks.push({ id: "task_doc", text: "Schedule a doctor consultation if symptoms do not improve within 48 hours", tag: "Medical Visit", done: false });
+      activeTasks.push({ id: "task_doc", text: "Consult a local General Physician (GP), Government Civil Hospital, or PHC if symptoms do not improve within 48 hours", tag: "Doctor Visit", done: false });
     }
 
     // Check localStorage for saved custom tasks
@@ -216,14 +216,14 @@ document.addEventListener("DOMContentLoaded", () => {
     todoCustomInput.value = "";
   });
 
-  // Nearby Doctor Search Execution
-  function executeDoctorSearch(careType = "doctors or urgent care") {
+  // Nearby Doctor Search Execution (India Focused)
+  function executeDoctorSearch(careType = "government hospital doctor clinic") {
     const location = doctorLocationInput.value.trim();
     let query = `${careType}`;
     if (location) {
-      query += ` near ${location}`;
+      query += ` in ${location} India`;
     } else {
-      query += ` near me`;
+      query += ` near me India`;
     }
     const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
     window.open(mapsUrl, "_blank");

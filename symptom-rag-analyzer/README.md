@@ -1,6 +1,15 @@
-# 🩺 Health Assistant — AI Clinical Decision Support (CDS) System
+# 🩺 Health Assistant — AI Clinical Decision Support (CDS) System (India 108 Ambulance Focused)
 
-A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](../design.md). Features invisible backend **Retrieval-Augmented Generation (RAG)**, **Long-Context Grounding**, real-time **Web Research**, an **Interactive Recovery Action Plan & To-Do List**, and **Nearby Doctor Search & Enquiry Guidance**.
+A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](../design.md) and focused on **India's Emergency & Healthcare Infrastructure (108 Ambulance, 112 Emergency, AIIMS/PHC/Jan Aushadhi locator)**.
+
+---
+
+## 🚨 India Emergency Response Integration
+
+* **🚑 108 Ambulance Service:** Free national emergency medical response across Indian states (toll-free: `tel:108`).
+* **👶 102 Maternity & Infant Ambulance:** Specialized emergency transport for pregnant women and newborns (`tel:102`).
+* **🚨 112 Unified Emergency Helpline:** Single unified number for all emergencies (Police, Fire, Medical) across India (`tel:112`).
+* **📞 104 Health Helpline:** 24x7 medical advice, blood bank status, and healthcare tele-consultation (`tel:104`).
 
 ---
 
@@ -27,12 +36,12 @@ A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differentia
    - Senior-accessible high-contrast dark theme, large 17px/21px typography, and 1-click quick symptom presets.
 
 2. **📋 Personal Recovery Action Plan & Interactive To-Do List:**
-   - Automatically generates smart, condition-tailored recovery steps (e.g. hydration goals, temperature tracking frequency, red-flag monitoring).
+   - Automatically generates smart, condition-tailored recovery steps (e.g. ORS hydration, temperature tracking frequency, red-flag monitoring).
    - Check off care steps as you complete them with persistent saving in local storage.
-   - Add your own custom personal reminders (e.g., *"Pick up prescription from pharmacy"*, *"Drink electrolyte water"*).
+   - Add your own custom personal reminders (e.g., *"Pick up medicine from Jan Aushadhi Kendra"*).
 
-3. **📍 Search Nearby Doctors & Enquiry Script:**
-   - **Local Care Search:** 1-click query for nearby Family Doctors (GP), Urgent Care Centers, Walk-In Clinics, or 24/7 Pharmacies based on your town or postal/zip code.
+3. **📍 Search Nearby Doctors, Hospitals & Clinics (India):**
+   - **Local Care Search:** 1-click query for nearby Government Civil Hospitals, AIIMS, PHCs, Private Clinics, or 24/7 Jan Aushadhi Pharmacies based on your Indian city or Pincode.
    - **Phone Consultation Enquiry Script:** Pre-populated questions tailored to your exact reported symptoms to guide you when calling local medical offices.
 
 4. **Dual-Tier Output Architecture:**
@@ -71,7 +80,7 @@ Open **`http://localhost:5000`** in your browser.
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 API Reference
 
 ### `POST /api/analyze`
 Submits symptoms for differential ranking and dual-tier CDS output.

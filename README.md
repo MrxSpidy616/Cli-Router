@@ -1,10 +1,19 @@
-# 🩺 Health Assistant — AI Clinical Decision Support (CDS) System
+# 🩺 Health Assistant — AI Clinical Decision Support (CDS) System (India 108 Ambulance Focused)
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0%2B-green.svg)](https://flask.palletsprojects.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](design.md). Features invisible backend **Retrieval-Augmented Generation (RAG)**, **Long-Context Grounding**, real-time **Web Research**, an **Interactive Recovery To-Do Action Plan**, and **Nearby Doctor Search & Enquiry Guidance**.
+A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](design.md) and focused on **India's Emergency & Healthcare Infrastructure (108 Ambulance, 112 Emergency, AIIMS/PHC/Jan Aushadhi locator)**.
+
+---
+
+## 🚨 India Emergency Response Integration
+
+* **🚑 108 Ambulance Service:** Free national emergency medical response across Indian states (toll-free: `tel:108`).
+* **👶 102 Maternity & Infant Ambulance:** Specialized emergency transport for pregnant women and newborns (`tel:102`).
+* **🚨 112 Unified Emergency Helpline:** Single unified number for all emergencies (Police, Fire, Medical) across India (`tel:112`).
+* **📞 104 Health Helpline:** 24x7 medical advice, blood bank status, and healthcare tele-consultation (`tel:104`).
 
 ---
 
@@ -32,7 +41,7 @@ A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differentia
 ---
 
 ### 4. 🔴 Negative / Critical Test Case (Emergency Red Flag Alert)
-*High-contrast urgent alert banner with 1-click **"📞 Call 911 Now"** action and emergency safety instructions.*
+*High-contrast urgent alert banner with 1-click **"📞 Call 108 Ambulance"** action and emergency safety instructions.*
 
 ![Negative Emergency Red Flag UI Result](docs/screenshots/ui_negative_emergency_alert.jpg)
 
@@ -45,12 +54,12 @@ A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differentia
    - Senior-accessible high-contrast dark theme, large 17px/21px typography, and 1-click quick symptom presets.
 
 2. **📋 Personal Recovery Action Plan & Interactive To-Do List:**
-   - Automatically generates smart, condition-tailored recovery steps (e.g. hydration goals, temperature tracking frequency, red-flag monitoring).
+   - Automatically generates smart, condition-tailored recovery steps (e.g. ORS hydration, temperature tracking frequency, red-flag monitoring).
    - Check off care steps as you complete them with persistent saving in local storage.
-   - Add your own custom personal reminders (e.g., *"Pick up prescription from pharmacy"*, *"Drink electrolyte water"*).
+   - Add your own custom personal reminders (e.g., *"Pick up medicine from Jan Aushadhi Kendra"*).
 
-3. **📍 Search Nearby Doctors & Enquiry Script:**
-   - **Local Care Search:** 1-click query for nearby Family Doctors (GP), Urgent Care Centers, Walk-In Clinics, or 24/7 Pharmacies based on your town or postal/zip code.
+3. **📍 Search Nearby Doctors, Hospitals & Clinics (India):**
+   - **Local Care Search:** 1-click query for nearby Government Civil Hospitals, AIIMS, PHCs, Private Clinics, or 24/7 Jan Aushadhi Pharmacies based on your Indian city or Pincode.
    - **Phone Consultation Enquiry Script:** Pre-populated questions tailored to your exact reported symptoms to guide you when calling local medical offices.
 
 4. **Dual-Tier Output Architecture:**
@@ -75,13 +84,13 @@ A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differentia
 │   ├── rag_engine.py              # BM25 Semantic Indexer & Synonym Expansion Engine
 │   ├── web_researcher.py          # Real-Time Clinical Literature Research Engine
 │   ├── llm_client.py              # Multi-Provider Gateway (CliProxy, Gemini, OpenAI, OpenRouter)
-│   ├── prompt.md                  # Master Clinical Knowledge Base & CDS Directives
+│   ├── prompt.md                  # Master Clinical Knowledge Base & CDS Directives (108 India Focus)
 │   ├── requirements.txt           # Python Dependencies
 │   ├── data/
 │   │   ├── knowledge_base.json    # 46 Structured Clinical Profiles + Zenodo 13338116 Dataset
 │   │   ├── evolving_knowledge.json# Self-Evolving Case Memory Archive
 │   │   └── research_cache/        # Cached Markdown Web Research Reports
-│   ├── templates/index.html       # Minimalist Single-Page Application UI
+│   ├── templates/index.html       # Minimalist Single-Page Application UI (India 108 Speed Dial)
 │   └── static/                    # Serene CSS Styles & Client Controller
 ├── docs/screenshots/              # High-Resolution Minimalist UI Mockups & Test Cases
 ├── design.md                      # Claude Minimalist Design System Architecture Guide

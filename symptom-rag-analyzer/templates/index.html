@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health Assistant — Calm, Simple Symptom Guidance</title>
+  <title>Health Assistant — Calm, Simple Symptom Guidance (India 108 Focus)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,10 +18,18 @@
         <span class="brand-icon">🩺</span>
         <div class="brand-text">
           <h1>Health Assistant</h1>
-          <p>Clear, gentle guidance for your symptoms</p>
+          <p>Clear, gentle symptom guidance & clinical support</p>
         </div>
       </div>
       <div class="header-controls">
+        <!-- Direct Emergency 108 / 112 Speed Dial for India -->
+        <a href="tel:108" class="btn-emergency-pill" title="Dial 108 Ambulance Service (India)">
+          <span>🚑 Call 108 (Ambulance)</span>
+        </a>
+        <a href="tel:112" class="btn-emergency-pill secondary" title="Dial 112 National Emergency (India)">
+          <span>🚨 112</span>
+        </a>
+
         <div class="font-toggle" title="Adjust text size for easier reading">
           <span class="toggle-label">Text</span>
           <button type="button" id="btn-font-normal" class="btn-text-size active" aria-label="Normal text size">A</button>
@@ -31,11 +39,14 @@
     </div>
   </header>
 
-  <!-- Reassuring Safety Note -->
+  <!-- Reassuring Safety & Emergency Banner (India Focused) -->
   <div class="notice-strip">
     <div class="notice-inner">
       <span class="notice-icon">🛡️</span>
-      <p>This tool helps you understand your symptoms and prepare for a doctor's visit. <strong>If you have severe chest pain or trouble breathing, please call 911 immediately.</strong></p>
+      <p>
+        This tool helps you understand symptoms and prepare for medical advice.
+        <strong>In an acute emergency (severe chest pain, breathing distress, stroke signs), immediately dial <a href="tel:108" class="emergency-link">108 (Ambulance)</a> or <a href="tel:112" class="emergency-link">112 (National Emergency Helpline)</a>.</strong>
+      </p>
     </div>
   </div>
 
@@ -55,7 +66,7 @@
           <span class="chips-label">Quick Examples:</span>
           <div class="chips-list">
             <button type="button" class="chip-btn" data-case="respiratory">Cough & Mild Fever</button>
-            <button type="button" class="chip-btn" data-case="cardiac">Chest Pressure</button>
+            <button type="button" class="chip-btn" data-case="cardiac">Chest Pressure & Sweats</button>
             <button type="button" class="chip-btn" data-case="abdominal">Stomach Pain & Nausea</button>
             <button type="button" class="chip-btn" data-case="headache">Throbbing Headache</button>
           </div>
@@ -118,7 +129,7 @@
           <div class="features-list">
             <div class="feature-item"><span>✓</span> Plain English guidance</div>
             <div class="feature-item"><span>✓</span> Percentage likelihoods</div>
-            <div class="feature-item"><span>✓</span> Simple home care steps</div>
+            <div class="feature-item"><span>✓</span> Recovery checklist & doctor search</div>
           </div>
         </div>
 
@@ -168,35 +179,46 @@
 
               <!-- Add Custom To-Do Item Form -->
               <form id="todo-add-form" class="todo-add-row">
-                <input type="text" id="todo-custom-input" placeholder="+ Add a personal reminder (e.g. pick up throat lozenges)..." autocomplete="off">
+                <input type="text" id="todo-custom-input" placeholder="+ Add a personal reminder (e.g. buy medicine from Jan Aushadhi)..." autocomplete="off">
                 <button type="submit" class="btn-todo-add">Add</button>
               </form>
             </div>
 
-            <!-- Search Nearby Doctors & Enquire Section -->
+            <!-- Search Nearby Doctors & Enquire Section (India Focused) -->
             <div class="doctor-search-section">
               <div class="doctor-search-header">
                 <span class="doctor-search-icon">📍</span>
                 <div>
-                  <h3 class="section-title" style="margin-bottom: 0.15rem;">Find Nearby Doctors & Clinics to Enquire</h3>
-                  <p class="doctor-search-subtitle">Search for trusted local primary care, urgent care, or specialists.</p>
+                  <h3 class="section-title" style="margin-bottom: 0.15rem;">Find Nearby Doctors, Hospitals & Clinics (India)</h3>
+                  <p class="doctor-search-subtitle">Search for Government Civil Hospitals, AIIMS, PHCs, Private Clinics, or 24/7 Pharmacies.</p>
+                </div>
+              </div>
+
+              <!-- Emergency Helpline Quick Call Strip -->
+              <div class="india-helpline-box">
+                <span class="helpline-title">🚨 India Emergency Speed Dial:</span>
+                <div class="helpline-buttons">
+                  <a href="tel:108" class="btn-helpline primary">🚑 108 Ambulance (Free Emergency)</a>
+                  <a href="tel:102" class="btn-helpline">👶 102 Pregnant & Infant Ambulance</a>
+                  <a href="tel:112" class="btn-helpline">🚨 112 Unified Emergency</a>
+                  <a href="tel:104" class="btn-helpline">📞 104 Medical Advice</a>
                 </div>
               </div>
 
               <!-- Search Query Row -->
               <div class="doctor-search-form">
                 <div class="search-input-group">
-                  <input type="text" id="doctor-location-input" placeholder="Enter your City, Town, or Postal/Zip Code...">
+                  <input type="text" id="doctor-location-input" placeholder="Enter City, Area or Pincode (e.g. Mumbai, Delhi 110001, Bangalore)...">
                   <button type="button" id="btn-search-doctors" class="btn-search-doctor">
                     <span>Search Care</span>
                     <span>🔍</span>
                   </button>
                 </div>
                 <div class="quick-care-chips">
-                  <button type="button" class="care-chip" data-type="urgent care">⚡ Urgent Care Centers</button>
-                  <button type="button" class="care-chip" data-type="primary care doctor GP">👨‍⚕️ Family Doctors (GP)</button>
-                  <button type="button" class="care-chip" data-type="walk-in clinic">🏥 Walk-In Clinics</button>
-                  <button type="button" class="care-chip" data-type="pharmacy">💊 24/7 Pharmacies</button>
+                  <button type="button" class="care-chip" data-type="hospital or emergency care">🏥 Government / Private Hospitals</button>
+                  <button type="button" class="care-chip" data-type="general physician doctor clinic">👨‍⚕️ General Physicians (GP / Clinic)</button>
+                  <button type="button" class="care-chip" data-type="urgent care clinic">⚡ 24x7 Emergency & Trauma Care</button>
+                  <button type="button" class="care-chip" data-type="jan aushadhi or 24 hour pharmacy medical store">💊 Jan Aushadhi & 24/7 Pharmacies</button>
                 </div>
               </div>
 
@@ -204,9 +226,9 @@
               <div class="enquiry-guidance-card">
                 <h4 class="enquiry-title">📞 Questions to Ask When You Call to Enquire:</h4>
                 <ul id="enquiry-questions-list" class="enquiry-list">
-                  <li>"I've been experiencing <span id="enquiry-symptom-tag">these symptoms</span> for <span id="enquiry-duration-tag">a few days</span>. Do you have same-day or walk-in availability?"</li>
-                  <li>"Given my symptoms, do you recommend I come in for an in-person exam, or is a telehealth visit suitable?"</li>
-                  <li>"Are there specific diagnostic tests (such as a rapid swab or blood work) I should be prepared for?"</li>
+                  <li>"I am experiencing <span id="enquiry-symptom-tag">these symptoms</span> for <span id="enquiry-duration-tag">a few days</span>. Do you have immediate OPD doctor availability or walk-in emergency?"</li>
+                  <li>"Is a physician available right now, or should I visit the casualty / emergency department?"</li>
+                  <li>"Do you accept Ayushman Bharat (PM-JAY) or cashless health insurance for outpatient/inpatient tests?"</li>
                 </ul>
               </div>
             </div>
@@ -232,7 +254,7 @@
   <footer class="site-footer">
     <div class="footer-content">
       <p><strong>Health Assistant</strong> is an informational clinical decision support tool designed for clarity and peace of mind.</p>
-      <p class="footer-sub">Complies with FDA CDS and WHO healthcare ethics principles. Always consult a qualified medical professional for diagnosis.</p>
+      <p class="footer-sub">Emergency helplines: <strong>108 (Ambulance - India)</strong> | <strong>112 (National Emergency)</strong> | <strong>104 (Health Information)</strong>. Always consult a qualified medical professional for binding diagnosis.</p>
     </div>
   </footer>
 

@@ -150,10 +150,10 @@ Your reported symptoms match common patterns of **{primary_condition}**. For mos
 2. **Monitor Your Temperature & Symptoms:** Keep a simple daily note of your fever, pain level, or any new symptoms.
 3. **Contact Your Doctor or Clinic:** Schedule a routine consultation if your symptoms do not start improving within 48 to 72 hours.
 
-#### ⚠️ When to Seek Immediate Medical Help (Call 911 or Go to the ER):
+#### ⚠️ When to Seek Immediate Medical Help (Dial 108 Ambulance - India or 112):
 * Sudden severe shortness of breath or difficulty catching your breath.
-* Chest pain, pressure, or tightness spreading to your arm or jaw.
-* Sudden confusion, dizziness, fainting, or inability to stay awake.
+* Heavy chest pain, pressure, or tightness radiating to your arm or jaw.
+* Sudden confusion, slurred speech, facial weakness, or fainting.
 
 ---
 
