@@ -111,15 +111,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Quick Endpoint Chips
   document.querySelectorAll(".btn-chip").forEach(chip => {
     chip.addEventListener("click", () => {
-      providerSelect.value = "openai_compatible";
+      if (chip.dataset.base.includes("cliproxy")) {
+        providerSelect.value = "cliproxy";
+      } else {
+        providerSelect.value = "openai_compatible";
+      }
       if (baseurlInput) baseurlInput.value = chip.dataset.base;
       modelSelect.value = chip.dataset.model;
+      if (chip.dataset.key) {
+        apikeyOverride.value = chip.dataset.key;
+      }
     });
   });
 
   // Provider Selection Helper
   providerSelect.addEventListener("change", (e) => {
-    if (e.target.value === "gemini") {
+    if (e.target.value === "cliproxy") {
+      if (baseurlInput) baseurlInput.value = "https://cliproxyapi-zvr2.onrender.com/v1";
+      modelSelect.value = "gemini-3.6-flash-high";
+      apikeyOverride.value = "aravind616";
+    } else if (e.target.value === "gemini") {
       modelSelect.value = "gemini-3.6-flash";
     } else if (e.target.value === "openrouter") {
       modelSelect.value = "meta-llama/llama-3.3-70b-instruct:free";

@@ -18,6 +18,10 @@ class LLMClient:
         self.openrouter_api_key = os.environ.get("OPENROUTER_API_KEY", "")
         self.gemini_api_key = os.environ.get("GEMINI_API_KEY", os.environ.get("GOOGLE_API_KEY", ""))
         
+        # Default CliProxy Render Configuration
+        self.cliproxy_base_url = os.environ.get("CLIPROXY_BASE_URL", "https://cliproxyapi-zvr2.onrender.com/v1")
+        self.cliproxy_api_key = os.environ.get("CLIPROXY_API_KEY", "aravind616")
+
         # Load from ~/.hermes/.env as fallback if env vars not in process
         hermes_env = os.path.expanduser("~/.hermes/.env")
         if os.path.exists(hermes_env):
@@ -31,6 +35,8 @@ class LLMClient:
                             self.gemini_api_key = line.split("=", 1)[1].strip()
                         elif line.startswith("OPENROUTER_API_KEY=") and not self.openrouter_api_key:
                             self.openrouter_api_key = line.split("=", 1)[1].strip()
+                        elif line.startswith("CLIPROXY_API_KEY=") and not self.cliproxy_api_key:
+                            self.cliproxy_api_key = line.split("=", 1)[1].strip()
             except Exception:
                 pass
 
@@ -227,7 +233,14 @@ Please generate a full percentage-based differential diagnosis, clinical reasoni
         effective_provider = provider
 
         def execute_llm_call(msgs):
-            if provider in ["openai_compatible", "openai", "custom"] or (base_url and base_url.strip() and provider != "gemini"):
+            if provider == "cliproxy":
+                return self.call_openai_compatible(
+                    messages=msgs,
+                    model=model or "gemini-3.6-flash-high",
+                    base_url=base_url or self.cliproxy_base_url,
+                    api_key=user_api_key or self.cliproxy_api_key
+                )
+            elif provider in ["openai_compatible", "openai", "custom"] or (base_url and base_url.strip() and provider != "gemini"):
                 return self.call_openai_compatible(
                     messages=msgs, 
                     model=model or "gpt-4o", 
