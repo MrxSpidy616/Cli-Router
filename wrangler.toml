@@ -2,6 +2,10 @@ name = "b2-file-manager"
 main = "index.js"
 compatibility_date = "2024-01-01"
 
+[[kv_namespaces]]
+binding = "AUTH_CACHE"
+id = "e8eb77a4c2544d5388b1f564e251666b"
+
 [vars]
 B2_BUCKET_ID = "your-bucket-id"
 B2_BUCKET_NAME = "your-bucket-name"

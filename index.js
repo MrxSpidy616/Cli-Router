@@ -781,6 +781,76 @@ async function handleFile(request, env) {
   }
 }
 
+function errorPage(status, title, message, detail = '') {
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${status} - ${title}</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 640px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  }
+  .badge {
+    display: inline-block;
+    background: #dc2626;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 22px; margin-bottom: 12px; }
+  p { color: #94a3b8; line-height: 1.6; font-size: 15px; margin-bottom: 12px; }
+  pre {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #fbbf24;
+  }
+  details { margin-top: 12px; }
+  summary { cursor: pointer; color: #60a5fa; font-size: 14px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">Error ${status}</span>
+    <h1>${title}</h1>
+    <p>${message}</p>
+    <details>
+      <summary>Technical details</summary>
+      <pre>${detail}</pre>
+    </details>
+  </div>
+</body>
+</html>`;
+  return htmlResponse(html, status);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -791,26 +861,34 @@ export default {
       return new Response(null, { headers: cors() });
     }
 
-    if (path === '/api/rename' && method === 'POST') {
-      return handleRename(request, env);
-    }
+    try {
+      if (path === '/api/rename' && method === 'POST') {
+        return await handleRename(request, env);
+      }
 
-    if (path === '/api/move' && method === 'POST') {
-      return handleMove(request, env);
-    }
+      if (path === '/api/move' && method === 'POST') {
+        return await handleMove(request, env);
+      }
 
-    if (path === '/api/delete' && method === 'DELETE') {
-      return handleDelete(request, env);
-    }
+      if (path === '/api/delete' && method === 'DELETE') {
+        return await handleDelete(request, env);
+      }
 
-    if (path.startsWith('/file/') && method === 'GET') {
-      return handleFile(request, env);
-    }
+      if (path.startsWith('/file/') && method === 'GET') {
+        return await handleFile(request, env);
+      }
 
-    if (path === '/' && method === 'GET') {
-      return handleDashboard(request, env);
-    }
+      if (path === '/' && method === 'GET') {
+        return await handleDashboard(request, env);
+      }
 
-    return errResponse('Not Found', 404);
+      return errResponse('Not Found', 404);
+    } catch (e) {
+      const isApi = path.startsWith('/api/');
+      if (isApi) {
+        return errResponse(e.message || 'Internal server error', 500);
+      }
+      return errorPage(500, 'Something went wrong', 'The worker hit an unexpected error while handling your request.', (e && e.stack) || String(e));
+    }
   }
 };
