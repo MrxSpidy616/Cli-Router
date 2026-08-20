@@ -24,6 +24,7 @@ def analyze():
     mode = data.get("mode", "rag")  # 'rag' or 'long_context'
     provider = data.get("provider", "auto")
     model = data.get("model", "google/gemini-2.0-flash-thinking-exp:free")
+    base_url = data.get("base_url", "").strip() or None
     user_api_key = data.get("api_key", "").strip() or None
 
     if not symptoms:
@@ -44,6 +45,7 @@ def analyze():
         severity=severity,
         provider=provider,
         model=model,
+        base_url=base_url,
         rag_context=context_data,
         user_api_key=user_api_key
     )

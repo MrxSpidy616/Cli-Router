@@ -132,18 +132,32 @@
                   <option value="auto">Auto (Default Provider / Free Tier)</option>
                   <option value="openrouter">OpenRouter (Free Community Models)</option>
                   <option value="gemini">Google Gemini (Native Google AI Studio)</option>
+                  <option value="openai_compatible">OpenAI-Compatible (Ollama, DeepSeek, Groq, OpenAI, LM Studio, vLLM)</option>
                 </select>
+              </div>
+
+              <!-- Base URL Container for OpenAI Compatible -->
+              <div class="form-group" id="baseurl-group">
+                <label for="baseurl-input">API Base URL (OpenAI-Compatible Endpoint)</label>
+                <input type="text" id="baseurl-input" value="https://api.openai.com/v1" placeholder="e.g. http://localhost:11434/v1 or https://api.deepseek.com/v1">
+                <div class="endpoint-chips">
+                  <span class="chip-label">Quick Presets:</span>
+                  <button type="button" class="btn-chip" data-base="http://localhost:11434/v1" data-model="llama3.1:latest">🦙 Ollama Local</button>
+                  <button type="button" class="btn-chip" data-base="https://api.deepseek.com/v1" data-model="deepseek-chat">🐋 DeepSeek</button>
+                  <button type="button" class="btn-chip" data-base="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile">⚡ Groq</button>
+                  <button type="button" class="btn-chip" data-base="https://api.openai.com/v1" data-model="gpt-4o">🟢 OpenAI Official</button>
+                </div>
               </div>
 
               <div class="form-group">
                 <label for="model-select">Model Identifier</label>
-                <input type="text" id="model-select" value="meta-llama/llama-3.3-70b-instruct:free" placeholder="e.g. meta-llama/llama-3.3-70b-instruct:free or gemini-3.6-flash">
-                <small class="helper-text">Free OpenRouter options: <code>meta-llama/llama-3.3-70b-instruct:free</code>, <code>deepseek/deepseek-r1:free</code>, <code>google/gemini-2.0-flash-thinking-exp:free</code></small>
+                <input type="text" id="model-select" value="meta-llama/llama-3.3-70b-instruct:free" placeholder="e.g. meta-llama/llama-3.3-70b-instruct:free, gpt-4o, deepseek-chat, or llama3.1">
+                <small class="helper-text">Works with any standard LLM model identifier on your target endpoint.</small>
               </div>
 
               <div class="form-group">
-                <label for="apikey-override">API Key Override (Optional)</label>
-                <input type="password" id="apikey-override" placeholder="Optional: sk-or-v1-... or AIzaSy...">
+                <label for="apikey-override">API Key / Bearer Token</label>
+                <input type="password" id="apikey-override" placeholder="e.g. sk-..., sk-or-v1-..., or leave blank for local Ollama">
               </div>
 
               <div class="callout-info">

@@ -34,8 +34,14 @@ class LLMClient:
             except Exception:
                 pass
 
-    def call_openrouter(self, messages, model="meta-llama/llama-3.3-70b-instruct:free", api_key=None):
-        key = api_key or self.openrouter_api_key or "sk-or-v1-anonymous"
+    def call_openai_compatible(self, messages, model="gpt-4o", base_url="https://api.openai.com/v1", api_key=None):
+        key = api_key or os.environ.get("OPENAI_API_KEY") or "sk-dummy-key"
+        clean_base = (base_url or "https://api.openai.com/v1").strip().rstrip("/")
+        if not clean_base.endswith("/chat/completions"):
+            endpoint = f"{clean_base}/chat/completions"
+        else:
+            endpoint = clean_base
+
         headers = {
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
@@ -49,11 +55,21 @@ class LLMClient:
             "max_tokens": 2048
         }
         
-        resp = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=45)
+        resp = requests.post(endpoint, headers=headers, json=payload, timeout=50)
         if resp.status_code != 200:
-            raise Exception(f"OpenRouter Error {resp.status_code}: {resp.text}")
+            raise Exception(f"OpenAI API Error {resp.status_code} ({endpoint}): {resp.text}")
         data = resp.json()
-        return data["choices"][0]["message"]["content"]
+        choice = data["choices"][0]["message"]
+        content = choice.get("content") or choice.get("reasoning_content") or ""
+        return content
+
+    def call_openrouter(self, messages, model="meta-llama/llama-3.3-70b-instruct:free", api_key=None):
+        return self.call_openai_compatible(
+            messages=messages, 
+            model=model, 
+            base_url="https://openrouter.ai/api/v1", 
+            api_key=api_key or self.openrouter_api_key or "sk-or-v1-anonymous"
+        )
 
     def call_gemini(self, messages, model="gemini-3.6-flash", api_key=None):
         key = api_key or self.gemini_api_key
@@ -182,7 +198,7 @@ Analysis evaluated presented symptom profile against authoritative clinical prac
 
     def analyze_symptoms(self, symptoms, history="", age=None, duration=None, severity=None, 
                          provider="auto", model="google/gemini-2.0-flash-thinking-exp:free", 
-                         rag_context=None, user_api_key=None):
+                         base_url=None, rag_context=None, user_api_key=None):
         
         system_prompt = get_system_prompt()
         
@@ -208,33 +224,50 @@ Please generate a full percentage-based differential diagnosis, clinical reasoni
 
         web_research_meta = []
         raw_response = ""
+        effective_provider = provider
 
-        # Select execution engine
-        try:
-            if provider == "gemini" or (provider == "auto" and (user_api_key or self.gemini_api_key)):
-                raw_response = self.call_gemini(messages, model=model if "gemini" in model else "gemini-2.5-flash", api_key=user_api_key)
+        def execute_llm_call(msgs):
+            if provider in ["openai_compatible", "openai", "custom"] or (base_url and base_url.strip() and provider != "gemini"):
+                return self.call_openai_compatible(
+                    messages=msgs, 
+                    model=model or "gpt-4o", 
+                    base_url=base_url or "https://api.openai.com/v1", 
+                    api_key=user_api_key
+                )
+            elif provider == "gemini" or (provider == "auto" and (user_api_key or self.gemini_api_key)):
+                return self.call_gemini(
+                    messages=msgs, 
+                    model=model if "gemini" in (model or "") else "gemini-3.6-flash", 
+                    api_key=user_api_key
+                )
             elif provider == "openrouter" or (provider == "auto" and self.openrouter_api_key):
-                raw_response = self.call_openrouter(messages, model=model, api_key=user_api_key)
+                return self.call_openrouter(
+                    messages=msgs, 
+                    model=model or "meta-llama/llama-3.3-70b-instruct:free", 
+                    api_key=user_api_key
+                )
             else:
-                # Try OpenRouter free tier or fallback to local heuristic
+                # Try OpenRouter community free tier
                 try:
-                    raw_response = self.call_openrouter(messages, model="meta-llama/llama-3.3-70b-instruct:free", api_key=user_api_key)
+                    return self.call_openrouter(
+                        messages=msgs, 
+                        model=model or "meta-llama/llama-3.3-70b-instruct:free", 
+                        api_key=user_api_key
+                    )
                 except Exception:
-                    raw_response, rankings = self.fallback_clinical_heuristic(symptoms, rag_context or {})
-                    return {
-                        "analysis_markdown": raw_response,
-                        "rankings": rankings,
-                        "web_research": [],
-                        "provider_used": "Offline Heuristic (No Key Provided)"
-                    }
+                    raise Exception("No active provider key or offline fallback triggered.")
+
+        # Stage 1: Initial Inference
+        try:
+            raw_response = execute_llm_call(messages)
         except Exception as e:
             print(f"LLM call failed: {e}. Falling back to clinical heuristic.")
             raw_response, rankings = self.fallback_clinical_heuristic(symptoms, rag_context or {})
             return {
-                "analysis_markdown": raw_response + f"\n\n*(Note: LLM API returned: {str(e)[:120]}... Fallback clinical heuristic utilized)*",
+                "analysis_markdown": raw_response + f"\n\n*(Note: Provider '{provider}' error: {str(e)[:120]}... Fallback clinical heuristic utilized)*",
                 "rankings": rankings,
                 "web_research": [],
-                "provider_used": "Fallback CDS Heuristic Engine"
+                "provider_used": f"Fallback CDS Heuristic ({provider})"
             }
 
         # Stage 2: Web Research Interceptor
@@ -253,10 +286,7 @@ Please incorporate these verified findings into your final synthesized percentag
             messages.append({"role": "user", "content": followup_prompt})
             
             try:
-                if provider == "gemini" or (provider == "auto" and (user_api_key or self.gemini_api_key)):
-                    raw_response = self.call_gemini(messages, model=model if "gemini" in model else "gemini-2.5-flash", api_key=user_api_key)
-                else:
-                    raw_response = self.call_openrouter(messages, model=model, api_key=user_api_key)
+                raw_response = execute_llm_call(messages)
             except Exception as e:
                 print(f"Followup synthesis failed: {e}")
 
@@ -267,7 +297,7 @@ Please incorporate these verified findings into your final synthesized percentag
             "analysis_markdown": raw_response,
             "rankings": rankings,
             "web_research": web_research_meta,
-            "provider_used": provider
+            "provider_used": effective_provider
         }
 
 llm_service = LLMClient()

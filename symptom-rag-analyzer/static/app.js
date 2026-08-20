@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const severityVal = document.getElementById("severity-val");
   const providerSelect = document.getElementById("provider-select");
   const modelSelect = document.getElementById("model-select");
+  const baseurlInput = document.getElementById("baseurl-input");
   const apikeyOverride = document.getElementById("apikey-override");
   
   const resultsEmpty = document.getElementById("results-empty");
@@ -107,12 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Quick Endpoint Chips
+  document.querySelectorAll(".btn-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      providerSelect.value = "openai_compatible";
+      if (baseurlInput) baseurlInput.value = chip.dataset.base;
+      modelSelect.value = chip.dataset.model;
+    });
+  });
+
   // Provider Selection Helper
   providerSelect.addEventListener("change", (e) => {
     if (e.target.value === "gemini") {
       modelSelect.value = "gemini-3.6-flash";
     } else if (e.target.value === "openrouter") {
       modelSelect.value = "meta-llama/llama-3.3-70b-instruct:free";
+    } else if (e.target.value === "openai_compatible") {
+      if (!modelSelect.value || modelSelect.value.includes("gemini")) {
+        modelSelect.value = "gpt-4o";
+      }
     }
   });
 
@@ -142,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const provider = providerSelect.value;
     const model = modelSelect.value.trim();
     const apiKey = apikeyOverride.value.trim();
+    const baseUrl = baseurlInput ? baseurlInput.value.trim() : null;
 
     // UI Loading State
     resultsEmpty.classList.add("hidden");
@@ -163,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
           mode,
           provider,
           model,
+          base_url: baseUrl,
           api_key: apiKey
         })
       });

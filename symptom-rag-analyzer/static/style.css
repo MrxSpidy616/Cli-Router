@@ -369,6 +369,37 @@ textarea {
   border-top: 1px solid var(--border-color);
 }
 
+.endpoint-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.chip-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.btn-chip {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: #7dd3fc;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-chip:hover {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: var(--primary-accent);
+  color: white;
+}
+
 .helper-text {
   font-size: 0.72rem;
   color: var(--text-muted);

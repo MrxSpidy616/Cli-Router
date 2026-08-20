@@ -48,7 +48,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure Model Provider (Optional)
-The system runs out-of-the-box using free community models or offline clinical heuristics. To use your own API keys:
+The system runs out-of-the-box using free community models or offline clinical heuristics. To use your own API keys or custom endpoints:
 
 ```bash
 # Option A: Google Gemini
@@ -56,7 +56,17 @@ export GEMINI_API_KEY="your-gemini-key"
 
 # Option B: OpenRouter
 export OPENROUTER_API_KEY="your-openrouter-key"
+
+# Option C: OpenAI-Compatible Endpoint (Local Ollama, LM Studio, DeepSeek, Groq, vLLM)
+export OPENAI_API_KEY="your-api-key"   # (leave blank for local Ollama)
 ```
+
+#### Supported OpenAI-Compatible Providers:
+- **Local Ollama:** Base URL `http://localhost:11434/v1` (e.g. model `llama3.1:latest` or `deepseek-r1:14b`)
+- **LM Studio / vLLM:** Base URL `http://localhost:1234/v1`
+- **DeepSeek API:** Base URL `https://api.deepseek.com/v1` (model `deepseek-chat` or `deepseek-reasoner`)
+- **Groq Cloud:** Base URL `https://api.groq.com/openai/v1` (model `llama-3.3-70b-versatile`)
+- **Official OpenAI:** Base URL `https://api.openai.com/v1` (model `gpt-4o` or `gpt-4o-mini`)
 
 ### 3. Run the Flask Web Application
 ```bash
