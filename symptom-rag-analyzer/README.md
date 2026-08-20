@@ -1,41 +1,40 @@
-# AI-Powered Symptom Analysis and Clinical Decision Support (CDS) RAG System
+# 🩺 AI Clinical Decision Support (CDS) & Symptom RAG Analyzer
 
-A web-based **Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, implementing both **Retrieval-Augmented Generation (RAG)** and **Long-Context** architectures.
+A full-stack medical **Clinical Decision Support (CDS)** and differential diagnosis application built with **Python + Flask**, featuring **Retrieval-Augmented Generation (RAG)**, **Long-Context Grounding**, real-time **Firecrawl v1 Web Research**, and a **Senior-Friendly Accessible UI**.
+
+---
+
+## 📸 UI Screenshots & Test Cases
+
+### 1. 🟢 Positive (Mild / Low-Risk Result)
+![Positive Low-Risk UI Result](docs/screenshots/ui_positive_low_risk.jpg)
+
+### 2. 🟡 Neutral (Moderate-Risk / Doctor Follow-Up)
+![Neutral Moderate-Risk UI Result](docs/screenshots/ui_neutral_moderate_risk.jpg)
+
+### 3. 🔴 Negative / Critical (Emergency Red Flag Alert)
+![Negative Emergency Red Flag UI Result](docs/screenshots/ui_negative_emergency_alert.jpg)
+
+### 4. 🔥 Live Firecrawl Medical Web Research Modal
+![Firecrawl Live Medical Web Research UI](docs/screenshots/ui_firecrawl_web_research.jpg)
 
 ---
 
 ## 🌟 Core Features
 
-1. **Percentage-Based Differential Diagnosis:** Generates ranked probabilistic estimates for conditions (e.g., *Condition A: 65%*, *Condition B: 20%*, *Condition C: 15%*) based on symptom constellations, demographics, and clinical guidelines.
-2. **Dual Context Architectures (RAG vs Long-Context):**
-   - **RAG Mode:** High-efficiency BM25 semantic chunk retrieval from WHO, NIH, CDC, and ICD-10 medical knowledge bases.
-   - **Long-Context Mode ("No-Stack Stack"):** Ingests the full clinical repository directly into the LLM's extended context window (1M+ tokens) for global gap analysis.
-3. **Self-Evolving Knowledge Loop:** Automatically persists analyzed cases into `data/evolving_knowledge.json`. Subsequent patient evaluations retrieve both base guidelines and verified historical cases.
-4. **Token-Triggered Web Research:** Scans LLM output for custom trigger tokens (e.g. `[WEB_SEARCH: <valid_url>]`). When detected, the engine fetches the external webpage, parses it into clean Markdown, stores it in `data/research_cache/`, and injects verified findings back into the reasoning loop.
-5. **FDA CDS & WHO AI Ethics Compliance:** Strict non-diagnostic positioning, red-flag triaging alerts, and medical regulatory disclaimers.
-
----
-
-## 📁 Directory Structure
-
-```
-symptom-rag-analyzer/
-├── app.py                     # Flask web server & REST API
-├── rag_engine.py              # Semantic retrieval, BM25 indexing & Evolving case store
-├── web_researcher.py          # Token interceptor, HTML-to-Markdown parser & web fetcher
-├── llm_client.py              # Multi-model gateway (Free OpenRouter / Gemini / Heuristics)
-├── prompt.md                  # Master CDS System Prompt & Architectural Rules
-├── requirements.txt           # Dependencies (Flask, requests, beautifulsoup4, markdown)
-├── data/
-│   ├── knowledge_base.json    # Authoritative clinical guidelines (ICD-10, symptoms, red flags)
-│   ├── evolving_knowledge.json# Persistent self-evolving case archive
-│   └── research_cache/        # Saved Markdown web research documents
-├── templates/
-│   └── index.html             # Responsive Clinical Decision Support web interface
-└── static/
-    ├── style.css              # Modern clinical dark UI & animated percentage progress bars
-    └── app.js                 # Asynchronous client controller & case presets
-```
+1. **Dual-Tier Output Architecture:**
+   - 👤 **Section A (Plain-Language Patient Summary):** Urgency level (🟢 Mild, 🟡 Moderate, 🔴 Emergency), everyday condition names, 6th-grade reading level explanation, home care checklist, and 911 warning signs.
+   - 🩺 **Section B (Detailed Clinician Reference):** Percentage differential probability table, ICD-10 diagnostic coding, pathophysiological concordance, and recommended diagnostic lab/imaging workups.
+2. **Firecrawl v1 Deep Web Research:**
+   - Scans reasoning streams for `[WEB_SEARCH: <url_or_topic>]` and `[FIRECRAWL_SEARCH: <query>]`.
+   - Fetches and scrapes authoritative clinical literature in high-fidelity Markdown, injecting live findings back into the diagnosis loop.
+3. **Dual Context Architectures (RAG vs Long-Context):**
+   - **RAG Mode:** Okapi BM25 semantic retrieval with medical synonym expansion over WHO, NIH, CDC, GLOBOCAN, and the NHS Inform Scotland directory (433 conditions).
+   - **Long-Context Mode:** Ingests the full medical repository into large context windows (1M+ tokens).
+4. **Self-Evolving Knowledge Loop:**
+   - Automatically archives evaluated cases into persistent memory (`data/evolving_knowledge.json`) to continually refine future differential calibration.
+5. **Senior Accessibility:**
+   - High-contrast dark theme, large 17px/20px typography, 1-click `A / A+` font resizer, and 1-click common symptom presets.
 
 ---
 
@@ -43,55 +42,35 @@ symptom-rag-analyzer/
 
 ### 1. Install Dependencies
 ```bash
-cd symptom-rag-analyzer
 pip install -r requirements.txt
 ```
 
-### 2. Configure Model Provider (Optional)
-The system runs out-of-the-box using free community models or offline clinical heuristics. To use your own API keys or custom endpoints:
-
+### 2. Configure Environment Variables (Optional)
 ```bash
-# Option A: Google Gemini
+# Firecrawl Web Research Key
+export FIRECRAWL_API_KEY="fc-bfc1c5abb4aa4f69b0da8f12c5b444d6"
+
+# Optional LLM Provider Overrides
+export CLIPROXY_API_KEY="aravind616"
 export GEMINI_API_KEY="your-gemini-key"
-
-# Option B: OpenRouter
-export OPENROUTER_API_KEY="your-openrouter-key"
-
-# Option C: OpenAI-Compatible Endpoint (Local Ollama, LM Studio, DeepSeek, Groq, vLLM)
-export OPENAI_API_KEY="your-api-key"   # (leave blank for local Ollama)
+export OPENAI_API_KEY="your-openai-key"
 ```
-
-#### Supported OpenAI-Compatible Providers:
-- **Local Ollama:** Base URL `http://localhost:11434/v1` (e.g. model `llama3.1:latest` or `deepseek-r1:14b`)
-- **LM Studio / vLLM:** Base URL `http://localhost:1234/v1`
-- **DeepSeek API:** Base URL `https://api.deepseek.com/v1` (model `deepseek-chat` or `deepseek-reasoner`)
-- **Groq Cloud:** Base URL `https://api.groq.com/openai/v1` (model `llama-3.3-70b-versatile`)
-- **Official OpenAI:** Base URL `https://api.openai.com/v1` (model `gpt-4o` or `gpt-4o-mini`)
 
 ### 3. Run the Flask Web Application
 ```bash
 python app.py
 ```
-Open [http://localhost:5000](http://localhost:5000) in your browser.
+Open **`http://localhost:5000`** in your browser.
 
 ---
 
 ## 🔌 API Endpoints
 
 ### `POST /api/analyze`
-Submits symptoms for differential ranking.
-```json
-{
-  "symptoms": "Persistent dry cough, mild fever, chest tightness",
-  "age": "42yo",
-  "duration": "4 days",
-  "history": "Hypertension, Non-smoker",
-  "severity": "5 / 10",
-  "mode": "rag",
-  "provider": "auto",
-  "model": "meta-llama/llama-3.3-70b-instruct:free"
-}
-```
+Submits symptoms for differential ranking and dual-tier CDS output.
+
+### `POST /api/research`
+Directly conducts live web search or scrapes a medical URL with Firecrawl.
 
 ### `GET /api/documents`
 Returns all indexed clinical guidelines and evolving cases.
@@ -99,5 +78,15 @@ Returns all indexed clinical guidelines and evolving cases.
 ### `GET /api/history`
 Returns historical cases stored in the self-evolving knowledge loop.
 
-### `POST /api/research`
-Directly converts a medical URL or query to a cached Markdown document.
+### `GET /api/health` & `GET /api/stats`
+Returns system health, document counts, and Firecrawl engine status.
+
+---
+
+## ⚖️ Regulatory Compliance Notice
+This system operates strictly under **FDA Clinical Decision Support (CDS) Guidance** and **WHO AI Health Ethics Principles**. It is intended as an informational clinical support tool and does not issue binding medical diagnoses or replace an in-person evaluation by a licensed physician.
+
+---
+
+## 📄 License
+MIT License.
