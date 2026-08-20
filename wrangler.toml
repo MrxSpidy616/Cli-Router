@@ -1,0 +1,7 @@
+name = "b2-file-manager"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+B2_BUCKET_ID = "your-bucket-id"
+B2_BUCKET_NAME = "your-bucket-name"
