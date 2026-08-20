@@ -4,12 +4,39 @@
     "condition": "Acute Bronchitis",
     "icd10": "J20.9",
     "system": "Respiratory",
-    "typical_symptoms": ["cough with or without mucus", "fatigue", "mild fever", "sore throat", "chest soreness", "shortness of breath on exertion"],
+    "typical_symptoms": [
+      "cough with or without mucus",
+      "fatigue",
+      "mild fever",
+      "sore throat",
+      "chest soreness",
+      "shortness of breath on exertion"
+    ],
     "duration": "1-3 weeks",
-    "risk_factors": ["recent upper respiratory viral infection", "tobacco exposure", "air pollutants", "immunocompromise"],
-    "red_flags": ["high sustained fever > 38.5C", "hemoptysis (coughing blood)", "resting severe dyspnea", "hypoxemia SpO2 < 94%"],
-    "differential_diagnoses": ["Pneumonia", "Asthma exacerbation", "COPD exacerbation", "COVID-19", "GERD"],
-    "recommended_tests": ["Chest X-ray if pneumonia suspected", "Pulse oximetry", "Viral panel / PCR"],
+    "risk_factors": [
+      "recent upper respiratory viral infection",
+      "tobacco exposure",
+      "air pollutants",
+      "immunocompromise"
+    ],
+    "red_flags": [
+      "high sustained fever > 38.5C",
+      "hemoptysis (coughing blood)",
+      "resting severe dyspnea",
+      "hypoxemia SpO2 < 94%"
+    ],
+    "differential_diagnoses": [
+      "Pneumonia",
+      "Asthma exacerbation",
+      "COPD exacerbation",
+      "COVID-19",
+      "GERD"
+    ],
+    "recommended_tests": [
+      "Chest X-ray if pneumonia suspected",
+      "Pulse oximetry",
+      "Viral panel / PCR"
+    ],
     "authoritative_source": "NIH / CDC Clinical Practice Guidelines for Adult Acute Respiratory Tract Infections"
   },
   {
@@ -17,12 +44,40 @@
     "condition": "Community-Acquired Pneumonia",
     "icd10": "J18.9",
     "system": "Respiratory",
-    "typical_symptoms": ["productive cough with purulent/rusty sputum", "high fever", "shaking chills (rigors)", "pleuritic chest pain", "tachypnea", "fatigue"],
+    "typical_symptoms": [
+      "productive cough with purulent/rusty sputum",
+      "high fever",
+      "shaking chills (rigors)",
+      "pleuritic chest pain",
+      "tachypnea",
+      "fatigue"
+    ],
     "duration": "Days to weeks (acute onset)",
-    "risk_factors": ["age > 65 or < 2", "chronic lung disease (COPD)", "smoking", "aspiration risk", "immunosuppression"],
-    "red_flags": ["confusion/altered mental state (CURB-65 criteria)", "respiratory rate >= 30/min", "hypotension SBP < 90", "severe hypoxemia"],
-    "differential_diagnoses": ["Acute bronchitis", "Pulmonary embolism", "Heart failure exacerbation", "Lung malignancy"],
-    "recommended_tests": ["Chest Radiograph (PA/Lateral)", "CBC with differential", "Blood cultures", "Sputum Gram stain and culture"],
+    "risk_factors": [
+      "age > 65 or < 2",
+      "chronic lung disease (COPD)",
+      "smoking",
+      "aspiration risk",
+      "immunosuppression"
+    ],
+    "red_flags": [
+      "confusion/altered mental state (CURB-65 criteria)",
+      "respiratory rate >= 30/min",
+      "hypotension SBP < 90",
+      "severe hypoxemia"
+    ],
+    "differential_diagnoses": [
+      "Acute bronchitis",
+      "Pulmonary embolism",
+      "Heart failure exacerbation",
+      "Lung malignancy"
+    ],
+    "recommended_tests": [
+      "Chest Radiograph (PA/Lateral)",
+      "CBC with differential",
+      "Blood cultures",
+      "Sputum Gram stain and culture"
+    ],
     "authoritative_source": "ATS / IDSA Clinical Guidelines for Community-Acquired Pneumonia"
   },
   {
@@ -30,12 +85,43 @@
     "condition": "Acute Coronary Syndrome (Myocardial Infarction / Angina)",
     "icd10": "I21.9",
     "system": "Cardiovascular",
-    "typical_symptoms": ["substernal pressure/squeezing chest pain", "radiation to left arm/jaw/back", "diaphoresis (cold sweats)", "nausea", "dyspnea", "lightheadedness"],
+    "typical_symptoms": [
+      "substernal pressure/squeezing chest pain",
+      "radiation to left arm/jaw/back",
+      "diaphoresis (cold sweats)",
+      "nausea",
+      "dyspnea",
+      "lightheadedness"
+    ],
     "duration": "Minutes to hours, worsening with exertion, unresolved by rest",
-    "risk_factors": ["hypertension", "dyslipidemia", "diabetes mellitus", "smoking", "family history of premature CAD", "male > 45, female > 55"],
-    "red_flags": ["crushing chest pain > 20 min", "syncope", "hemodynamic instability", "pulmonary edema / crackles"],
-    "differential_diagnoses": ["Aortic dissection", "Pulmonary embolism", "Esophageal spasm", "Costochondritis", "GERD", "Panic attack"],
-    "recommended_tests": ["Immediate 12-lead ECG (<10 min)", "Serial cardiac troponin I/T", "Chest X-ray", "Coronary angiography"],
+    "risk_factors": [
+      "hypertension",
+      "dyslipidemia",
+      "diabetes mellitus",
+      "smoking",
+      "family history of premature CAD",
+      "male > 45, female > 55"
+    ],
+    "red_flags": [
+      "crushing chest pain > 20 min",
+      "syncope",
+      "hemodynamic instability",
+      "pulmonary edema / crackles"
+    ],
+    "differential_diagnoses": [
+      "Aortic dissection",
+      "Pulmonary embolism",
+      "Esophageal spasm",
+      "Costochondritis",
+      "GERD",
+      "Panic attack"
+    ],
+    "recommended_tests": [
+      "Immediate 12-lead ECG (<10 min)",
+      "Serial cardiac troponin I/T",
+      "Chest X-ray",
+      "Coronary angiography"
+    ],
     "authoritative_source": "AHA / ACC Guideline for the Management of Patients With Acute Coronary Syndromes"
   },
   {
@@ -43,12 +129,42 @@
     "condition": "Gastroesophageal Reflux Disease (GERD)",
     "icd10": "K21.9",
     "system": "Gastrointestinal",
-    "typical_symptoms": ["pyrosis (heartburn)", "acid regurgitation", "epigastric burning postprandial", "chronic dry cough", "globus sensation (lump in throat)", "dysphagia"],
+    "typical_symptoms": [
+      "pyrosis (heartburn)",
+      "acid regurgitation",
+      "epigastric burning postprandial",
+      "chronic dry cough",
+      "globus sensation (lump in throat)",
+      "dysphagia"
+    ],
     "duration": "Chronic / episodic (> 2 times weekly)",
-    "risk_factors": ["obesity", "hiatal hernia", "pregnancy", "delayed gastric emptying", "smoking", "NSAIDs", "alcohol"],
-    "red_flags": ["progressive dysphagia", "odynophagia", "unintentional weight loss", "gastrointestinal bleeding / melena", "persistent vomiting"],
-    "differential_diagnoses": ["Coronary artery disease (cardiac ischemia must be ruled out)", "Peptic ulcer disease", "Esophageal motility disorders", "Gastric malignancy"],
-    "recommended_tests": ["Empirical trial of PPI", "Upper GI Endoscopy (EGD)", "Esophageal 24-hr pH monitoring"],
+    "risk_factors": [
+      "obesity",
+      "hiatal hernia",
+      "pregnancy",
+      "delayed gastric emptying",
+      "smoking",
+      "NSAIDs",
+      "alcohol"
+    ],
+    "red_flags": [
+      "progressive dysphagia",
+      "odynophagia",
+      "unintentional weight loss",
+      "gastrointestinal bleeding / melena",
+      "persistent vomiting"
+    ],
+    "differential_diagnoses": [
+      "Coronary artery disease (cardiac ischemia must be ruled out)",
+      "Peptic ulcer disease",
+      "Esophageal motility disorders",
+      "Gastric malignancy"
+    ],
+    "recommended_tests": [
+      "Empirical trial of PPI",
+      "Upper GI Endoscopy (EGD)",
+      "Esophageal 24-hr pH monitoring"
+    ],
     "authoritative_source": "ACG Clinical Guideline for the Diagnosis and Management of GERD"
   },
   {
@@ -56,12 +172,42 @@
     "condition": "Type 2 Diabetes Mellitus (New Onset / Hyperglycemia)",
     "icd10": "E11.9",
     "system": "Endocrine / Metabolic",
-    "typical_symptoms": ["polyuria (frequent urination)", "polydipsia (excessive thirst)", "polyphagia", "unexplained weight loss", "blurred vision", "lethargy / chronic fatigue"],
+    "typical_symptoms": [
+      "polyuria (frequent urination)",
+      "polydipsia (excessive thirst)",
+      "polyphagia",
+      "unexplained weight loss",
+      "blurred vision",
+      "lethargy / chronic fatigue"
+    ],
     "duration": "Weeks to months (insidious progression)",
-    "risk_factors": ["BMI >= 25", "sedentary lifestyle", "family history of diabetes", "hypertension", "PCOS", "history of gestational diabetes"],
-    "red_flags": ["Kussmaul breathing", "fruity acetone breath", "altered consciousness", "severe dehydration (Diabetic Ketoacidosis / HHS)"],
-    "differential_diagnoses": ["Type 1 diabetes", "Diabetes insipidus", "Cushing syndrome", "Hyperthyroidism", "Medication-induced hyperglycemia"],
-    "recommended_tests": ["Fasting plasma glucose >= 126 mg/dL", "Hemoglobin A1c >= 6.5%", "Oral Glucose Tolerance Test (OGTT)", "Urine ketones and microalbumin"],
+    "risk_factors": [
+      "BMI >= 25",
+      "sedentary lifestyle",
+      "family history of diabetes",
+      "hypertension",
+      "PCOS",
+      "history of gestational diabetes"
+    ],
+    "red_flags": [
+      "Kussmaul breathing",
+      "fruity acetone breath",
+      "altered consciousness",
+      "severe dehydration (Diabetic Ketoacidosis / HHS)"
+    ],
+    "differential_diagnoses": [
+      "Type 1 diabetes",
+      "Diabetes insipidus",
+      "Cushing syndrome",
+      "Hyperthyroidism",
+      "Medication-induced hyperglycemia"
+    ],
+    "recommended_tests": [
+      "Fasting plasma glucose >= 126 mg/dL",
+      "Hemoglobin A1c >= 6.5%",
+      "Oral Glucose Tolerance Test (OGTT)",
+      "Urine ketones and microalbumin"
+    ],
     "authoritative_source": "ADA Standards of Care in Diabetes (2025/2026)"
   },
   {
@@ -69,12 +215,37 @@
     "condition": "Migraine Headache with/without Aura",
     "icd10": "G43.9",
     "system": "Neurological",
-    "typical_symptoms": ["unilateral throbbing/pulsating headache", "photophobia", "phonophobia", "nausea and vomiting", "visual aura (scintillating scotoma, zigzag lines)", "aggravation by physical activity"],
+    "typical_symptoms": [
+      "unilateral throbbing/pulsating headache",
+      "photophobia",
+      "phonophobia",
+      "nausea and vomiting",
+      "visual aura (scintillating scotoma, zigzag lines)",
+      "aggravation by physical activity"
+    ],
     "duration": "4 to 72 hours per episode",
-    "risk_factors": ["female sex (3:1 ratio)", "family history", "hormonal fluctuations", "stress", "sleep disturbances", "dietary triggers (tyramine, MSG, alcohol)"],
-    "red_flags": ["SNOOP criteria: Systemic symptoms/fever, Neurological deficits, Sudden 'thunderclap' onset, Older age > 50 onset, Pattern change"],
-    "differential_diagnoses": ["Tension-type headache", "Cluster headache", "Subarachnoid hemorrhage", "Temporal arteritis", "Idiopathic intracranial hypertension"],
-    "recommended_tests": ["Clinical diagnostic criteria (ICHD-3)", "Brain MRI/CT if red flags present or atypical aura"],
+    "risk_factors": [
+      "female sex (3:1 ratio)",
+      "family history",
+      "hormonal fluctuations",
+      "stress",
+      "sleep disturbances",
+      "dietary triggers (tyramine, MSG, alcohol)"
+    ],
+    "red_flags": [
+      "SNOOP criteria: Systemic symptoms/fever, Neurological deficits, Sudden 'thunderclap' onset, Older age > 50 onset, Pattern change"
+    ],
+    "differential_diagnoses": [
+      "Tension-type headache",
+      "Cluster headache",
+      "Subarachnoid hemorrhage",
+      "Temporal arteritis",
+      "Idiopathic intracranial hypertension"
+    ],
+    "recommended_tests": [
+      "Clinical diagnostic criteria (ICHD-3)",
+      "Brain MRI/CT if red flags present or atypical aura"
+    ],
     "authoritative_source": "International Headache Society (IHS) ICHD-3 Diagnostic Guidelines"
   },
   {
@@ -82,12 +253,38 @@
     "condition": "Acute Appendicitis",
     "icd10": "K35.8",
     "system": "Gastrointestinal / Surgical",
-    "typical_symptoms": ["periumbilical pain migrating to right lower quadrant (McBurney point)", "anorexia", "nausea and vomiting", "low-grade fever", "rebound tenderness", "Rovsing sign"],
+    "typical_symptoms": [
+      "periumbilical pain migrating to right lower quadrant (McBurney point)",
+      "anorexia",
+      "nausea and vomiting",
+      "low-grade fever",
+      "rebound tenderness",
+      "Rovsing sign"
+    ],
     "duration": "Hours to 1-2 days (rapid progression)",
-    "risk_factors": ["age 10-30", "lymphoid hyperplasia", "fecalith obstruction", "family history"],
-    "red_flags": ["sudden relief of pain followed by diffuse peritonitis (perforation)", "high fever > 39C with rigid 'board-like' abdomen", "septic shock"],
-    "differential_diagnoses": ["Mesenteric adenitis", "Ovarian cyst rupture / torsion", "Ectopic pregnancy", "Kidney stone (nephrolithiasis)", "Crohn disease"],
-    "recommended_tests": ["Abdominal Ultrasound / Contrast CT", "CBC (leukocytosis with left shift)", "Urinalysis and beta-hCG"],
+    "risk_factors": [
+      "age 10-30",
+      "lymphoid hyperplasia",
+      "fecalith obstruction",
+      "family history"
+    ],
+    "red_flags": [
+      "sudden relief of pain followed by diffuse peritonitis (perforation)",
+      "high fever > 39C with rigid 'board-like' abdomen",
+      "septic shock"
+    ],
+    "differential_diagnoses": [
+      "Mesenteric adenitis",
+      "Ovarian cyst rupture / torsion",
+      "Ectopic pregnancy",
+      "Kidney stone (nephrolithiasis)",
+      "Crohn disease"
+    ],
+    "recommended_tests": [
+      "Abdominal Ultrasound / Contrast CT",
+      "CBC (leukocytosis with left shift)",
+      "Urinalysis and beta-hCG"
+    ],
     "authoritative_source": "World Society of Emergency Surgery (WSES) Jerusalem Guidelines"
   },
   {
@@ -95,12 +292,40 @@
     "condition": "Urinary Tract Infection (Acute Cystitis / Pyelonephritis)",
     "icd10": "N39.0",
     "system": "Genitourinary",
-    "typical_symptoms": ["dysuria (painful urination)", "urinary frequency and urgency", "suprapubic discomfort", "cloudy or malodorous urine", "hematuria"],
+    "typical_symptoms": [
+      "dysuria (painful urination)",
+      "urinary frequency and urgency",
+      "suprapubic discomfort",
+      "cloudy or malodorous urine",
+      "hematuria"
+    ],
     "duration": "Acute (1-5 days)",
-    "risk_factors": ["female anatomy", "sexual intercourse", "catheterization", "urinary retention", "diabetes mellitus", "pregnancy"],
-    "red_flags": ["high fever > 38.5C with shaking chills", "costovertebral angle (flank) tenderness", "intractable nausea (suggests upper tract pyelonephritis)", "urosepsis"],
-    "differential_diagnoses": ["Bacterial cystitis", "Acute pyelonephritis", "Urethritis / STI (Chlamydia/Gonorrhea)", "Vaginitis", "Interstitial cystitis"],
-    "recommended_tests": ["Urinalysis (leukocyte esterase, nitrites, WBCs)", "Urine culture & antimicrobial sensitivity", "Renal ultrasound if complicated"],
+    "risk_factors": [
+      "female anatomy",
+      "sexual intercourse",
+      "catheterization",
+      "urinary retention",
+      "diabetes mellitus",
+      "pregnancy"
+    ],
+    "red_flags": [
+      "high fever > 38.5C with shaking chills",
+      "costovertebral angle (flank) tenderness",
+      "intractable nausea (suggests upper tract pyelonephritis)",
+      "urosepsis"
+    ],
+    "differential_diagnoses": [
+      "Bacterial cystitis",
+      "Acute pyelonephritis",
+      "Urethritis / STI (Chlamydia/Gonorrhea)",
+      "Vaginitis",
+      "Interstitial cystitis"
+    ],
+    "recommended_tests": [
+      "Urinalysis (leukocyte esterase, nitrites, WBCs)",
+      "Urine culture & antimicrobial sensitivity",
+      "Renal ultrasound if complicated"
+    ],
     "authoritative_source": "IDSA International Clinical Practice Guidelines for Acute Uncomplicated Cystitis"
   },
   {
@@ -108,12 +333,42 @@
     "condition": "Generalized Anxiety Disorder / Panic Attack",
     "icd10": "F41.1",
     "system": "Psychiatric / Autonomic",
-    "typical_symptoms": ["sudden surge of intense fear", "palpitations / tachycardia", "trembling / shaking", "hyperventilation / sensation of shortness of breath", "dizziness / lightheadedness", "fear of losing control or dying"],
+    "typical_symptoms": [
+      "sudden surge of intense fear",
+      "palpitations / tachycardia",
+      "trembling / shaking",
+      "hyperventilation / sensation of shortness of breath",
+      "dizziness / lightheadedness",
+      "fear of losing control or dying"
+    ],
     "duration": "Peak within 10 minutes, lasting 20-30 minutes",
-    "risk_factors": ["prior panic episodes", "high baseline stress", "caffeine / stimulant intake", "family history of anxiety disorders", "trauma"],
-    "red_flags": ["true exertional chest pain", "syncope", "neurological focal signs", "hypoxemia", "must rule out physical organic causes first"],
-    "differential_diagnoses": ["Cardiac arrhythmia", "Hyperthyroidism", "Pheochromocytoma", "Pulmonary embolism", "Asthma attack"],
-    "recommended_tests": ["12-lead ECG", "Thyroid function panel (TSH, free T4)", "Electrolyte panel", "Toxicology screen"],
+    "risk_factors": [
+      "prior panic episodes",
+      "high baseline stress",
+      "caffeine / stimulant intake",
+      "family history of anxiety disorders",
+      "trauma"
+    ],
+    "red_flags": [
+      "true exertional chest pain",
+      "syncope",
+      "neurological focal signs",
+      "hypoxemia",
+      "must rule out physical organic causes first"
+    ],
+    "differential_diagnoses": [
+      "Cardiac arrhythmia",
+      "Hyperthyroidism",
+      "Pheochromocytoma",
+      "Pulmonary embolism",
+      "Asthma attack"
+    ],
+    "recommended_tests": [
+      "12-lead ECG",
+      "Thyroid function panel (TSH, free T4)",
+      "Electrolyte panel",
+      "Toxicology screen"
+    ],
     "authoritative_source": "DSM-5-TR Diagnostic Criteria & APA Practice Guidelines"
   },
   {
@@ -121,12 +376,436 @@
     "condition": "Viral Gastroenteritis (Stomach Flu)",
     "icd10": "A08.4",
     "system": "Gastrointestinal / Infectious",
-    "typical_symptoms": ["watery diarrhea", "cramping abdominal pain", "nausea and vomiting", "low-grade fever", "myalgias", "headache"],
+    "typical_symptoms": [
+      "watery diarrhea",
+      "cramping abdominal pain",
+      "nausea and vomiting",
+      "low-grade fever",
+      "myalgias",
+      "headache"
+    ],
     "duration": "1 to 3 days (Norovirus) or up to 7-10 days (Rotavirus)",
-    "risk_factors": ["consumption of contaminated food/water", "contact with infected individuals", "daycare or cruise ship settings"],
-    "red_flags": ["signs of severe dehydration (sunken eyes, anuria, dry mucous membranes)", "grossly bloody stool", "high fever > 39C", "severe localized pain"],
-    "differential_diagnoses": ["Bacterial enteritis (Salmonella, Shigella, Campylobacter, C. diff)", "Food poisoning (toxin-mediated)", "Appendicitis", "Inflammatory bowel disease"],
-    "recommended_tests": ["Clinical assessment of hydration", "Stool PCR multiplex / stool culture if bloody or severe", "Basic metabolic panel (electrolytes/BUN/Cr)"],
+    "risk_factors": [
+      "consumption of contaminated food/water",
+      "contact with infected individuals",
+      "daycare or cruise ship settings"
+    ],
+    "red_flags": [
+      "signs of severe dehydration (sunken eyes, anuria, dry mucous membranes)",
+      "grossly bloody stool",
+      "high fever > 39C",
+      "severe localized pain"
+    ],
+    "differential_diagnoses": [
+      "Bacterial enteritis (Salmonella, Shigella, Campylobacter, C. diff)",
+      "Food poisoning (toxin-mediated)",
+      "Appendicitis",
+      "Inflammatory bowel disease"
+    ],
+    "recommended_tests": [
+      "Clinical assessment of hydration",
+      "Stool PCR multiplex / stool culture if bloody or severe",
+      "Basic metabolic panel (electrolytes/BUN/Cr)"
+    ],
     "authoritative_source": "WHO Guidelines on the Management of Acute Diarrhoea & Infectious Diseases"
+  },
+  {
+    "id": "KB-CA-001",
+    "condition": "Lung Cancer (Trachea, Bronchus, Lung)",
+    "icd10": "C34.9",
+    "system": "Oncology / Respiratory",
+    "typical_symptoms": [
+      "chronic worsening cough",
+      "hemoptysis (coughing up blood)",
+      "unexplained weight loss",
+      "dyspnea",
+      "chest pain",
+      "recurrent pneumonia/bronchitis"
+    ],
+    "duration": "Weeks to months",
+    "risk_factors": [
+      "tobacco smoking (85%)",
+      "age > 55",
+      "radon/asbestos exposure",
+      "COPD history",
+      "family history"
+    ],
+    "red_flags": [
+      "massive hemoptysis",
+      "superior vena cava syndrome (facial/neck swelling)",
+      "severe hoarseness (recurrent laryngeal nerve invasion)",
+      "unilateral breath sound absence"
+    ],
+    "differential_diagnoses": [
+      "Community-acquired pneumonia",
+      "Tuberculosis",
+      "COPD exacerbation",
+      "Bronchiectasis",
+      "Benign lung nodule"
+    ],
+    "recommended_tests": [
+      "Low-dose chest CT (LDCT)",
+      "Bronchoscopy with EBUS biopsy",
+      "PET-CT staging",
+      "Molecular biomarker testing (EGFR, ALK, PD-L1)"
+    ],
+    "authoritative_source": "GLOBOCAN 2024 / WHO Lung Cancer Guidelines / SEER"
+  },
+  {
+    "id": "KB-CA-002",
+    "condition": "Breast Cancer",
+    "icd10": "C50.9",
+    "system": "Oncology / Breast",
+    "typical_symptoms": [
+      "painless palpable breast mass/lump",
+      "skin dimpling / peau d'orange",
+      "nipple retraction or spontaneous bloody discharge",
+      "axillary lymphadenopathy"
+    ],
+    "duration": "Weeks to months",
+    "risk_factors": [
+      "female sex",
+      "age > 50",
+      "BRCA1/BRCA2 mutation",
+      "dense breast tissue",
+      "early menarche/late menopause",
+      "obesity"
+    ],
+    "red_flags": [
+      "rapidly growing inflammatory breast erythema",
+      "fixed hard axillary/supraclavicular lymph node mass",
+      "ulceration of breast skin"
+    ],
+    "differential_diagnoses": [
+      "Fibroadenoma",
+      "Fibrocystic breast changes",
+      "Mastitis / breast abscess",
+      "Fat necrosis"
+    ],
+    "recommended_tests": [
+      "Diagnostic bilateral mammography",
+      "Targeted breast ultrasound",
+      "Core needle biopsy with ER/PR/HER2 pathology",
+      "Breast MRI"
+    ],
+    "authoritative_source": "WHO Global Breast Cancer Initiative / NCCN Guidelines / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-003",
+    "condition": "Colorectal Cancer",
+    "icd10": "C18.9 / C20",
+    "system": "Oncology / Gastrointestinal",
+    "typical_symptoms": [
+      "change in bowel habits (diarrhea/constipation/pencil-thin stools)",
+      "rectal bleeding / hematochezia",
+      "unexplained iron-deficiency anemia",
+      "cramping abdominal pain",
+      "unintentional weight loss"
+    ],
+    "duration": "Months",
+    "risk_factors": [
+      "age > 45-50",
+      "family history / Lynch syndrome / FAP",
+      "inflammatory bowel disease (IBD)",
+      "high red/processed meat diet",
+      "sedentary lifestyle"
+    ],
+    "red_flags": [
+      "acute bowel obstruction",
+      "gross lower GI hemorrhage with hemodynamic compromise",
+      "perforation with peritonitis"
+    ],
+    "differential_diagnoses": [
+      "Hemorrhoids",
+      "Diverticular disease",
+      "Inflammatory bowel disease",
+      "Irritable bowel syndrome",
+      "Ischemic colitis"
+    ],
+    "recommended_tests": [
+      "Colonoscopy with tissue biopsy (gold standard)",
+      "Fecal Immunochemical Test (FIT)",
+      "CT Abdomen/Pelvis staging",
+      "Tumor MSI/dMMR molecular testing"
+    ],
+    "authoritative_source": "USPSTF / ACS / WHO Colorectal Cancer Guidelines 2024-2026"
+  },
+  {
+    "id": "KB-CA-004",
+    "condition": "Gastric (Stomach) Cancer",
+    "icd10": "C16.9",
+    "system": "Oncology / Gastrointestinal",
+    "typical_symptoms": [
+      "persistent indigestion / epigastric pain",
+      "early satiety",
+      "unexplained weight loss",
+      "nausea and vomiting",
+      "melena (black tarry stools)",
+      "fatigue from anemia"
+    ],
+    "duration": "Months (often silent in early stages)",
+    "risk_factors": [
+      "chronic Helicobacter pylori infection (90% of noncardia cases)",
+      "age > 65",
+      "male sex (2-3x)",
+      "high salt-preserved foods",
+      "atrophic gastritis / pernicious anemia"
+    ],
+    "red_flags": [
+      "Virchow node (left supraclavicular lymphadenopathy)",
+      "Sister Mary Joseph nodule",
+      "severe persistent dysphagia or gastric outlet obstruction"
+    ],
+    "differential_diagnoses": [
+      "Peptic ulcer disease (PUD)",
+      "GERD",
+      "Gastritis",
+      "Gastric lymphoma",
+      "GIST"
+    ],
+    "recommended_tests": [
+      "Esophagogastroduodenoscopy (EGD) with multiple biopsies",
+      "H. pylori testing",
+      "Contrast-enhanced CT scan",
+      "Endoscopic ultrasound (EUS)"
+    ],
+    "authoritative_source": "IARC / WHO Fact Sheet / BMC Public Health / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-005",
+    "condition": "Hepatocellular Carcinoma (Liver Cancer)",
+    "icd10": "C22.0",
+    "system": "Oncology / Hepatic",
+    "typical_symptoms": [
+      "unexplained weight loss / anorexia",
+      "right upper quadrant abdominal fullness/pain",
+      "jaundice (icterus)",
+      "ascites / abdominal distension",
+      "pruritus",
+      "lethargy"
+    ],
+    "duration": "Weeks to months in cirrhotic background",
+    "risk_factors": [
+      "chronic Hepatitis B virus (HBV) or Hepatitis C (HCV)",
+      "cirrhosis of any etiology",
+      "heavy alcohol consumption",
+      "MASLD / NAFLD / NASH",
+      "aflatoxin exposure"
+    ],
+    "red_factors": [
+      "hepatic encephalopathy",
+      "ruptured HCC with hemoperitoneum",
+      "variceal upper GI bleeding"
+    ],
+    "differential_diagnoses": [
+      "Decompensated cirrhosis",
+      "Intrahepatic cholangiocarcinoma",
+      "Hepatic metastasis from GI primary",
+      "Benign hepatic adenoma / hemangioma"
+    ],
+    "recommended_tests": [
+      "Serum Alpha-Fetoprotein (AFP)",
+      "Multiphasic contrast CT / MRI (LI-RADS criteria)",
+      "Hepatic viral serologies (HBsAg, anti-HCV)",
+      "Liver biopsy"
+    ],
+    "authoritative_source": "AASLD / EASL Clinical Practice Guidelines / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-006",
+    "condition": "Prostate Cancer",
+    "icd10": "C61",
+    "system": "Oncology / Genitourinary",
+    "typical_symptoms": [
+      "often asymptomatic early",
+      "urinary hesitancy / weak stream",
+      "nocturia and urinary frequency",
+      "hematuria",
+      "bone pain in spine/pelvis if advanced"
+    ],
+    "duration": "Months to years (slow progression)",
+    "risk_factors": [
+      "male age > 50 (median age 66)",
+      "African ancestry (2-3x higher mortality)",
+      "family history",
+      "BRCA2 mutations",
+      "obesity"
+    ],
+    "red_flags": [
+      "acute urinary retention",
+      "spinal cord compression with bilateral leg weakness / paresthesia",
+      "pathologic bone fractures"
+    ],
+    "differential_diagnoses": [
+      "Benign Prostatic Hyperplasia (BPH)",
+      "Prostatitis",
+      "Urethral stricture",
+      "Urinary tract infection"
+    ],
+    "recommended_tests": [
+      "Serum Prostate-Specific Antigen (PSA)",
+      "Digital Rectal Examination (DRE)",
+      "Multiparametric prostate MRI (PIRADS)",
+      "MRI-targeted transrectal/transperineal biopsy"
+    ],
+    "authoritative_source": "EAU / AUA / USPSTF Guidelines / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-007",
+    "condition": "Cervical Cancer",
+    "icd10": "C53.9",
+    "system": "Oncology / Gynecologic",
+    "typical_symptoms": [
+      "postcoital or intermenstrual vaginal bleeding",
+      "abnormal watery or foul-smelling vaginal discharge",
+      "pelvic or lower back pain",
+      "dyspareunia"
+    ],
+    "duration": "Weeks to months",
+    "risk_factors": [
+      "persistent high-risk HPV infection (types 16, 18 cause 70%+)",
+      "lack of regular Pap/HPV screening",
+      "HIV/AIDS / immunosuppression",
+      "tobacco use",
+      "early sexual activity"
+    ],
+    "red_flags": [
+      "heavy vaginal hemorrhage",
+      "severe unilateral leg edema (pelvic wall compression)",
+      "hydronephrosis / renal failure"
+    ],
+    "differential_diagnoses": [
+      "Cervical polyps",
+      "Cervicitis / pelvic inflammatory disease",
+      "Endometrial hyperplasia / cancer",
+      "Vaginal intraepithelial neoplasia"
+    ],
+    "recommended_tests": [
+      "Cervical cytology (Pap test) and High-Risk HPV DNA co-testing",
+      "Colposcopy with directed punch biopsy",
+      "Endocervical curettage (ECC)",
+      "Pelvic MRI staging"
+    ],
+    "authoritative_source": "WHO Cervical Cancer Elimination Initiative / Lancet 2026 / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-008",
+    "condition": "Bladder Cancer (Urothelial Carcinoma)",
+    "icd10": "C67.9",
+    "system": "Oncology / Urologic",
+    "typical_symptoms": [
+      "painless gross hematuria (visible blood in urine)",
+      "microscopic hematuria",
+      "dysuria",
+      "urinary urgency and frequency without infection",
+      "pelvic pain"
+    ],
+    "duration": "Episodic / persistent over weeks to months",
+    "risk_factors": [
+      "tobacco smoking (causes 50% of cases)",
+      "male sex (3-4x)",
+      "age > 70",
+      "occupational exposure to aromatic amines/dyes",
+      "Schistosoma haematobium (endemic regions)"
+    ],
+    "red_flags": [
+      "gross clot retention with bladder tamponade",
+      "flank pain from ureteral obstruction",
+      "constitutional cachexia"
+    ],
+    "differential_diagnoses": [
+      "Urinary tract infection (cystitis)",
+      "Nephrolithiasis (kidney stones)",
+      "Benign prostatic hyperplasia",
+      "Glomerulonephritis",
+      "Renal cell carcinoma"
+    ],
+    "recommended_tests": [
+      "Rigid/Flexible Cystoscopy with tissue resection (TURBT)",
+      "Voided urine cytology",
+      "CT Urography with intravenous contrast",
+      "Urine FISH markers"
+    ],
+    "authoritative_source": "EAU / AUA Bladder Cancer Guidelines / SEER / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-009",
+    "condition": "Non-Hodgkin Lymphoma (NHL)",
+    "icd10": "C85.9",
+    "system": "Oncology / Hematologic",
+    "typical_symptoms": [
+      "painless, rubbery lymphadenopathy (cervical, axillary, or inguinal)",
+      "B-symptoms: drenching night sweats, unexplained fevers > 38C, weight loss > 10% in 6 months",
+      "pruritus",
+      "fatigue"
+    ],
+    "duration": "Weeks to months (indolent vs aggressive)",
+    "risk_factors": [
+      "age > 65",
+      "immunodeficiency (HIV, organ transplant immunosuppression)",
+      "autoimmune disorders (RA, Sjogren)",
+      "EBV / HCV / H. pylori exposure",
+      "pesticide exposure"
+    ],
+    "red_flags": [
+      "superior vena cava obstruction",
+      "rapidly enlarging bulky abdominal / mediastinal mass",
+      "neutropenic fever / spinal compression"
+    ],
+    "differential_diagnoses": [
+      "Hodgkin lymphoma",
+      "Infectious mononucleosis / viral lymphadenitis",
+      "Toxoplasmosis",
+      "Tuberculosis lymphadenitis (scrofula)",
+      "Metastatic carcinoma"
+    ],
+    "recommended_tests": [
+      "Excisional lymph node biopsy (histopathology & flow cytometry)",
+      "Whole-body PET-CT scan",
+      "Bone marrow biopsy",
+      "Serum LDH and beta-2 microglobulin"
+    ],
+    "authoritative_source": "WHO Classification of Haematolymphoid Tumours / GLOBOCAN 2024"
+  },
+  {
+    "id": "KB-CA-010",
+    "condition": "Pancreatic Ductal Adenocarcinoma",
+    "icd10": "C25.9",
+    "system": "Oncology / Gastrointestinal",
+    "typical_symptoms": [
+      "painless obstructive jaundice (yellow skin/sclera, dark urine, pale stools)",
+      "unexplained profound weight loss",
+      "midepigastric abdominal pain radiating straight to the back",
+      "new-onset diabetes after age 50",
+      "anorexia"
+    ],
+    "duration": "Weeks to months (insidious, high lethality)",
+    "risk_factors": [
+      "age > 65 (median 70)",
+      "cigarette smoking",
+      "chronic pancreatitis",
+      "longstanding or new-onset Type 2 diabetes",
+      "obesity",
+      "BRCA1/BRCA2 or Lynch mutations"
+    ],
+    "red_flags": [
+      "Courvoisier sign (palpable, non-tender gallbladder with jaundice)",
+      "Trousseau syndrome (migratory thrombophlebitis)",
+      "acute biliary sepsis"
+    ],
+    "differential_diagnoses": [
+      "Chronic pancreatitis / autoimmune pancreatitis",
+      "Choledocholithiasis (common bile duct stone)",
+      "Cholangiocarcinoma",
+      "Ampullary carcinoma",
+      "Peptic ulcer disease"
+    ],
+    "recommended_tests": [
+      "Multiphasic Pancreatic Protocol CT scan",
+      "Endoscopic Ultrasound (EUS) with fine needle biopsy",
+      "Serum CA 19-9 biomarker",
+      "MRCP / ERCP"
+    ],
+    "authoritative_source": "NCCN Pancreatic Adenocarcinoma Guidelines / GLOBOCAN 2024 / SEER"
   }
 ]
