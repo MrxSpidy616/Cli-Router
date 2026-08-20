@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const historyInput = document.getElementById("history-input");
   const severityRange = document.getElementById("severity-range");
   const severityVal = document.getElementById("severity-val");
-  const btnClearSymptoms = document.getElementById("btn-clear-symptoms");
   
   const resultsEmpty = document.getElementById("results-empty");
   const resultsLoading = document.getElementById("results-loading");
@@ -19,9 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const markdownOutput = document.getElementById("markdown-output");
   const doctorEvidenceList = document.getElementById("doctor-evidence-list");
 
-  // Body Zone Elements
-  const zoneButtons = document.querySelectorAll(".zone-btn");
-  const zoneSymptomsList = document.getElementById("zone-symptoms-list");
+  // To-Do Checklist Elements
+  const todoList = document.getElementById("todo-list");
+  const todoAddForm = document.getElementById("todo-add-form");
+  const todoCustomInput = document.getElementById("todo-custom-input");
+
+  // Doctor Search & Enquiry Elements
+  const doctorLocationInput = document.getElementById("doctor-location-input");
+  const btnSearchDoctors = document.getElementById("btn-search-doctors");
+  const enquirySymptomTag = document.getElementById("enquiry-symptom-tag");
+  const enquiryDurationTag = document.getElementById("enquiry-duration-tag");
 
   // View Switchers
   const btnViewPatient = document.getElementById("btn-view-patient");
@@ -32,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Font Resizer for Seniors
   const btnFontNormal = document.getElementById("btn-font-normal");
   const btnFontLarge = document.getElementById("btn-font-large");
+
+  // Internal state for To-Do tasks
+  let activeTasks = [];
 
   btnFontNormal.addEventListener("click", () => {
     document.body.classList.remove("large-text");
@@ -60,104 +69,53 @@ document.addEventListener("DOMContentLoaded", () => {
     doctorViewContainer.classList.remove("hidden");
   });
 
-  // Clear Textarea Handler
-  btnClearSymptoms?.addEventListener("click", () => {
-    symptomsInput.value = "";
-    document.querySelectorAll(".symptom-tag-btn").forEach(b => b.classList.remove("added"));
-    symptomsInput.focus();
-  });
-
-  // Body Area Symptom Catalogs
-  const BODY_ZONE_SYMPTOMS = {
-    head: [
-      "Throbbing Headache",
-      "Dizziness & Lightheaded",
-      "Sore Scratchy Throat",
-      "Vision Shimmering / Aura",
-      "Runny / Stuffy Nose",
-      "Ear Ache or Ringing"
-    ],
-    chest: [
-      "Wet Cough with Phlegm",
-      "Dry Persistent Cough",
-      "Tight Chest Pressure",
-      "Shortness of Breath",
-      "Wheezing & Whistling Breath",
-      "Sharp Pain when Breathing In"
-    ],
-    stomach: [
-      "Dull Upper Belly Ache",
-      "Sharp Lower Right Pain",
-      "Burning Acid Heartburn",
-      "Nausea & Sick to Stomach",
-      "Bloating & Discomfort",
-      "Loose Stools / Diarrhea"
-    ],
-    joints: [
-      "Stiff Morning Joints",
-      "Lower Back Pain",
-      "Swollen Knee or Ankle",
-      "Muscle Aches & Soreness",
-      "Shooting Pain down Leg",
-      "Neck Stiffness"
-    ],
-    general: [
-      "Mild Fever & Chills",
-      "Unusual Fatigue & Tiredness",
-      "Itchy Red Skin Rash",
-      "Night Sweats",
-      "Loss of Taste or Smell",
-      "Unexplained Weight Loss"
-    ]
+  // Everyday Case Presets
+  const PRESETS = {
+    respiratory: {
+      symptoms: "Deep wet cough with yellow phlegm for 4 days, mild fever of 100°F, feeling tired and sore in the chest.",
+      age: "62",
+      duration: "4 days",
+      history: "Seasonal allergies",
+      severity: 5
+    },
+    cardiac: {
+      symptoms: "Heavy tight pressure in the center of the chest spreading to the left arm, broke into a cold sweat, short of breath.",
+      age: "65",
+      duration: "45 minutes",
+      history: "High blood pressure",
+      severity: 9
+    },
+    abdominal: {
+      symptoms: "Constant dull ache around belly button that moved to the lower right side, hurts when walking, feeling sick to stomach.",
+      age: "28",
+      duration: "1 day",
+      history: "None",
+      severity: 7
+    },
+    headache: {
+      symptoms: "Pounding headache on one side of my head, seeing shimmering lights, sensitive to bright sunlight and feeling nauseous.",
+      age: "45",
+      duration: "6 hours",
+      history: "Occasional headaches",
+      severity: 6
+    }
   };
 
-  // Render Symptom Tags for Active Body Zone
-  function renderZoneSymptoms(zoneKey) {
-    if (!zoneSymptomsList) return;
-    zoneSymptomsList.innerHTML = "";
-    const symptoms = BODY_ZONE_SYMPTOMS[zoneKey] || [];
-    
-    symptoms.forEach(sym => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "symptom-tag-btn";
-      
-      // Check if already in input
-      if (symptomsInput.value.toLowerCase().includes(sym.toLowerCase())) {
-        btn.classList.add("added");
-      }
-      
-      btn.textContent = `+ ${sym}`;
-      
-      btn.addEventListener("click", () => {
-        let currentText = symptomsInput.value.trim();
-        if (currentText) {
-          if (!currentText.toLowerCase().includes(sym.toLowerCase())) {
-            symptomsInput.value = `${currentText}, ${sym}`;
-            btn.classList.add("added");
-          }
-        } else {
-          symptomsInput.value = `I am experiencing ${sym.toLowerCase()}`;
-          btn.classList.add("added");
-        }
-      });
-      
-      zoneSymptomsList.appendChild(btn);
-    });
-  }
-
-  // Zone Button Listeners
-  zoneButtons.forEach(btn => {
+  // Preset Chips Listener
+  document.querySelectorAll(".chip-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      zoneButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const zoneKey = btn.dataset.zone;
-      renderZoneSymptoms(zoneKey);
+      const caseKey = btn.dataset.case;
+      const data = PRESETS[caseKey];
+      if (data) {
+        symptomsInput.value = data.symptoms;
+        ageInput.value = data.age;
+        durationInput.value = data.duration;
+        historyInput.value = data.history;
+        severityRange.value = data.severity;
+        updateSeverityLabel(data.severity);
+      }
     });
   });
-
-  // Initial render with 'head'
-  renderZoneSymptoms("head");
 
   // Severity Slider
   severityRange.addEventListener("input", (e) => {
@@ -177,6 +135,117 @@ document.addEventListener("DOMContentLoaded", () => {
     severityVal.textContent = `${val} / 10 (${desc})`;
     severityVal.className = `severity-tag ${cssClass}`;
   }
+
+  // To-Do Checklist Management
+  function initTodoList(primaryCondition, severityText) {
+    // Generate smart recovery tasks based on diagnosis
+    activeTasks = [
+      { id: "task_1", text: "Rest and stay well-hydrated with warm broths, water, or herbal teas", tag: "Home Care", done: false },
+      { id: "task_2", text: "Monitor and record temperature twice daily (morning & evening)", tag: "Monitoring", done: false },
+      { id: "task_3", text: "Note down any new changes in pain, breathing, or energy levels", tag: "Tracking", done: false }
+    ];
+
+    if (severityText.includes("Severe") || severityText.includes("9") || severityText.includes("10")) {
+      activeTasks.unshift({ id: "task_em", text: "Seek urgent emergency medical evaluation or call 911 immediately", tag: "🔴 Urgent", done: false });
+    } else {
+      activeTasks.push({ id: "task_doc", text: "Schedule a doctor consultation if symptoms do not improve within 48 hours", tag: "Medical Visit", done: false });
+    }
+
+    // Check localStorage for saved custom tasks
+    const savedCustom = JSON.parse(localStorage.getItem("health_custom_todos") || "[]");
+    savedCustom.forEach((t, i) => {
+      activeTasks.push({ id: `custom_${i}`, text: t.text, tag: "Personal", done: t.done || false });
+    });
+
+    renderTodoList();
+  }
+
+  function renderTodoList() {
+    if (!todoList) return;
+    todoList.innerHTML = "";
+
+    activeTasks.forEach((task) => {
+      const itemEl = document.createElement("div");
+      itemEl.className = "todo-item" + (task.done ? " completed" : "");
+      
+      itemEl.innerHTML = `
+        <input type="checkbox" class="todo-checkbox" ${task.done ? "checked" : ""} aria-label="${task.text}">
+        <span class="todo-text">${task.text}</span>
+        <span class="todo-tag">${task.tag}</span>
+      `;
+
+      // Checkbox click event
+      const checkbox = itemEl.querySelector(".todo-checkbox");
+      const toggleDone = () => {
+        task.done = !task.done;
+        checkbox.checked = task.done;
+        itemEl.classList.toggle("completed", task.done);
+        saveCustomTodos();
+      };
+
+      itemEl.addEventListener("click", (e) => {
+        if (e.target !== checkbox) toggleDone();
+      });
+      checkbox.addEventListener("change", toggleDone);
+
+      todoList.appendChild(itemEl);
+    });
+  }
+
+  function saveCustomTodos() {
+    const customOnly = activeTasks.filter(t => t.id.startsWith("custom_")).map(t => ({ text: t.text, done: t.done }));
+    localStorage.setItem("health_custom_todos", JSON.stringify(customOnly));
+  }
+
+  // Add Custom To-Do Form
+  todoAddForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = todoCustomInput.value.trim();
+    if (!text) return;
+
+    const newTask = {
+      id: `custom_${Date.now()}`,
+      text: text,
+      tag: "Personal",
+      done: false
+    };
+
+    activeTasks.push(newTask);
+    saveCustomTodos();
+    renderTodoList();
+    todoCustomInput.value = "";
+  });
+
+  // Nearby Doctor Search Execution
+  function executeDoctorSearch(careType = "doctors or urgent care") {
+    const location = doctorLocationInput.value.trim();
+    let query = `${careType}`;
+    if (location) {
+      query += ` near ${location}`;
+    } else {
+      query += ` near me`;
+    }
+    const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
+    window.open(mapsUrl, "_blank");
+  }
+
+  btnSearchDoctors?.addEventListener("click", () => {
+    executeDoctorSearch("primary care doctor clinic or urgent care");
+  });
+
+  doctorLocationInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      executeDoctorSearch("primary care doctor clinic or urgent care");
+    }
+  });
+
+  document.querySelectorAll(".care-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const type = chip.dataset.type || "doctors";
+      executeDoctorSearch(type);
+    });
+  });
 
   // Form Submission
   form.addEventListener("submit", async (e) => {
@@ -214,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(data.error || "Could not complete review.");
       }
 
-      renderResults(data);
+      renderResults(data, symptoms, durationInput.value.trim());
     } catch (err) {
       clearInterval(progressTimer);
       resultsLoading.classList.add("hidden");
@@ -240,13 +309,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1800);
   }
 
-  function renderResults(data) {
+  function renderResults(data, userSymptoms, userDuration) {
     resultsLoading.classList.add("hidden");
     resultsContent.classList.remove("hidden");
 
     // 1. Render Likelihood Percentage Cards
     rankingsList.innerHTML = "";
+    let primaryCondition = "General Symptoms";
     if (data.rankings && data.rankings.length > 0) {
+      primaryCondition = data.rankings[0].condition;
       data.rankings.forEach((r, idx) => {
         const card = document.createElement("div");
         card.className = "rank-card" + (idx === 0 ? " top" : "");
@@ -281,7 +352,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Render Patient Explanation
     markdownOutput.innerHTML = data.analysis_html;
 
-    // 3. Render Doctor Reference Notes
+    // 3. Initialize Interactive To-Do List
+    initTodoList(primaryCondition, severityVal.textContent);
+
+    // 4. Update Doctor Enquiry Script with actual symptoms
+    if (enquirySymptomTag) {
+      const shortSnippet = userSymptoms.length > 40 ? userSymptoms.substring(0, 40) + "..." : userSymptoms;
+      enquirySymptomTag.textContent = `"${shortSnippet}"`;
+    }
+    if (enquiryDurationTag) {
+      enquiryDurationTag.textContent = userDuration || "a few days";
+    }
+
+    // 5. Render Doctor Reference Notes
     const kbChunks = data.retrieved_context?.kb_chunks || [];
     if (doctorEvidenceList) {
       doctorEvidenceList.innerHTML = "";

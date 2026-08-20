@@ -4,7 +4,7 @@
 [![Flask](https://img.shields.io/badge/Flask-3.0%2B-green.svg)](https://flask.palletsprojects.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](design.md). Features invisible backend **Retrieval-Augmented Generation (RAG)**, **Long-Context Grounding**, and real-time **Web Research**.
+A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](design.md). Features invisible backend **Retrieval-Augmented Generation (RAG)**, **Long-Context Grounding**, real-time **Web Research**, an **Interactive Recovery To-Do Action Plan**, and **Nearby Doctor Search & Enquiry Guidance**.
 
 ---
 
@@ -38,18 +38,30 @@ A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differentia
 
 ---
 
-## 🌟 Key Capabilities
+## 🌟 Key Capabilities & Features
 
 1. **Radical Minimalism & Human-Centric Design:**
    - Designed strictly following [Claude Design System Principles](design.md) — zero developer clutter, zero technical badges, and no raw API forms exposed to patients.
    - Senior-accessible high-contrast dark theme, large 17px/21px typography, and 1-click quick symptom presets.
-2. **Dual-Tier Output Architecture:**
+
+2. **📋 Personal Recovery Action Plan & Interactive To-Do List:**
+   - Automatically generates smart, condition-tailored recovery steps (e.g. hydration goals, temperature tracking frequency, red-flag monitoring).
+   - Check off care steps as you complete them with persistent saving in local storage.
+   - Add your own custom personal reminders (e.g., *"Pick up prescription from pharmacy"*, *"Drink electrolyte water"*).
+
+3. **📍 Search Nearby Doctors & Enquiry Script:**
+   - **Local Care Search:** 1-click query for nearby Family Doctors (GP), Urgent Care Centers, Walk-In Clinics, or 24/7 Pharmacies based on your town or postal/zip code.
+   - **Phone Consultation Enquiry Script:** Pre-populated questions tailored to your exact reported symptoms to guide you when calling local medical offices.
+
+4. **Dual-Tier Output Architecture:**
    - 👤 **Patient Summary:** Urgency badge (🟢 Mild, 🟡 Moderate, 🔴 Emergency), everyday condition names, 6th-grade reading level explanation, and home care steps.
    - 🩺 **Clinical Notes:** Clean, discreet accordion with structured medical references and ICD-10 diagnostic coding.
-3. **Invisible Background Intelligence:**
+
+5. **Invisible Background Intelligence:**
    - **RAG Mode:** Okapi BM25 semantic retrieval with medical synonym expansion over WHO, NIH, CDC, GLOBOCAN, and the NHS Inform Scotland directory (433 conditions).
    - **Real-Time Web Research:** Deep clinical literature verification executes silently under the hood.
-4. **Self-Evolving Knowledge Loop:**
+
+6. **Self-Evolving Knowledge Loop:**
    - Automatically archives evaluated cases into persistent memory (`data/evolving_knowledge.json`) to continually refine future differential calibration.
 
 ---

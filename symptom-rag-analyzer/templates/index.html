@@ -47,51 +47,24 @@
       <section class="panel input-panel">
         <div class="panel-heading">
           <h2>Describe how you feel</h2>
-          <p>Tap a body area below to pick symptoms, or type in your own words.</p>
+          <p>Choose a common example or describe your symptoms in your own words.</p>
         </div>
 
-        <!-- Minimalist Body Area Selector -->
-        <div class="body-zone-section">
-          <label class="label">Where is your discomfort located?</label>
-          <div class="body-zones-grid">
-            <button type="button" class="zone-btn active" data-zone="head">
-              <span class="zone-icon">🧠</span>
-              <span class="zone-name">Head & Senses</span>
-            </button>
-            <button type="button" class="zone-btn" data-zone="chest">
-              <span class="zone-icon">🫁</span>
-              <span class="zone-name">Chest & Lungs</span>
-            </button>
-            <button type="button" class="zone-btn" data-zone="stomach">
-              <span class="zone-icon">🩹</span>
-              <span class="zone-name">Stomach & Gut</span>
-            </button>
-            <button type="button" class="zone-btn" data-zone="joints">
-              <span class="zone-icon">🦴</span>
-              <span class="zone-name">Joints & Spine</span>
-            </button>
-            <button type="button" class="zone-btn" data-zone="general">
-              <span class="zone-icon">⚡</span>
-              <span class="zone-name">Skin & Fever</span>
-            </button>
-          </div>
-
-          <!-- Dynamic Contextual Symptom Tags for Active Zone -->
-          <div id="zone-symptoms-container" class="zone-symptoms-box">
-            <span class="symptoms-box-hint">Tap to add symptoms:</span>
-            <div id="zone-symptoms-list" class="zone-symptoms-list">
-              <!-- Dynamically populated tags based on selected body zone -->
-            </div>
+        <!-- Quick Example Chips -->
+        <div class="chips-group">
+          <span class="chips-label">Quick Examples:</span>
+          <div class="chips-list">
+            <button type="button" class="chip-btn" data-case="respiratory">Cough & Mild Fever</button>
+            <button type="button" class="chip-btn" data-case="cardiac">Chest Pressure</button>
+            <button type="button" class="chip-btn" data-case="abdominal">Stomach Pain & Nausea</button>
+            <button type="button" class="chip-btn" data-case="headache">Throbbing Headache</button>
           </div>
         </div>
 
         <form id="symptom-form">
           <div class="input-block">
-            <div class="textarea-header">
-              <label for="symptoms-input" class="label">Your Symptoms Description</label>
-              <button type="button" id="btn-clear-symptoms" class="btn-clear-text" title="Clear text">Clear</button>
-            </div>
-            <textarea id="symptoms-input" rows="4" placeholder="Select tags above or type your symptoms here (e.g. I have a sore throat, runny nose, and feel tired)..." required></textarea>
+            <label for="symptoms-input" class="label">What symptoms are you experiencing?</label>
+            <textarea id="symptoms-input" rows="4" placeholder="Example: I've had a sore throat, runny nose, and feeling unusually tired for the past 3 days..." required></textarea>
           </div>
 
           <div class="input-row">
@@ -141,7 +114,7 @@
         <div id="results-empty" class="empty-state">
           <div class="empty-illustration">🌿</div>
           <h3>Ready when you are</h3>
-          <p>Pick your body area or describe symptoms on the left, then click <strong>"Review My Symptoms"</strong>.</p>
+          <p>Fill in your symptoms on the left and click <strong>"Review My Symptoms"</strong> to get a clear, easy-to-read explanation.</p>
           <div class="features-list">
             <div class="feature-item"><span>✓</span> Plain English guidance</div>
             <div class="feature-item"><span>✓</span> Percentage likelihoods</div>
@@ -178,6 +151,66 @@
             <div id="markdown-output" class="patient-text">
               <!-- Rendered markdown explanation -->
             </div>
+
+            <!-- Interactive Recovery Action Plan & To-Do List -->
+            <div class="todo-section">
+              <div class="todo-header">
+                <span class="todo-icon">📋</span>
+                <div>
+                  <h3 class="section-title" style="margin-bottom: 0.15rem;">Your Recovery Action Plan</h3>
+                  <p class="todo-subtitle">Check off care steps as you complete them. Saved automatically.</p>
+                </div>
+              </div>
+              
+              <div id="todo-list" class="todo-list">
+                <!-- Dynamically populated smart checklist -->
+              </div>
+
+              <!-- Add Custom To-Do Item Form -->
+              <form id="todo-add-form" class="todo-add-row">
+                <input type="text" id="todo-custom-input" placeholder="+ Add a personal reminder (e.g. pick up throat lozenges)..." autocomplete="off">
+                <button type="submit" class="btn-todo-add">Add</button>
+              </form>
+            </div>
+
+            <!-- Search Nearby Doctors & Enquire Section -->
+            <div class="doctor-search-section">
+              <div class="doctor-search-header">
+                <span class="doctor-search-icon">📍</span>
+                <div>
+                  <h3 class="section-title" style="margin-bottom: 0.15rem;">Find Nearby Doctors & Clinics to Enquire</h3>
+                  <p class="doctor-search-subtitle">Search for trusted local primary care, urgent care, or specialists.</p>
+                </div>
+              </div>
+
+              <!-- Search Query Row -->
+              <div class="doctor-search-form">
+                <div class="search-input-group">
+                  <input type="text" id="doctor-location-input" placeholder="Enter your City, Town, or Postal/Zip Code...">
+                  <button type="button" id="btn-search-doctors" class="btn-search-doctor">
+                    <span>Search Care</span>
+                    <span>🔍</span>
+                  </button>
+                </div>
+                <div class="quick-care-chips">
+                  <button type="button" class="care-chip" data-type="urgent care">⚡ Urgent Care Centers</button>
+                  <button type="button" class="care-chip" data-type="primary care doctor GP">👨‍⚕️ Family Doctors (GP)</button>
+                  <button type="button" class="care-chip" data-type="walk-in clinic">🏥 Walk-In Clinics</button>
+                  <button type="button" class="care-chip" data-type="pharmacy">💊 24/7 Pharmacies</button>
+                </div>
+              </div>
+
+              <!-- What to Ask When You Call (Enquiry Script) -->
+              <div class="enquiry-guidance-card">
+                <h4 class="enquiry-title">📞 Questions to Ask When You Call to Enquire:</h4>
+                <ul id="enquiry-questions-list" class="enquiry-list">
+                  <li>"I've been experiencing <span id="enquiry-symptom-tag">these symptoms</span> for <span id="enquiry-duration-tag">a few days</span>. Do you have same-day or walk-in availability?"</li>
+                  <li>"Given my symptoms, do you recommend I come in for an in-person exam, or is a telehealth visit suitable?"</li>
+                  <li>"Are there specific diagnostic tests (such as a rapid swab or blood work) I should be prepared for?"</li>
+                </ul>
+              </div>
+            </div>
+
           </div>
 
           <!-- Clinical Notes (for Doctor Reference) -->
