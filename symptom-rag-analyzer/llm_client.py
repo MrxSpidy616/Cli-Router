@@ -61,7 +61,7 @@ class LLMClient:
             "max_tokens": 2048
         }
         
-        resp = requests.post(endpoint, headers=headers, json=payload, timeout=50)
+        resp = requests.post(endpoint, headers=headers, json=payload, timeout=60)
         if resp.status_code != 200:
             raise Exception(f"OpenAI API Error {resp.status_code} ({endpoint}): {resp.text}")
         data = resp.json()
@@ -77,7 +77,7 @@ class LLMClient:
             api_key=api_key or self.openrouter_api_key or "sk-or-v1-anonymous"
         )
 
-    def call_gemini(self, messages, model="gemini-3.6-flash", api_key=None):
+    def call_gemini(self, messages, model="gemini-2.0-flash", api_key=None):
         key = api_key or self.gemini_api_key
         if not key:
             raise Exception("Gemini API key is not configured.")
@@ -185,10 +185,11 @@ Your reported symptoms match common patterns of **{primary_condition}**. For mos
         # 1. **Acute Bronchitis (ICD-10: J20.9)** — **65%**
         # - **Condition Name**: 65%
         # | Condition | 65% |
+        # 1. Chest Cold (Acute Bronchitis) — 70% Likely
         patterns = [
             r'(?:\d+\.|\*|\-)\s+\*\*([^\*\n]+?)\*\*\s*[\—\-\:\|]+\s*\*\*?(\d{1,3})\s*%',
             r'[-*]\s+\*\*([^*\n:]+)\*\*[^%\n]*?:\s*(\d{1,3})\s*%',
-            r'[-*]\s+([A-Za-z0-9\s\(\)\-\/]+?):\s*\*\*?(\d{1,3})\s*%',
+            r'(?:\d+\.|\*|\-)\s+([A-Za-z0-9\s\(\)\-\/\,]+?)\s*[\—\-\:]+\s*\*\*?(\d{1,3})\s*%',
             r'\|\s*([A-Za-z0-9\s\(\)\-\/]+?)\s*\|\s*(\d{1,3})\s*%\s*\|'
         ]
         
@@ -221,8 +222,8 @@ Your reported symptoms match common patterns of **{primary_condition}**. For mos
         return rankings
 
     def analyze_symptoms(self, symptoms, history="", age=None, duration=None, severity=None, 
-                         provider="auto", model="google/gemini-2.0-flash-thinking-exp:free", 
-                         base_url=None, rag_context=None, user_api_key=None):
+                          provider="auto", model="google/gemini-2.0-flash-thinking-exp:free", 
+                          base_url=None, rag_context=None, user_api_key=None):
         
         system_prompt = get_system_prompt()
         
@@ -239,7 +240,7 @@ Your reported symptoms match common patterns of **{primary_condition}**. For mos
 {context_str}
 </retrieved_rag_context>
 
-Please generate a full percentage-based differential diagnosis, clinical reasoning grounded in the retrieved authoritative knowledge, recommended diagnostic workup, and clinical decision support disclaimers. If you need fresh guidelines on a specific disease or rare pathogen, include `[WEB_SEARCH: <valid_url_or_topic>]` in your reasoning."""
+Please generate a full percentage-based differential diagnosis, clinical reasoning grounded in the retrieved authoritative knowledge, recommended diagnostic workup, and clinical decision support disclaimers. If you need live clinical verification on an emerging disease or rare presentation, you may trigger real-time Firecrawl research by outputting `[WEB_SEARCH: <valid_url_or_topic>]` in your reasoning."""
 
         messages = [
             {"role": "system", "content": system_prompt},
@@ -268,7 +269,7 @@ Please generate a full percentage-based differential diagnosis, clinical reasoni
             elif provider == "gemini" or (provider == "auto" and (user_api_key or self.gemini_api_key)):
                 return self.call_gemini(
                     messages=msgs, 
-                    model=model if "gemini" in (model or "") else "gemini-3.6-flash", 
+                    model=model if "gemini" in (model or "") else "gemini-2.0-flash", 
                     api_key=user_api_key
                 )
             elif provider == "openrouter" or (provider == "auto" and self.openrouter_api_key):
@@ -301,17 +302,17 @@ Please generate a full percentage-based differential diagnosis, clinical reasoni
                 "provider_used": f"Fallback CDS Heuristic ({provider})"
             }
 
-        # Stage 2: Web Research Interceptor
-        # Check if the model requested live web research via custom token [WEB_SEARCH: url]
+        # Stage 2: Web Research Interceptor (Firecrawl Powered)
+        # Check if the model requested live web research via custom token [WEB_SEARCH: query_or_url]
         injected_web_context, research_results = web_researcher.process_llm_stream_or_text(raw_response)
         
         if injected_web_context and research_results:
             web_research_meta = research_results
             # Re-query model with web research context
-            followup_prompt = f"""Web research was successfully executed for your query. Here is the verified external data:
+            followup_prompt = f"""Real-time Firecrawl web research was successfully executed for your query. Here is the verified clinical data from authoritative sources:
 {injected_web_context}
 
-Please incorporate these verified findings into your final synthesized percentage differential diagnosis and clinical recommendations."""
+Please incorporate these verified findings into your final synthesized percentage differential diagnosis, patient summary, and clinical recommendations."""
             
             messages.append({"role": "assistant", "content": raw_response})
             messages.append({"role": "user", "content": followup_prompt})
@@ -319,7 +320,7 @@ Please incorporate these verified findings into your final synthesized percentag
             try:
                 raw_response = execute_llm_call(messages)
             except Exception as e:
-                print(f"Followup synthesis failed: {e}")
+                print(f"Followup synthesis with Firecrawl context failed: {e}")
 
         # Parse rankings
         rankings = self.parse_rankings_from_markdown(raw_response)

@@ -8,6 +8,33 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 KB_FILE = os.path.join(DATA_DIR, "knowledge_base.json")
 EVOLVING_FILE = os.path.join(DATA_DIR, "evolving_knowledge.json")
 
+# Medical synonym expansion to boost retrieval recall between laymen terms and clinical terms
+MEDICAL_SYNONYMS = {
+    "shortness of breath": ["dyspnea", "breathlessness", "wheezing", "hypoxia", "respiratory"],
+    "breathless": ["dyspnea", "shortness of breath", "hypoxia", "wheeze"],
+    "chest pain": ["angina", "myocardial", "infarction", "coronary", "ischemia", "pleurisy", "substernal"],
+    "chest tightness": ["angina", "bronchospasm", "asthma", "ischemia"],
+    "heart attack": ["myocardial", "infarction", "stemi", "nstemi", "coronary"],
+    "high blood pressure": ["hypertension", "hypertensive", "systolic", "diastolic"],
+    "belly pain": ["abdominal", "epigastric", "colic", "cramping", "peritoneal", "appendicitis", "cholecystitis"],
+    "stomach pain": ["abdominal", "gastric", "epigastric", "peptic", "gastroenteritis", "cramping"],
+    "tummy ache": ["abdominal", "gastroenteritis", "cramping", "colic"],
+    "fever": ["pyrexia", "febrile", "temperature", "chills", "rigors"],
+    "headache": ["migraine", "cephalalgia", "tension", "throbbing", "temporal"],
+    "dizziness": ["vertigo", "presyncope", "lightheadedness", "ataxia"],
+    "throwing up": ["vomiting", "nausea", "emesis", "gastroenteritis"],
+    "vomit": ["emesis", "nausea", "gastroenteritis", "norovirus"],
+    "loose stools": ["diarrhoea", "diarrhea", "enteritis", "gastroenteritis"],
+    "diarrhea": ["diarrhoea", "loose stools", "enteritis", "gastroenteritis", "colitis"],
+    "stroke": ["cerebrovascular", "cva", "infarction", "ischemia", "hemiplegia", "aphasia"],
+    "blood clot": ["thrombosis", "embolism", "dvt", "embolus", "thrombus"],
+    "itchy": ["pruritus", "urticaria", "eczema", "dermatitis"],
+    "rash": ["erythema", "exanthem", "maculopapular", "dermatitis", "eczema", "urticaria"],
+    "joint pain": ["arthralgia", "arthritis", "osteoarthritis", "rheumatoid", "gout"],
+    "swollen leg": ["edema", "oedema", "deep vein thrombosis", "dvt", "cellulitis"],
+    "cough": ["bronchitis", "pneumonia", "tussis", "sputum", "phlegm", "hemoptysis"]
+}
+
 def load_json(filepath, default_data=None):
     if os.path.exists(filepath):
         try:
@@ -27,6 +54,19 @@ def tokenize(text):
         return []
     # Lowercase, alphanumeric extraction
     return [w.lower() for w in re.findall(r'\b[a-zA-Z0-9_\-\./]+\b', text) if len(w) > 2]
+
+def expand_query_with_synonyms(query_text):
+    """Expands query tokens with clinical and layman synonyms for higher BM25 recall."""
+    tokens = tokenize(query_text)
+    expanded = list(tokens)
+    query_lower = query_text.lower()
+    
+    for phrase, syns in MEDICAL_SYNONYMS.items():
+        if phrase in query_lower:
+            for s in syns:
+                expanded.extend(tokenize(s))
+                
+    return list(set(expanded))
 
 class RAGEngine:
     def __init__(self):
@@ -63,7 +103,8 @@ class RAGEngine:
         # Index self-evolving cases
         for case in self.evolving_cases:
             diff_text = " ".join([d.get("condition", "") for d in case.get("differential_ranking", [])])
-            text_corpus = f"{case.get('patient_demographics', '')} {' '.join(case.get('presented_symptoms', []))} {diff_text} {case.get('clinical_takeaway', '')} {case.get('outcome_validation', '')}"
+            symptoms_str = " ".join(case.get("presented_symptoms", [])) if isinstance(case.get("presented_symptoms"), list) else str(case.get("presented_symptoms", ""))
+            text_corpus = f"{case.get('patient_demographics', '')} {symptoms_str} {diff_text} {case.get('clinical_takeaway', '')} {case.get('outcome_validation', '')}"
             tokens = tokenize(text_corpus)
             self.doc_index.append({
                 "type": "evolving_case",
@@ -75,8 +116,8 @@ class RAGEngine:
             })
 
     def search_similar(self, query_text, top_k=4):
-        query_tokens = tokenize(query_text)
-        if not query_tokens:
+        expanded_tokens = expand_query_with_synonyms(query_text)
+        if not expanded_tokens:
             return []
 
         N = len(self.doc_index)
@@ -87,6 +128,11 @@ class RAGEngine:
         k1 = 1.5
         b = 0.75
 
+        # Precompute Document Frequencies (DF)
+        df_cache = {}
+        for q in set(expanded_tokens):
+            df_cache[q] = sum(1 for d in self.doc_index if q in d["token_set"])
+
         scores = []
         for item in self.doc_index:
             score = 0.0
@@ -96,19 +142,19 @@ class RAGEngine:
             for t in doc_tokens:
                 token_counts[t] = token_counts.get(t, 0) + 1
             
-            # Standard BM25 term calculation
-            for q in set(query_tokens):
+            # Standard Okapi BM25 term calculation
+            for q in set(expanded_tokens):
                 if q in item["token_set"]:
                     tf = token_counts.get(q, 0)
-                    df = sum(1 for d in self.doc_index if q in d["token_set"])
+                    df = df_cache.get(q, 0)
                     idf = math.log((N - df + 0.5) / (df + 0.5) + 1.0)
                     term_score = idf * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * (doc_len / avg_doc_len)))
                     score += term_score
 
             # Title exact match boost
             title_tokens = set(tokenize(item["title"]))
-            title_overlap = len(set(query_tokens) & title_tokens)
-            score += title_overlap * 3.0
+            title_overlap = len(set(expanded_tokens) & title_tokens)
+            score += title_overlap * 3.5
 
             if score > 0:
                 scores.append((score, item))
@@ -166,11 +212,20 @@ class RAGEngine:
 
     def add_evolving_case(self, presented_symptoms, demographics, ranking, reasoning="", outcome=""):
         case_id = f"CASE-EV-{len(self.evolving_cases) + 1:03d}"
+        
+        # Deduplicate symptoms list
+        if isinstance(presented_symptoms, str):
+            symptoms_list = [s.strip() for s in presented_symptoms.split(",") if s.strip()]
+        elif isinstance(presented_symptoms, list):
+            symptoms_list = presented_symptoms
+        else:
+            symptoms_list = [str(presented_symptoms)]
+            
         new_case = {
             "case_id": case_id,
             "timestamp": datetime.utcnow().isoformat() + "Z",
             "patient_demographics": demographics or "Not specified",
-            "presented_symptoms": [s.strip() for s in presented_symptoms.split(",") if s.strip()] if isinstance(presented_symptoms, str) else presented_symptoms,
+            "presented_symptoms": symptoms_list,
             "differential_ranking": ranking,
             "clinical_takeaway": reasoning[:300] if reasoning else "Analyzed via AI Clinical Decision Support.",
             "outcome_validation": outcome or "Initial clinical evaluation generated."

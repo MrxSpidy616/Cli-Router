@@ -37,6 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnFontNormal = document.getElementById("btn-font-normal");
   const btnFontLarge = document.getElementById("btn-font-large");
 
+  // Live Firecrawl Modal Elements
+  const btnOpenResearch = document.getElementById("btn-open-research");
+  const btnCloseResearch = document.getElementById("btn-close-research");
+  const researchModal = document.getElementById("research-modal");
+  const directResearchForm = document.getElementById("direct-research-form");
+  const researchQueryInput = document.getElementById("research-query-input");
+  const researchModalLoading = document.getElementById("research-modal-loading");
+  const researchModalResult = document.getElementById("research-modal-result");
+  const researchEngineBadge = document.getElementById("research-engine-badge");
+  const researchUrlDisplay = document.getElementById("research-url-display");
+  const researchMarkdownDisplay = document.getElementById("research-markdown-display");
+
+  // Font Resizer Handlers
   btnFontNormal.addEventListener("click", () => {
     document.body.classList.remove("large-text");
     btnFontNormal.classList.add("active");
@@ -60,9 +73,73 @@ document.addEventListener("DOMContentLoaded", () => {
   btnViewDoctor.addEventListener("click", () => {
     btnViewDoctor.classList.add("active");
     btnViewPatient.classList.remove("active");
-    patientViewContainer.classList.remove("hidden"); // keep text visible
+    patientViewContainer.classList.remove("hidden");
     doctorViewContainer.classList.remove("hidden");
   });
+
+  // Firecrawl Modal Listeners
+  if (btnOpenResearch && researchModal) {
+    btnOpenResearch.addEventListener("click", () => {
+      researchModal.classList.remove("hidden");
+      setTimeout(() => researchQueryInput?.focus(), 100);
+    });
+
+    btnCloseResearch?.addEventListener("click", () => {
+      researchModal.classList.add("hidden");
+    });
+
+    researchModal.addEventListener("click", (e) => {
+      if (e.target === researchModal) {
+        researchModal.classList.add("hidden");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !researchModal.classList.contains("hidden")) {
+        researchModal.classList.add("hidden");
+      }
+    });
+
+    // Execute Direct Firecrawl Web Research
+    directResearchForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const q = researchQueryInput.value.trim();
+      if (!q) return;
+
+      researchModalResult.classList.add("hidden");
+      researchModalLoading.classList.remove("hidden");
+
+      try {
+        const resp = await fetch("/api/research", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query_or_url: q })
+        });
+
+        const data = await resp.json();
+        researchModalLoading.classList.add("hidden");
+        researchModalResult.classList.remove("hidden");
+
+        if (data.success) {
+          researchEngineBadge.textContent = data.engine || "Firecrawl v1";
+          researchEngineBadge.className = "badge-engine " + (data.engine?.includes("Firecrawl") ? "firecrawl" : "fallback");
+          researchUrlDisplay.textContent = data.url || q;
+          researchMarkdownDisplay.textContent = data.markdown || "No content extracted.";
+        } else {
+          researchEngineBadge.textContent = "Error";
+          researchEngineBadge.className = "badge-engine fallback";
+          researchUrlDisplay.textContent = q;
+          researchMarkdownDisplay.textContent = `Error: ${data.error || 'Failed to research topic.'}`;
+        }
+      } catch (err) {
+        researchModalLoading.classList.add("hidden");
+        researchModalResult.classList.remove("hidden");
+        researchEngineBadge.textContent = "Network Error";
+        researchEngineBadge.className = "badge-engine fallback";
+        researchMarkdownDisplay.textContent = `Network error: ${err.message}`;
+      }
+    });
+  }
 
   // Sample Presets (Everyday Words)
   const PRESETS = {
@@ -149,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modelSelect.value = "gemini-3.6-flash-high";
       apikeyOverride.value = "aravind616";
     } else if (e.target.value === "gemini") {
-      modelSelect.value = "gemini-3.6-flash";
+      modelSelect.value = "gemini-2.0-flash";
     } else if (e.target.value === "openrouter") {
       modelSelect.value = "meta-llama/llama-3.3-70b-instruct:free";
     } else if (e.target.value === "openai_compatible") {
@@ -311,23 +388,24 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 4. Web Research Interceptor Logs
+    // 4. Web Research Interceptor Logs (Firecrawl Powered)
     const webItems = data.web_research || [];
     if (countWeb) countWeb.textContent = webItems.length;
     if (webResearchContainer) {
       webResearchContainer.innerHTML = "";
       if (webItems.length === 0) {
-        webResearchContainer.innerHTML = `<p class="helper-text">No external web search token was needed for this standard presentation.</p>`;
+        webResearchContainer.innerHTML = `<p class="helper-text">No external Firecrawl web search token was needed for this standard presentation.</p>`;
       } else {
         webItems.forEach(item => {
           const div = document.createElement("div");
           div.className = "research-card";
+          const engineTag = item.engine || "Firecrawl";
           div.innerHTML = `
             <div class="research-header">
-              <span class="chunk-title">🌐 External Search: ${item.url}</span>
-              <span class="rank-pct-pill ${item.success ? 'high' : 'medium'}">${item.success ? 'Retrieved' : 'Cached'}</span>
+              <span class="chunk-title">🔥 Firecrawl Research: ${item.url}</span>
+              <span class="rank-pct-pill ${item.success ? 'high' : 'medium'}">${engineTag}</span>
             </div>
-            <div class="code-box">${item.markdown ? item.markdown.substring(0, 400) + '...' : 'No content'}</div>
+            <div class="code-box">${item.markdown ? item.markdown.substring(0, 500) + '...' : 'No content'}</div>
           `;
           webResearchContainer.appendChild(div);
         });

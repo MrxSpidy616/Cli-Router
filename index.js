@@ -762,19 +762,29 @@ async function handleFile(request, env) {
   const fileName = decodeURIComponent(url.pathname.slice('/file/'.length));
   if (!fileName) return errResponse('Missing filename', 400);
   const forceDownload = url.searchParams.get('dl') === '1';
+  const range = request.headers.get('Range');
 
   try {
-    const resp = await b2DownloadFile(env, fileName);
+    const resp = await b2DownloadFile(env, fileName, range);
     const contentType = resp.headers.get('Content-Type') || 'application/octet-stream';
     const inline = !forceDownload && /^(image\/|text\/|audio\/|video\/|application\/pdf|application\/json)/.test(contentType);
 
+    const headers = {
+      'Content-Type': contentType,
+      'Content-Disposition': `${inline ? 'inline' : 'attachment'}; filename="${fileName.split('/').pop()}"`,
+      'Content-Length': resp.headers.get('Content-Length') || '',
+      'X-Content-Type-Options': 'nosniff',
+      ...cors()
+    };
+
+    if (resp.headers.has('Content-Range')) {
+      headers['Content-Range'] = resp.headers.get('Content-Range');
+      headers['Accept-Ranges'] = 'bytes';
+    }
+
     return new Response(resp.body, {
-      headers: {
-        'Content-Type': contentType,
-        'Content-Disposition': `${inline ? 'inline' : 'attachment'}; filename="${fileName.split('/').pop()}"`,
-        'Content-Length': resp.headers.get('Content-Length') || '',
-        ...cors()
-      }
+      status: resp.status,
+      headers
     });
   } catch (e) {
     return errResponse(e.message, 404);

@@ -23,6 +23,12 @@
       </div>
 
       <div class="header-actions">
+        <!-- Live Firecrawl Web Research Button -->
+        <button type="button" id="btn-open-research" class="btn-header-action" title="Research any medical condition or guideline live via Firecrawl">
+          <span class="action-icon">🔥</span>
+          <span>Live Firecrawl Research</span>
+        </button>
+
         <!-- Text Size Controls for Seniors -->
         <div class="font-resizer" title="Adjust text size for easier reading">
           <span class="resizer-label">Text Size:</span>
@@ -111,7 +117,7 @@
             </div>
           </div>
 
-          <!-- Advanced / Clinician Settings (Collapsible so normal users aren't overwhelmed) -->
+          <!-- Advanced / Clinician Settings (Collapsible) -->
           <details class="settings-accordion">
             <summary>⚙️ Advanced & Doctor Settings (Optional)</summary>
             <div class="settings-content">
@@ -157,6 +163,10 @@
               <div class="form-group">
                 <label for="apikey-override" class="field-label">API Key</label>
                 <input type="password" id="apikey-override" value="aravind616">
+              </div>
+
+              <div class="firecrawl-status-badge">
+                <span>🔥 Web Research Engine: <strong>Firecrawl v1 Active (Key Configured)</strong></span>
               </div>
             </div>
           </details>
@@ -225,7 +235,7 @@
           <div id="doctor-view-container" class="view-container hidden">
             <div class="tabs-nav">
               <button class="tab-btn active" data-tab="tab-rag">📚 Clinical Evidence Chunks (<span id="count-rag">0</span>)</button>
-              <button class="tab-btn" data-tab="tab-web">🌐 Web Research (<span id="count-web">0</span>)</button>
+              <button class="tab-btn" data-tab="tab-web">🌐 Firecrawl Research (<span id="count-web">0</span>)</button>
               <button class="tab-btn" data-tab="tab-evolving">🧠 Case Memory Archive</button>
             </div>
 
@@ -252,11 +262,48 @@
     </div>
   </main>
 
+  <!-- Live Firecrawl Medical Web Research Modal -->
+  <div id="research-modal" class="modal-backdrop hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="modal-icon">🔥</span>
+          <h3>Live Medical Web Research (Firecrawl)</h3>
+        </div>
+        <button type="button" id="btn-close-research" class="btn-close-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Search for any disease, symptom, or treatment, or paste a medical link (NHS Inform, WHO, CDC, PubMed) for real-time high-fidelity extraction.</p>
+        <form id="direct-research-form" class="research-input-form">
+          <div class="research-input-row">
+            <input type="text" id="research-query-input" placeholder="e.g. NHS Inform Scotland stroke signs or https://www.nhsinform.scot/..." required>
+            <button type="submit" id="btn-do-research" class="btn-research-submit">
+              <span>Research</span>
+            </button>
+          </div>
+        </form>
+
+        <div id="research-modal-loading" class="research-modal-loading hidden">
+          <div class="spinner-small"></div>
+          <span>Conducting deep web research via Firecrawl API...</span>
+        </div>
+
+        <div id="research-modal-result" class="research-modal-result hidden">
+          <div class="result-meta-bar">
+            <span id="research-engine-badge" class="badge-engine">Firecrawl</span>
+            <span id="research-url-display" class="url-display"></span>
+          </div>
+          <div id="research-markdown-display" class="research-markdown-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Simple Footer -->
   <footer class="app-footer">
     <div class="footer-inner">
       <p><strong>Easy Health Assistant</strong> — Built for clarity, accessibility, and clinical decision support.</p>
-      <p class="footer-note">Compliant with FDA Clinical Decision Support (CDS) & WHO AI Health Ethics Principles.</p>
+      <p class="footer-note">Compliant with FDA Clinical Decision Support (CDS) & WHO AI Health Ethics Principles. Powered by Firecrawl for web research.</p>
     </div>
   </footer>
 
