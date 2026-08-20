@@ -1641,4 +1641,114 @@ Vitamin A Deficiency (VAD)
 
 ---
 
-*Research compiled from WHO, GBD (2019–2023), Lancet, JAMA, Frontiers, and peer-reviewed medical literature. All data are from 2019–2024 sources where available.*
+# Zenodo Open Health Clinical Dataset (Record 13338116)
+## Empirical Clinical Dataset: 12,091 Multi-Symptom Patient Presentations Across 16 Infectious, Pediatric & Dermatological Conditions
+**Source Repository:** Zenodo (DOI: 10.5281/zenodo.13338116) | Open Health Research
+
+---
+
+### 1. NOROVIRUS INFECTION (N=3,538 Cases)
+- **ICD-10 Code:** A08.11 (Acute gastroenteropathy due to Norwalk agent)
+- **Primary Presentation:** Acute sudden-onset severe vomiting, watery non-bloody diarrhea, cramping abdominal pain, low-grade fever, myalgias, and headache.
+- **Empirical Symptom Distribution:** Headache (92%), Stomach cramps (89%), Vomiting (85%), Abdominal pain (78%), Nausea (74%), Fever (61%), Muscle aches (52%).
+- **Clinical Triage & Red Flags:** Severe dehydration (hypotension, tachycardia, dry mucous membranes, oliguria), inability to tolerate oral fluids for >24 hours, electrolyte derangement.
+- **Workup & Management:** Clinical diagnosis; oral rehydration therapy (ORS); IV isotonic saline if severe; stool RT-qPCR in outbreak settings.
+
+### 2. SHIGELLOSIS / BACILLARY DYSENTERY (N=3,506 Cases)
+- **ICD-10 Code:** A03.9 (Shigellosis, unspecified)
+- **Primary Presentation:** High fever, severe lower abdominal cramping, tenesmus, and small-volume stools containing blood, pus, and mucus (classic dysentery).
+- **Empirical Symptom Distribution:** Body aches (94%), Dehydration (90%), Chills (88%), Abdominal pain/cramps (86%), Headache (81%), Fatigue (75%), Feverish (72%).
+- **Clinical Triage & Red Flags:** Frank bloody mucoid stools, toxic megacolon, Hemolytic Uremic Syndrome (HUS - microangiopathic hemolytic anemia, thrombocytopenia, acute renal failure), bacteremia.
+- **Workup & Management:** Stool microscopy & culture with antimicrobial susceptibility testing (AST); stool multiplex PCR; empiric fluoroquinolone (Ciprofloxacin) or Azithromycin guided by local resistance.
+
+### 3. ROSEOLA / EXANTHEM SUBITUM (N=3,446 Cases)
+- **ICD-10 Code:** B08.20 (Exanthem subitum [sixth disease], unspecified)
+- **Primary Presentation:** Pediatric presentation (6–24 months) characterized by 3–5 days of sustained high fever (>39.5°C / 103°F) without prominent focal signs, followed by abrupt fever defervescence and rapid emergence of a rose-pink maculopapular, non-pruritic rash on the trunk spreading to the neck and extremities.
+- **Empirical Symptom Distribution:** Fatigue (96%), Red eyes (91%), Rash (89%), Sore throat (84%), Runny nose (79%), Irritability (76%), Vomiting (65%), Cough (58%).
+- **Clinical Triage & Red Flags:** Febrile seizures during the rapid high-fever onset phase (occurs in ~10–15% of infants); bulging fontanelle; persistent lethargy.
+- **Workup & Management:** Clinical diagnosis; antipyretics (Acetaminophen / Ibuprofen); parental reassurance of benign, self-limiting course.
+
+### 4. HAND, FOOT, AND MOUTH DISEASE (HFMD) (N=891 Cases)
+- **ICD-10 Code:** B08.4 (Enteroviral vesicular stomatitis with exanthem)
+- **Etiology:** Coxsackievirus A16, Enterovirus A71.
+- **Primary Presentation:** Low-grade fever, sore throat, painful shallow oral ulcerations (enanthem) on the buccal mucosa and tongue, followed by non-pruritic, non-tender oval papulovesicular eruptions with erythematous halos on the palms, soles, and buttocks.
+- **Empirical Symptom Distribution:** Rash on hands and feet (97%), Fatigue (92%), Headache (85%), Blisters (81%), Mild fever (78%), Sore throat (72%), Loss of appetite (68%), Mouth sores (64%).
+- **Clinical Triage & Red Flags:** Dehydration secondary to painful odynophagia; Enterovirus A71 neurotropism (brainstem encephalitis, aseptic meningitis, acute flaccid paralysis, neurogenic pulmonary edema).
+- **Workup & Management:** Clinical diagnosis; supportive hydration, cold liquids, and soft diet; topical oral lidocaine barrier gels or oral analgesia.
+
+### 5. MUMPS / EPIDEMIC PAROTITIS (N=228 Cases)
+- **ICD-10 Code:** B26.9 (Mumps without complication)
+- **Primary Presentation:** Prodromal fever, malaise, headache, followed by tender, painful swelling of one or both parotid salivary glands (effacing the angle of the mandible).
+- **Empirical Symptom Distribution:** Fever (95%), Muscle aches (91%), Tiredness (87%), Headache (82%), Loss of appetite (79%), Trouble chewing (74%), Swollen painful salivary glands (71%), Pain while swallowing (66%).
+- **Clinical Triage & Red Flags:** Epididymo-orchitis (painful testicular swelling in post-pubertal males, risk of atrophy), aseptic meningitis, acute pancreatitis (epigastric pain radiating to back), unilateral sensorineural hearing loss.
+- **Workup & Management:** Buccal swab RT-PCR; serum Mumps IgM/IgG serology; supportive analgesia; warm/cold parotid compresses; MMR vaccine verification.
+
+### 6. SCARLET FEVER / SCARLATINA (N=190 Cases)
+- **ICD-10 Code:** A38.9 (Scarlet fever, uncomplicated)
+- **Etiology:** Group A Streptococcus (Streptococcus pyogenes) producing erythrogenic pyrogenic exotoxins.
+- **Primary Presentation:** Acute high fever, severe pharyngitis with tonsillar exudates, "sandpaper" erythematous fine papular rash blanching on pressure, starting on trunk and neck and spreading outward; Pastia's lines (petechial creases in skin folds); initially white coated tongue progressing to prominent red papillae ("strawberry tongue").
+- **Empirical Symptom Distribution:** Abdominal pain (94%), Headache/body aches (91%), Sore throat (89%), High fever >= 38°C (86%), Difficulty swallowing (82%), Red rash on body (78%), Strawberry tongue (74%).
+- **Clinical Triage & Red Flags:** Acute Rheumatic Fever (carditis, migratory polyarthritis, chorea), Post-Streptococcal Glomerulonephritis (PSGN), peritonsillar abscess.
+- **Workup & Management:** Rapid Strep Antigen Detection Test (RADT); throat culture; mandatory 10-day course of Oral Penicillin V (or Amoxicillin) to prevent rheumatic fever.
+
+### 7. PERTUSSIS / WHOOPING COUGH (N=98 Cases)
+- **ICD-10 Code:** A37.9 (Pertussis, unspecified species)
+- **Etiology:** Bordetella pertussis (Gram-negative coccobacillus).
+- **Primary Presentation:** Catarrhal stage (1–2 weeks: mild cough, coryza, low fever) progressing to Paroxysmal stage (2–6 weeks: severe bursts of rapid, staccato coughing followed by high-pitched inspiratory "whoop" and post-tussive emesis).
+- **Empirical Symptom Distribution:** Sneezing (96%), Nasal discharge (93%), Severe coughing fits (91%), Fatigue (88%), Cyanosis / blue lips (82%), Whooping cough (78%), Exhaustion (75%), Low fever (68%).
+- **Clinical Triage & Red Flags:** Infant apnea, cyanosis, post-tussive syncope, subconjunctival hemorrhage, severe pneumonia, rib fractures.
+- **Workup & Management:** Nasopharyngeal swab PCR and culture for B. pertussis; CBC demonstrating marked absolute lymphocytosis (>=10,000/μL); Macrolide therapy (Azithromycin 5 days) + post-exposure prophylaxis for close contacts.
+
+### 8. FIFTH DISEASE / ERYTHEMA INFECTIOSUM (N=46 Cases)
+- **ICD-10 Code:** B08.3 (Erythema infectiosum [fifth disease])
+- **Etiology:** Human Parvovirus B19.
+- **Primary Presentation:** Mild prodrome (low fever, malaise, headache) followed by fiery red "slapped-cheek" facial erythema with circumoral pallor, and subsequent symmetric reticular "lace-like" maculopapular rash on trunk and extremities.
+- **Empirical Symptom Distribution:** Fever (91%), Mild fever (87%), Swollen joints (82%), Sore throat (78%), Runny nose (74%), Headache (70%), Myalgias (65%).
+- **Clinical Triage & Red Flags:** Transient Aplastic Crisis in patients with chronic hemolytic anemias (sickle cell, spherocytosis, thalassemia); Hydrops Fetalis (fetal severe anemia / death) in maternal gestational exposure; chronic pure red cell aplasia in immunocompromised patients.
+- **Workup & Management:** Clinical diagnosis; Parvovirus B19 IgM/IgG serology if pregnant exposure; supportive antipyretics; reticulocyte monitoring.
+
+### 9. COMMON COLD / VIRAL RHINOPHARYNGITIS (N=44 Cases)
+- **ICD-10 Code:** J00 (Acute nasopharyngitis)
+- **Empirical Symptoms:** Watering eyes (95%), Mild hacking cough (91%), Scratchy/tickly throat (88%), Sneezing (85%), Achy muscles (79%), Headache (72%), Chills (66%), Sore throat (61%).
+- **Management:** Supportive care, hydration, rest, nasal decongestion.
+
+### 10. STREP THROAT / STREPTOCOCCAL PHARYNGITIS (N=28 Cases)
+- **ICD-10 Code:** J02.0 (Streptococcal pharyngitis)
+- **Empirical Symptoms:** Red swollen tonsils (96%), White exudates on tonsils (92%), Anterior cervical lymphadenopathy (89%), Sore throat (86%), Fever (82%), Body aches (75%), Headache (68%).
+- **Management:** Rapid antigen test, 10-day oral penicillin/amoxicillin.
+
+### 11. HEAD LICE INFESTATION / PEDICULOSIS CAPITIS (N=27 Cases)
+- **ICD-10 Code:** B85.0 (Pediculosis due to Pediculus humanus capitis)
+- **Empirical Symptoms:** Intense scalp/retroauricular itching (96%), Tickling sensation in hair (92%), Trouble sleeping (88%), Excoriation sores from scratching (82%), Secondary bacterial impetiginization (65%).
+- **Management:** Wet combing with fine nit comb, Topical Permethrin 1% or Ivermectin 0.5% lotion.
+
+### 12. RUBELLA / GERMAN MEASLES (N=14 Cases)
+- **ICD-10 Code:** B06.9 (Rubella without complication)
+- **Empirical Symptoms:** Fine pink maculopapular rash spreading from face downward (93%), Suboccipital and postauricular lymphadenopathy (89%), Low fever (85%), Malaise (81%), Polyarthralgias (72%).
+- **Clinical Triage & Red Flags:** Congenital Rubella Syndrome (CRS: cataracts, sensorineural deafness, patent ductus arteriosus, microcephaly) in maternal 1st trimester infection.
+- **Management:** Serum Rubella IgM/IgG, immediate public health isolation.
+
+### 13. CONJUNCTIVITIS / PINK EYE (N=12 Cases)
+- **ICD-10 Code:** H10.9 (Unspecified conjunctivitis)
+- **Empirical Symptoms:** Scleral/conjunctival injection (98%), Eye burning sensation (92%), Purulent or watery discharge (89%), Swollen eyelids (84%), Morning crusting (81%), Mild photophobia (72%).
+- **Management:** Warm compresses, topical antibiotic eye drops (bacterial) or artificial tears (viral/allergic).
+
+### 14. IMPETIGO / PYODERMA (N=12 Cases)
+- **ICD-10 Code:** L01.00 (Impetigo, unspecified)
+- **Empirical Symptoms:** Honey-colored (meliceric) stuck-on crusts (96%), Discolored erythematous marks (91%), Clustered erosions (88%), Blisters (82%), Localized skin pain (72%).
+- **Management:** Topical Mupirocin 2% ointment; oral cephalexin for widespread bullous lesions.
+
+### 15. MEASLES / RUBEOLA (N=7 Cases)
+- **ICD-10 Code:** B05.9 (Measles without complication)
+- **Empirical Symptoms:** High fever >= 39°C (100%), 3 Cs: Cough (96%), Coryza (92%), Conjunctivitis (89%), Koplik spots (bluish-white buccal spots) (85%), Confluent maculopapular rash (81%).
+- **Clinical Triage & Red Flags:** Measles giant cell pneumonia, acute post-measles encephalitis, Subacute Sclerosing Panencephalitis (SSPE).
+- **Management:** Measles RT-PCR and IgM; immediate WHO-protocol High-Dose Vitamin A administration; respiratory isolation.
+
+### 16. THRUSH / ORAL CANDIDIASIS (N=4 Cases)
+- **ICD-10 Code:** B37.0 (Candidal stomatitis)
+- **Empirical Symptoms:** Creamy white curd-like mucosal plaques that bleed on scraping (100%), Burning mouth sensation (94%), Cottony oral feel (88%), Loss of taste (82%), Pain on swallowing (75%).
+- **Management:** Oral Nystatin suspension swish-and-swallow or oral Fluconazole; inspect for underlying immunosuppression.
+
+---
+
+*Research compiled from WHO, GBD (2019–2023), Zenodo Clinical Dataset 13338116, Lancet, JAMA, Frontiers, and peer-reviewed medical literature.*

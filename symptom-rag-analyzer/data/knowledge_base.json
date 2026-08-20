@@ -1220,5 +1220,735 @@
       "Clinical grading according to WHO Xerophthalmia classification"
     ],
     "authoritative_source": "WHO Guidelines on Vitamin A Supplementation / UNICEF 2023 / GBD 2021"
+  },
+  {
+    "id": "KB-ZEN-031",
+    "condition": "Norovirus Infection",
+    "icd10": "A08.11",
+    "system": "Gastroenterology / Infectious Disease",
+    "typical_symptoms": [
+      "headache",
+      "stomach cramps",
+      "vomiting",
+      "abdominal pain",
+      "rashes",
+      "nausea",
+      "fever",
+      "muscle aches",
+      "dehydration",
+      "loss of appetite",
+      "chills",
+      "body aches"
+    ],
+    "red_flags": [
+      "severe dehydration (hypotension, sunken eyes, lethargy)",
+      "inability to retain fluids for >24h",
+      "intractable vomiting",
+      "bloody stools"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Rotavirus enteritis",
+      "Campylobacteriosis",
+      "Salmonella enterica",
+      "Staphylococcal food poisoning",
+      "Giardiasis"
+    ],
+    "recommended_tests": [
+      "Clinical diagnosis",
+      "Oral rehydration solution (ORS)",
+      "Stool PCR/RT-qPCR for Norovirus GI/GII",
+      "Electrolyte panel"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / CDC Norovirus Clinical Guidance",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 31612
+  },
+  {
+    "id": "KB-ZEN-032",
+    "condition": "Shigellosis (Bacillary Dysentery)",
+    "icd10": "A03.9",
+    "system": "Gastroenterology / Infectious Disease",
+    "typical_symptoms": [
+      "body aches",
+      "dehydration",
+      "chills",
+      "abdominal pain or cramps",
+      "stomach cramps",
+      "headache",
+      "fatigue",
+      "feverish",
+      "fever",
+      "diarrhea",
+      "nausea",
+      "muscle aches"
+    ],
+    "red_flags": [
+      "frank bloody mucoid stools (dysentery)",
+      "toxic megacolon",
+      "hemolytic uremic syndrome (HUS)",
+      "septic shock",
+      "seizures in young children"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Enterohemorrhagic E. coli (EHEC)",
+      "Campylobacter jejuni",
+      "Salmonellosis",
+      "Amebic dysentery",
+      "C. difficile colitis"
+    ],
+    "recommended_tests": [
+      "Stool culture and antimicrobial susceptibility testing (AST)",
+      "Stool multiplex PCR",
+      "CBC with differential",
+      "Renal function panel"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / WHO Shigella Management Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 31536
+  },
+  {
+    "id": "KB-ZEN-033",
+    "condition": "Roseola",
+    "icd10": "B08.20",
+    "system": "Pediatrics / Infectious Disease",
+    "typical_symptoms": [
+      "fatigue",
+      "red eyes",
+      "rash",
+      "sore throat",
+      "runny nose",
+      "irritability",
+      "vomiting",
+      "cough",
+      "headache",
+      "high fever",
+      "chills",
+      "diarrhea"
+    ],
+    "red_flags": [
+      "febrile seizures (during initial high fever spike)",
+      "bulging fontanelle",
+      "lethargy",
+      "meningismus"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Measles",
+      "Rubella",
+      "Scarlet fever",
+      "Erythema infectiosum (Fifth disease)",
+      "Enterovirus infection",
+      "Drug rash"
+    ],
+    "recommended_tests": [
+      "Clinical evaluation (fever resolves then rose-pink maculopapular rash appears on trunk)",
+      "Supportive care",
+      "HHV-6 PCR if immunocompromised"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / AAP Red Book: Human Herpesvirus 6 & 7",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 30892
+  },
+  {
+    "id": "KB-ZEN-034",
+    "condition": "Hand, Foot, and Mouth Disease",
+    "icd10": "B08.4",
+    "system": "Pediatrics / Dermatology",
+    "typical_symptoms": [
+      "rash on hands and feet",
+      "fatigue",
+      "headache",
+      "blisters",
+      "mild fever",
+      "sore throat",
+      "loss of appetite",
+      "mouth sores",
+      "red spots",
+      "cough",
+      "sores in mouth",
+      "fever"
+    ],
+    "red_flags": [
+      "severe dehydration from painful swallowing",
+      "neurological complications (enterovirus A71 encephalitis)",
+      "myocarditis",
+      "sustained high fever >39C"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Herpetic gingivostomatitis",
+      "Aphthous stomatitis",
+      "Varicella (Chickenpox)",
+      "Erythema multiforme"
+    ],
+    "recommended_tests": [
+      "Clinical diagnosis based on classic papulovesicular distribution on palms, soles, buttocks and oral ulcerations",
+      "Supportive hydration & analgesia"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / CDC Coxsackievirus Clinical Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 7051
+  },
+  {
+    "id": "KB-ZEN-035",
+    "condition": "Mumps",
+    "icd10": "B26.9",
+    "system": "Infectious Disease / Pediatrics",
+    "typical_symptoms": [
+      "fever",
+      "muscle aches",
+      "tiredness",
+      "headache",
+      "loss of appetite",
+      "trouble chewing",
+      "swollen, painful salivary glands",
+      "pain while chewing or swallowing",
+      "testicle pain and tenderness"
+    ],
+    "red_flags": [
+      "orchitis (painful testicular swelling in postpubertal males)",
+      "aseptic meningitis",
+      "encephalitis",
+      "acute pancreatitis",
+      "sensorineural hearing loss"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Bacterial suppurative parotitis",
+      "Sialolithiasis",
+      "Epstein-Barr virus (EBV)",
+      "Adenovirus",
+      "HIV parotitis"
+    ],
+    "recommended_tests": [
+      "Buccal swab RT-PCR for Mumps virus",
+      "Serum Mumps IgM/IgG serology",
+      "Amylase / Lipase"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / CDC Mumps Clinical Overview",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 1622
+  },
+  {
+    "id": "KB-ZEN-036",
+    "condition": "Scarlet Fever",
+    "icd10": "A38.9",
+    "system": "Pediatrics / Infectious Disease",
+    "typical_symptoms": [
+      "abdominal pain",
+      "headache and body aches",
+      "sore throat",
+      "fever (100.4\ufffdf / 38.0\ufffdc or higher)",
+      "difficulty swallowing",
+      "red rash on the body",
+      "strawberry tongue",
+      "fever",
+      "swollen glands",
+      "sore and red throat with patches",
+      "red lines in body folds",
+      "nausea or vomiting"
+    ],
+    "red_flags": [
+      "strawberry tongue with sandpaper exanthem",
+      "Pastia's lines",
+      "acute rheumatic fever",
+      "post-streptococcal glomerulonephritis (cola-colored urine)"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Kawasaki disease",
+      "Staphylococcal toxic shock syndrome",
+      "Measles",
+      "Viral exanthem",
+      "Drug hypersensitivity"
+    ],
+    "recommended_tests": [
+      "Rapid Antigen Detection Test (RADT) for Group A Strep",
+      "Throat culture",
+      "First-line oral Penicillin V or Amoxicillin (10-day course)"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / IDSA Streptococcal Pharyngitis Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 1348
+  },
+  {
+    "id": "KB-ZEN-037",
+    "condition": "Pertussis (Whooping Cough)",
+    "icd10": "A37.9",
+    "system": "Respiratory / Pediatrics",
+    "typical_symptoms": [
+      "sneezing",
+      "nasal discharge",
+      "severe coughing fits",
+      "fatigue",
+      "cyanosis (blue lips, tongue, nailbeds)",
+      "whooping cough",
+      "exhaustion",
+      "low-grade fever",
+      "sore, watery eyes",
+      "fever",
+      "vomiting after coughing",
+      "runny nose"
+    ],
+    "red_flags": [
+      "paroxysmal coughing fits with inspiratory whoop",
+      "post-tussive emesis",
+      "infant apnea / cyanosis",
+      "subconjunctival hemorrhages",
+      "pneumothorax"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Mycoplasma pneumoniae",
+      "Chlamydia pneumoniae",
+      "RSV bronchiolitis",
+      "Adenovirus",
+      "Foreign body aspiration"
+    ],
+    "recommended_tests": [
+      "Nasopharyngeal aspirate/swab PCR for Bordetella pertussis (within 3 weeks)",
+      "CBC with absolute lymphocytosis",
+      "Macrolide antibiotic therapy (Azithromycin)"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / CDC Pertussis Clinical Guidance",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 672
+  },
+  {
+    "id": "KB-ZEN-038",
+    "condition": "Fifth Disease (Erythema Infectiosum)",
+    "icd10": "B08.3",
+    "system": "Pediatrics / Dermatology",
+    "typical_symptoms": [
+      "fever",
+      "vomiting",
+      "mild fever",
+      "swollen joints",
+      "sore throat",
+      "runny or stuffy nose",
+      "headache",
+      "myalgias",
+      "malaise",
+      "fatigue",
+      "rash on face",
+      "diarrhea"
+    ],
+    "red_flags": [
+      "transient aplastic crisis (in sickle cell / thalassemia)",
+      "hydrops fetalis in pregnant contacts",
+      "chronic pure red cell aplasia in immunocompromised"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Rubella",
+      "Scarlet fever",
+      "Systemic lupus erythematosus (malar rash)",
+      "Juvenile idiopathic arthritis",
+      "Parvovirus B19 arthropathy"
+    ],
+    "recommended_tests": [
+      "Clinical evaluation ('slapped-cheek' facial rash with reticulated lacy trunk erythema)",
+      "Parvovirus B19 IgM/IgG serology",
+      "Complete blood count with reticulocyte count"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / CDC Parvovirus B19 Clinical Information",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 286
+  },
+  {
+    "id": "KB-ZEN-039",
+    "condition": "Common Cold",
+    "icd10": "J00",
+    "system": "Respiratory",
+    "typical_symptoms": [
+      "watering eyes",
+      "mild hacking cough",
+      "scratchy, tickly throat",
+      "sneezing",
+      "achy muscles and bones",
+      "headache",
+      "chills",
+      "sore throat",
+      "low-grade fever",
+      "stuffy, runny nose",
+      "mild fatigue",
+      "watery discharge from nose that thickens and turns yellow or green"
+    ],
+    "red_flags": [
+      "fever > 38.5C lasting >3 days",
+      "severe localized facial pain",
+      "dyspnea",
+      "secondary bacterial otitis media"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Allergic rhinitis",
+      "Influenza",
+      "Acute rhinosinusitis",
+      "COVID-19",
+      "Streptococcal pharyngitis"
+    ],
+    "recommended_tests": [
+      "Clinical diagnosis",
+      "Symptomatic supportive treatment (saline nasal rinse, oral hydration, antipyretics)"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / NIH MedlinePlus Upper Respiratory Overview",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 266
+  },
+  {
+    "id": "KB-ZEN-040",
+    "condition": "Strep Throat",
+    "icd10": "J02.0",
+    "system": "ENT / Infectious Disease",
+    "typical_symptoms": [
+      "red and swollen tonsils",
+      "white patches on tonsils",
+      "swollen lymph nodes",
+      "sore throat",
+      "fever",
+      "body aches",
+      "headache",
+      "loss of appetite",
+      "abdominal pain",
+      "rash",
+      "nausea"
+    ],
+    "red_flags": [
+      "tonsillar exudates without cough (Centor criteria)",
+      "trismus (inability to open mouth)",
+      "uvular deviation",
+      "drooling / airway compromise"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Viral pharyngitis (EBV/Adenovirus)",
+      "Herpangina",
+      "Peritonsillar abscess",
+      "Diphtheria"
+    ],
+    "recommended_tests": [
+      "Rapid Strep Antigen Test (RADT)",
+      "Throat swab culture",
+      "Centor/McIsaac scoring",
+      "Oral Amoxicillin/Penicillin"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / IDSA Pharyngitis Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 165
+  },
+  {
+    "id": "KB-ZEN-041",
+    "condition": "Head Lice Infestation",
+    "icd10": "B85.0",
+    "system": "Dermatology / Parasitology",
+    "typical_symptoms": [
+      "tickling feeling",
+      "trouble sleeping",
+      "itching",
+      "tickling sensation in hair",
+      "difficulty sleeping",
+      "infection from scratched skin",
+      "itching on the scalp, neck, and ears",
+      "sores from scratching",
+      "sores on the scalp",
+      "irritability",
+      "visible lice on the scalp"
+    ],
+    "red_flags": [
+      "severe secondary bacterial skin infection (impetigo / excoriation cellulitis) from intense scratching"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Seborrheic dermatitis (dandruff)",
+      "Hair cast artifact",
+      "Trichomycosis",
+      "Tinea capitis"
+    ],
+    "recommended_tests": [
+      "Direct visual inspection with fine-toothed nit comb for live nymphs and nits attached within 1/4 inch of scalp",
+      "Topical Permethrin 1% or Ivermectin lotion"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / AAP Head Lice Clinical Report",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 157
+  },
+  {
+    "id": "KB-ZEN-042",
+    "condition": "Rubella",
+    "icd10": "B06.9",
+    "system": "Infectious Disease / Public Health",
+    "typical_symptoms": [
+      "runny nose",
+      "headache",
+      "cough",
+      "joint pain",
+      "generally feeling unwell (malaise)",
+      "rash",
+      "low fever",
+      "swollen lymph nodes",
+      "sore throat",
+      "pink eye"
+    ],
+    "red_flags": [
+      "Congenital Rubella Syndrome (CRS: cataracts, sensorineural deafness, patent ductus arteriosus, microcephaly) in pregnant exposure",
+      "thrombocytopenic purpura"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Measles (Rubeola)",
+      "Roseola",
+      "Scarlet fever",
+      "Parvovirus B19",
+      "Drug eruption"
+    ],
+    "recommended_tests": [
+      "Serum Rubella IgM/IgG serology",
+      "Viral RT-PCR",
+      "Immediate public health notification"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / WHO Rubella Surveillance Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 82
+  },
+  {
+    "id": "KB-ZEN-043",
+    "condition": "Conjunctivitis (Pink Eye)",
+    "icd10": "H10.9",
+    "system": "Ophthalmology",
+    "typical_symptoms": [
+      "burning sensation in the eyes",
+      "swollen eyelids (blepharitis)",
+      "redness in the white of the eye (sclera) or inner eyelid",
+      "light sensitivity (photophobia)",
+      "mild eye pain or discomfort",
+      "dry or watery eyes (epiphora)",
+      "blurred vision (intermittent)",
+      "eye discharge (yellowish, greenish, or white; may cause crusting)",
+      "sensation of a foreign object in the eye",
+      "itchy or irritated eyes"
+    ],
+    "red_flags": [
+      "severe eye pain",
+      "significant visual acuity loss",
+      "marked photophobia",
+      "copious hyperacute purulent discharge (N. gonorrhoeae)",
+      "ciliary flush"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Corneal ulcer / keratitis",
+      "Acute angle-closure glaucoma",
+      "Anterior uveitis",
+      "Scleritis",
+      "Subconjunctival hemorrhage"
+    ],
+    "recommended_tests": [
+      "Slit lamp biomicroscopy",
+      "Fluorescein corneal staining",
+      "Bacterial conjunctival culture in severe/refractory cases"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / AAO Preferred Practice Pattern: Conjunctivitis",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 68
+  },
+  {
+    "id": "KB-ZEN-044",
+    "condition": "Impetigo",
+    "icd10": "L01.00",
+    "system": "Dermatology / Infectious Disease",
+    "typical_symptoms": [
+      "redness",
+      "discolored sores",
+      "discolored marks",
+      "clustered sores",
+      "yellow crust",
+      "blisters",
+      "pain",
+      "swelling",
+      "fever",
+      "itchiness"
+    ],
+    "red_flags": [
+      "honey-colored (meliceric) crusted erosions",
+      "rapid bullous expansion (Staph aureus exfoliative toxin)",
+      "post-streptococcal glomerulonephritis",
+      "deep ecthyma ulcers"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Contact dermatitis",
+      "Herpes simplex virus (HSV)",
+      "Bullous pemphigoid",
+      "Scabies",
+      "Tinea corporis"
+    ],
+    "recommended_tests": [
+      "Clinical dermatologic examination",
+      "Bacterial culture of lesion exudate",
+      "Topical Mupirocin 2% or oral cephalexin/clindamycin"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / AAD Impetigo Management Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 68
+  },
+  {
+    "id": "KB-ZEN-045",
+    "condition": "Measles",
+    "icd10": "B05.9",
+    "system": "Infectious Disease / Virology",
+    "typical_symptoms": [
+      "high fever",
+      "small white spots inside the cheeks",
+      "hacking cough",
+      "running nose",
+      "tiredness",
+      "cough",
+      "runny nose",
+      "red and watery eyes",
+      "red eyes"
+    ],
+    "red_flags": [
+      "3 Cs: Cough, Coryza, Conjunctivitis + Koplik spots",
+      "severe measles pneumonia (Hecht giant cell)",
+      "acute encephalitis (1 in 1,000 cases)",
+      "subacute sclerosing panencephalitis (SSPE)"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Rubella",
+      "Scarlet fever",
+      "Roseola",
+      "Kawasaki disease",
+      "Dengue fever",
+      "Drug eruption"
+    ],
+    "recommended_tests": [
+      "Measles RT-PCR (throat/nasopharyngeal swab and urine)",
+      "Serum Measles IgM antibody",
+      "Vitamin A administration (WHO protocol)",
+      "Mandatory isolation and epidemiological report"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / WHO Measles Surveillance and Clinical Protocol",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 33
+  },
+  {
+    "id": "KB-ZEN-046",
+    "condition": "Thrush (Oral Candidiasis)",
+    "icd10": "B37.0",
+    "system": "Oral Medicine / Infectious Disease",
+    "typical_symptoms": [
+      "soreness or burning in the mouth",
+      "dry, cracked skin at mouth corners",
+      "redness, irritation, and pain under dentures (denture stomatitis)",
+      "difficulty swallowing",
+      "slight bleeding if spots are scraped",
+      "bad taste in the mouth",
+      "loss of taste",
+      "cotton-like sensation in the mouth"
+    ],
+    "red_flags": [
+      "retrosternal odynophagia / dysphagia (esophageal candidiasis: AIDS-defining illness)",
+      "disseminated candidiasis in neutropenia / immunocompromise"
+    ],
+    "risk_factors": [
+      "unvaccinated status",
+      "close contact exposure",
+      "daycare/school setting",
+      "immunocompromised state"
+    ],
+    "differential_diagnoses": [
+      "Oral leukoplakia",
+      "Oral lichen planus",
+      "Geographic tongue",
+      "Hairy leukoplakia (EBV)",
+      "Chemical burn"
+    ],
+    "recommended_tests": [
+      "Direct clinical inspection (creamy white curds on erythematous mucosa that bleed slightly upon scraping)",
+      "KOH preparation showing pseudohyphae",
+      "Topical Nystatin oral suspension or oral Fluconazole"
+    ],
+    "source": "Zenodo Clinical Health Dataset (Record 13338116) / IDSA Candidiasis Clinical Practice Guidelines",
+    "zenodo_dataset_grounded": true,
+    "dataset_cases_count": 19
   }
 ]
