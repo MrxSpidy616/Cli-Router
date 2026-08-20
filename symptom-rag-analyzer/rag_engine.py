@@ -44,7 +44,12 @@ class RAGEngine:
         
         # Index baseline medical KB
         for doc in self.kb_documents:
-            text_corpus = f"{doc.get('condition', '')} {doc.get('system', '')} {' '.join(doc.get('typical_symptoms', []))} {' '.join(doc.get('risk_factors', []))} {' '.join(doc.get('differential_diagnoses', []))} {doc.get('authoritative_source', '')}"
+            typical_s = " ".join(doc.get("typical_symptoms", []))
+            red_f = " ".join(doc.get("red_flags", []))
+            risks = " ".join(doc.get("risk_factors", []))
+            diffs = " ".join(doc.get("differential_diagnoses", []))
+            tests = " ".join(doc.get("recommended_tests", []))
+            text_corpus = f"{doc.get('condition', '')} {doc.get('icd10', '')} {doc.get('system', '')} {typical_s} {red_f} {risks} {diffs} {tests} {doc.get('authoritative_source', '')}"
             tokens = tokenize(text_corpus)
             self.doc_index.append({
                 "type": "kb",
@@ -74,27 +79,36 @@ class RAGEngine:
         if not query_tokens:
             return []
 
-        # BM25-style term frequency + inverse doc frequency scoring
-        scores = []
         N = len(self.doc_index)
+        if N == 0:
+            return []
+            
+        avg_doc_len = sum(len(d["tokens"]) for d in self.doc_index) / N
+        k1 = 1.5
+        b = 0.75
+
+        scores = []
         for item in self.doc_index:
             score = 0.0
             doc_tokens = item["tokens"]
             doc_len = len(doc_tokens) or 1
+            token_counts = {}
+            for t in doc_tokens:
+                token_counts[t] = token_counts.get(t, 0) + 1
             
-            # Match token overlap
-            for q in query_tokens:
+            # Standard BM25 term calculation
+            for q in set(query_tokens):
                 if q in item["token_set"]:
-                    tf = doc_tokens.count(q) / doc_len
-                    # IDF approximation
+                    tf = token_counts.get(q, 0)
                     df = sum(1 for d in self.doc_index if q in d["token_set"])
-                    idf = math.log(1 + (N - df + 0.5) / (df + 0.5))
-                    score += tf * (idf + 1.0) * 10.0
-                    
-            # Boost matches in condition title
+                    idf = math.log((N - df + 0.5) / (df + 0.5) + 1.0)
+                    term_score = idf * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * (doc_len / avg_doc_len)))
+                    score += term_score
+
+            # Title exact match boost
             title_tokens = set(tokenize(item["title"]))
             title_overlap = len(set(query_tokens) & title_tokens)
-            score += title_overlap * 15.0
+            score += title_overlap * 3.0
 
             if score > 0:
                 scores.append((score, item))

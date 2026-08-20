@@ -807,5 +807,418 @@
       "MRCP / ERCP"
     ],
     "authoritative_source": "NCCN Pancreatic Adenocarcinoma Guidelines / GLOBOCAN 2024 / SEER"
+  },
+  {
+    "id": "KB-GH-001",
+    "condition": "Road Traffic Injury / Polytrauma",
+    "icd10": "V00-V89",
+    "system": "Trauma / Emergency Medicine",
+    "typical_symptoms": [
+      "acute blunt/penetrating trauma",
+      "severe musculoskeletal pain",
+      "visible hemorrhage / lacerations",
+      "loss of consciousness / concussion",
+      "deformity of limbs",
+      "hypotension / shock"
+    ],
+    "duration": "Acute trauma onset",
+    "risk_factors": [
+      "young males 10-39yo",
+      "speeding",
+      "non-use of seatbelts/helmets",
+      "alcohol/substance impairment",
+      "vulnerable road users (pedestrians/cyclists/motorcyclists)"
+    ],
+    "red_flags": [
+      "airway compromise",
+      "tension pneumothorax",
+      "massive external/internal hemorrhage (hypovolemic shock)",
+      "Glasgow Coma Scale (GCS) < 8",
+      "flail chest",
+      "unstable pelvic fracture"
+    ],
+    "differential_diagnoses": [
+      "Isolated extremity fracture",
+      "Traumatic Brain Injury (TBI)",
+      "Intra-abdominal hemorrhage (splenic/liver laceration)",
+      "Spinal cord injury"
+    ],
+    "recommended_tests": [
+      "Advanced Trauma Life Support (ATLS) primary/secondary survey",
+      "eFAST bedside ultrasound",
+      "Pan-scan CT (Head, C-spine, Chest, Abdomen, Pelvis)",
+      "Type and Crossmatch 4+ units PRBCs"
+    ],
+    "authoritative_source": "WHO Global Status Report on Road Safety 2023 / GBD 2023"
+  },
+  {
+    "id": "KB-GH-002",
+    "condition": "Unintentional Falls & Fragility Fracture",
+    "icd10": "W00-W19",
+    "system": "Trauma / Geriatrics",
+    "typical_symptoms": [
+      "inability to bear weight on limb",
+      "groin / hip pain after ground-level fall",
+      "shortened and externally rotated leg (hip fracture)",
+      "acute subdural headache",
+      "contusions and abrasions"
+    ],
+    "duration": "Acute event following mechanical or syncopal trip/slip",
+    "risk_factors": [
+      "age > 60 years",
+      "osteoporosis (low bone mineral density)",
+      "polypharmacy (sedatives, antihypertensives)",
+      "gait/balance impairment (Parkinson's, neuropathy)",
+      "visual impairment",
+      "environmental trip hazards"
+    ],
+    "red_flags": [
+      "intracranial hemorrhage (subdural/epidural hematoma) especially on anticoagulants",
+      "open compound fracture",
+      "neurovascular deficit distal to fracture",
+      "rhabdomyolysis from prolonged lie"
+    ],
+    "differential_diagnoses": [
+      "Femoral neck / intertrochanteric hip fracture",
+      "Distal radius (Colles) fracture",
+      "Vertebral compression fracture",
+      "Traumatic subdural hematoma",
+      "Vasovagal / cardiogenic syncope leading to fall"
+    ],
+    "recommended_tests": [
+      "Pelvis and Hip Radiographs (AP & Cross-table Lateral)",
+      "Non-contrast Brain CT if head struck or on anticoagulants",
+      "DEXA scan",
+      "Serum CK and renal function"
+    ],
+    "authoritative_source": "WHO Step Safely Strategies / GBD 2021 / AGS/BGS Fall Prevention Guidelines"
+  },
+  {
+    "id": "KB-GH-003",
+    "condition": "Acute Suicidal Crisis & Intentional Self-Harm",
+    "icd10": "X60-X84 / Y87.0",
+    "system": "Psychiatry / Mental Health Emergency",
+    "typical_symptoms": [
+      "active suicidal ideation with intent/plan",
+      "profound hopelessness and worthlessness",
+      "overwhelming psychological pain",
+      "severe agitation / akathisia",
+      "social withdrawal / giving away possessions",
+      "signs of self-inflicted cutting or overdose"
+    ],
+    "duration": "Acute exacerbation of chronic or acute psychiatric distress",
+    "risk_factors": [
+      "prior suicide attempt (strongest single predictor)",
+      "major depressive disorder / bipolar disorder / psychosis",
+      "substance/alcohol use disorder",
+      "acute life crisis (loss of relationship, financial ruin)",
+      "access to lethal means (firearms, pesticides)"
+    ],
+    "red_flags": [
+      "imminent lethal intent with explicit suicide plan and available means",
+      "acute toxic ingestion / self-poisoning",
+      "command auditory hallucinations",
+      "severe refusal of food/fluids"
+    ],
+    "differential_diagnoses": [
+      "Major Depressive Episode with psychotic features",
+      "Bipolar I mixed state",
+      "Borderline Personality Disorder crisis",
+      "Substance-induced mood disorder",
+      "Delirium / organic encephalopathy"
+    ],
+    "recommended_tests": [
+      "Columbia-Suicide Severity Rating Scale (C-SSRS)",
+      "PHQ-9 screening",
+      "Comprehensive toxicology screen (acetaminophen, salicylates, ethanol, drug panel)",
+      "1:1 continuous safety observation"
+    ],
+    "authoritative_source": "WHO LIVE LIFE Comprehensive Suicide Prevention Guide / GBD 2023 / APA Practice Guidelines"
+  },
+  {
+    "id": "KB-GH-004",
+    "condition": "Interpersonal Violence & Trauma (IPV / Physical Abuse)",
+    "icd10": "X85-Y09 / T74",
+    "system": "Emergency Medicine / Forensic & Public Health",
+    "typical_symptoms": [
+      "injuries inconsistent with reported mechanism",
+      "multiple bruises at varying stages of healing",
+      "defensive forearm contusions",
+      "facial fractures / tympanic membrane rupture",
+      "chronic pelvic pain",
+      "hypervigilance and post-traumatic stress symptoms"
+    ],
+    "duration": "Acute trauma episodes amidst chronic coercive control",
+    "risk_factors": [
+      "female sex aged 15-49 (1 in 3 women affected globally)",
+      "pregnancy",
+      "substance abuse in household",
+      "social isolation / economic dependency",
+      "conflict and humanitarian crisis zones"
+    ],
+    "red_flags": [
+      "strangulation history (petechiae, odynophagia, hoarseness - high risk of delayed carotid injury/homicide)",
+      "firearm or weapon threats",
+      "injuries sustained during pregnancy",
+      "pediatric non-accidental trauma"
+    ],
+    "differential_diagnoses": [
+      "Accidental blunt trauma",
+      "Bleeding diathesis / coagulopathy",
+      "Post-Traumatic Stress Disorder (PTSD)",
+      "Major Depressive Disorder",
+      "Somatization disorder"
+    ],
+    "recommended_tests": [
+      "Safe private routine inquiry (HITS / HARK screening tool)",
+      "Full forensic body map & photographic documentation",
+      "Soft tissue neck imaging if strangulation reported",
+      "HIV/STI Post-Exposure Prophylaxis (PEP) if sexual assault"
+    ],
+    "authoritative_source": "WHO Clinical Guidelines for Responding to Intimate Partner Violence and Sexual Violence / GBD 2023"
+  },
+  {
+    "id": "KB-GH-005",
+    "condition": "Obstetric Emergency: Postpartum Hemorrhage & Severe Pre-eclampsia",
+    "icd10": "O72 / O14.9 / O00-O99",
+    "system": "Obstetrics & Maternal-Fetal Medicine",
+    "typical_symptoms": [
+      "excessive vaginal bleeding > 500mL (vaginal) or > 1000mL (cesarean)",
+      "severe throbbing fronto-occipital headache",
+      "visual disturbances (scotomata, blurring)",
+      "epigastric or RUQ pain (hepatic distension)",
+      "sudden facial/hand edema",
+      "tachycardia and dizziness"
+    ],
+    "duration": "Peripartum to 42 days postpartum",
+    "risk_factors": [
+      "uterine atony (4Ts: Tone, Tissue, Trauma, Thrombin)",
+      "multiple gestation / polyhydramnios",
+      "prior history of pre-eclampsia / chronic hypertension",
+      "adolescent or advanced maternal age (>35)",
+      "low-resource delivery setting without skilled birth attendance"
+    ],
+    "red_flags": [
+      "systolic BP >= 160 mmHg or diastolic BP >= 110 mmHg (Hypertensive Crisis in Pregnancy)",
+      "eclampsia (tonic-clonic seizures)",
+      "HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets)",
+      "hypovolemic obstetric shock"
+    ],
+    "differential_diagnoses": [
+      "Uterine atony",
+      "Retained placental tissue",
+      "Genital tract lacerations",
+      "Placental abruption",
+      "Amniotic fluid embolism",
+      "Disseminated Intravascular Coagulation (DIC)"
+    ],
+    "recommended_tests": [
+      "Immediate Bimanual uterine examination",
+      "Uterotonic administration (Oxytocin, Tranexamic Acid)",
+      "Intravenous Magnesium Sulfate for eclampsia seizure prophylaxis",
+      "Urinary protein-to-creatinine ratio (UPCR) and CBC/coagulation/liver panel"
+    ],
+    "authoritative_source": "WHO Recommendations on Maternal Mortality Reduction & PPH (2025) / MMEIG / Lancet 2025"
+  },
+  {
+    "id": "KB-GH-006",
+    "condition": "Neonatal Preterm Birth Complications & Respiratory Distress",
+    "icd10": "P07.3 / P22.0",
+    "system": "Neonatology / Pediatrics",
+    "typical_symptoms": [
+      "birth before 37 completed gestational weeks",
+      "low birth weight (<2500g) or very low (<1500g)",
+      "tachypnea (>60 breaths/min)",
+      "intercostal/subcostal retractions and nasal flaring",
+      "expiratory grunting",
+      "hypothermia and poor suck reflex"
+    ],
+    "duration": "Immediate perinatal period (< 28 days of life)",
+    "risk_factors": [
+      "maternal untreated infections (malaria, bacterial vaginosis, UTI)",
+      "pre-eclampsia",
+      "multiple gestation (twins/triplets)",
+      "maternal malnutrition",
+      "lack of antenatal corticosteroid coverage"
+    ],
+    "red_flags": [
+      "central cyanosis / oxygen saturation < 88% on room air",
+      "apnea episodes > 20 seconds with bradycardia",
+      "necrotizing enterocolitis (abdominal distension, bilious aspirates, bloody stool)",
+      "intraventricular hemorrhage (fontanelle bulging, seizures)"
+    ],
+    "differential_diagnoses": [
+      "Neonatal Respiratory Distress Syndrome (surfactant deficiency)",
+      "Transient Tachypnea of the Newborn (TTN)",
+      "Neonatal Sepsis / Congenital Pneumonia",
+      "Meconium Aspiration Syndrome",
+      "Congenital Diaphragmatic Hernia"
+    ],
+    "recommended_tests": [
+      "Continuous Pulse Oximetry and Temperature monitoring",
+      "Chest Radiograph (reticulogranular 'ground glass' pattern with air bronchograms)",
+      "Blood cultures and CBC",
+      "Bedside blood gas analysis (pH, pCO2, lactate)"
+    ],
+    "authoritative_source": "WHO Guidelines on Care of Preterm or Low-Birth-Weight Infant (Born Too Soon 2023) / Lancet 2023"
+  },
+  {
+    "id": "KB-GH-007",
+    "condition": "Congenital Anomalies (Congenital Heart Defects / Neural Tube Defects)",
+    "icd10": "Q00-Q99 / Q24.9",
+    "system": "Pediatric Genetics & Congenital Disorders",
+    "typical_symptoms": [
+      "central cyanosis unresponsive to 100% oxygen (hyperoxia test)",
+      "pathological heart murmur with poor feeding and sweating during feeds",
+      "visible structural midline defects (cleft lip/palate, spina bifida cystica)",
+      "limb reductions or dysmorphic features",
+      "hypotonia (Down syndrome)"
+    ],
+    "duration": "Congenital (present from embryogenesis/birth)",
+    "risk_factors": [
+      "maternal periconceptional folate deficiency (neural tube defects)",
+      "maternal poorly controlled pre-gestational diabetes",
+      "consanguinity",
+      "maternal teratogenic exposures (valproic acid, isotretinoin, alcohol)",
+      "maternal rubella infection"
+    ],
+    "red_flags": [
+      "ductal-dependent critical congenital heart disease (rapid circulatory collapse upon ductus arteriosus closure)",
+      "spina bifida with leaking CSF (meningitis risk)",
+      "congenital diaphragmatic hernia with severe pulmonary hypoplasia"
+    ],
+    "differential_diagnoses": [
+      "Critical Congenital Heart Disease (Tetralogy of Fallot, TGA, Coarctation)",
+      "Ventricular / Atrial Septal Defect",
+      "Myelomeningocele",
+      "Trisomy 21 (Down syndrome)",
+      "Omphalocele / Gastroschisis"
+    ],
+    "recommended_tests": [
+      "Universal Newborn Pulse Oximetry Screening (hands and feet)",
+      "Pediatric Echocardiography with Doppler",
+      "Spinal/Cranial Ultrasound or MRI",
+      "Chromosomal Microarray Analysis (CMA)"
+    ],
+    "authoritative_source": "WHO Fact Sheet on Birth Defects 2023 / GBD 2021 / American Heart Association (AHA)"
+  },
+  {
+    "id": "KB-GH-008",
+    "condition": "Severe Protein-Energy Malnutrition (Marasmus & Kwashiorkor)",
+    "icd10": "E40 / E41 / E43",
+    "system": "Nutritional Pathology & Global Pediatrics",
+    "typical_symptoms": [
+      "severe somatic muscle wasting and loss of subcutaneous fat ('old man facies' - Marasmus)",
+      "bilateral pitting pedal edema migrating to ascites and anasarca (Kwashiorkor)",
+      "dry, peeling 'flaky-paint' skin dermatitis",
+      "sparse, brittle, hypopigmented hair (flag sign)",
+      "hepatomegaly due to fatty infiltration",
+      "lethargy and apathy"
+    ],
+    "duration": "Weeks to months of chronic caloric and protein deprivation",
+    "risk_factors": [
+      "children under 5 years in food-insecure regions",
+      "early cessation of breastfeeding without safe complementary food",
+      "chronic diarrhea / recurrent enteropathies",
+      "measles / TB / HIV infection",
+      "hospitalized elderly with chronic illness"
+    ],
+    "red_flags": [
+      "hypothermia (rectal temp < 35.5C)",
+      "severe hypoglycemia (< 3.0 mmol/L or 54 mg/dL)",
+      "severe dehydration without diarrhea due to low intravascular volume (fluid overload risk with IV fluids!)",
+      "severe septic shock without fever"
+    ],
+    "differential_diagnoses": [
+      "Nutritional Marasmus",
+      "Kwashiorkor (Protein deficiency)",
+      "Marasmic Kwashiorkor",
+      "Celiac Disease / Severe Malabsorption",
+      "Nephrotic Syndrome (causes edema)",
+      "Congestive Heart Failure"
+    ],
+    "recommended_tests": [
+      "Mid-Upper Arm Circumference (MUAC < 115 mm defines SAM)",
+      "Weight-for-Height Z-score (WHZ < -3 SD)",
+      "Serum Electrolytes (watch for refeeding syndrome: hypophosphatemia, hypokalemia)",
+      "Blood Glucose and Urinalysis"
+    ],
+    "authoritative_source": "WHO Guidelines on the Management of Severe Acute Malnutrition (SAM) / Nutrients 2022 / GBD 2023"
+  },
+  {
+    "id": "KB-GH-009",
+    "condition": "Iodine Deficiency Disorders & Endemic Goiter",
+    "icd10": "E00-E02",
+    "system": "Endocrinology & Micronutrient Nutrition",
+    "typical_symptoms": [
+      "visible enlargement of anterior neck / thyroid gland (goiter)",
+      "cold intolerance, weight gain, fatigue, dry skin (hypothyroidism)",
+      "constipation and hoarseness",
+      "impaired intellectual development, cognitive slowing and developmental delay in children",
+      "growth stunting"
+    ],
+    "duration": "Chronic nutritional deficiency over months to years",
+    "risk_factors": [
+      "inland/mountainous soil zones depleted of iodine",
+      "lack of universal salt iodization (USI)",
+      "pregnant and lactating women (increased thyroid hormone demand)",
+      "consumption of goitrogenic foods (cassava, millet) without adequate iodine"
+    ],
+    "red_flags": [
+      "congenital iodine deficiency syndrome (cretinism: severe irreversible cognitive disability, deaf-mutism, dwarfism)",
+      "large compressive goiter causing stridor, dysphagia, or tracheal deviation",
+      "myxedema coma in severe untreated hypothyroidism"
+    ],
+    "differential_diagnoses": [
+      "Endemic Multinodular Goiter",
+      "Hashimoto's Autoimmune Thyroiditis",
+      "Graves' Disease (hyperthyroidism)",
+      "Thyroid Neoplasm / Carcinoma",
+      "Subacute Granulomatous Thyroiditis"
+    ],
+    "recommended_tests": [
+      "Median Urinary Iodine Concentration (UIC < 100 ug/L indicates population deficiency; <20 ug/L severe)",
+      "Serum Thyroid Stimulating Hormone (TSH) and Free T4",
+      "Thyroid Ultrasound for nodularity and volume",
+      "Thyroperoxidase (anti-TPO) antibodies to rule out Hashimoto's"
+    ],
+    "authoritative_source": "Iodine Global Network (IGN Scorecard 2024) / WHO Nutrition Guidelines / GBD 2021"
+  },
+  {
+    "id": "KB-GH-010",
+    "condition": "Vitamin A Deficiency & Xerophthalmia",
+    "icd10": "E50.0-E50.9 / E64.1",
+    "system": "Ophthalmology & Nutritional Deficiency",
+    "typical_symptoms": [
+      "night blindness (nyctalopia - difficulty seeing in dim light / early sign)",
+      "conjunctival xerosis (dry, lusterless eyes)",
+      "Bitot's spots (foamy, silver-gray triangular plaques on bulbar conjunctiva)",
+      "corneal xerosis and haziness",
+      "increased susceptibility to recurrent diarrhea and measles"
+    ],
+    "duration": "Insidious progression over weeks to months as hepatic retinol stores deplete",
+    "risk_factors": [
+      "preschool children aged 6-59 months in low SDI regions",
+      "diet lacking preformed vitamin A (animal liver, dairy) and provitamin A carotenoids (orange vegetables)",
+      "measles infection (rapidly depletes retinol reserves)",
+      "chronic fat malabsorption / celiac / CF"
+    ],
+    "red_flags": [
+      "corneal ulceration and keratomalacia (rapid liquefactive necrosis of cornea leading to irreversible corneal rupture and blindness within 24-48 hours)",
+      "measles infection in a vitamin A-deficient child (very high fatality rate)"
+    ],
+    "differential_diagnoses": [
+      "Xerophthalmia (Stages XN to X3B)",
+      "Infectious Keratoconjunctivitis (Herpes simplex keratitis, Trachoma)",
+      "Retinitis Pigmentosa (congenital night blindness)",
+      "Severe Dry Eye Syndrome (Sjogren's)"
+    ],
+    "recommended_tests": [
+      "Serum Retinol / Retinol-Binding Protein level (< 0.70 umol/L defines deficiency; < 0.35 umol/L severe)",
+      "Slit-lamp Biomicroscopic eye examination with Fluorescein staining",
+      "Dark adaptation testing",
+      "Clinical grading according to WHO Xerophthalmia classification"
+    ],
+    "authoritative_source": "WHO Guidelines on Vitamin A Supplementation / UNICEF 2023 / GBD 2021"
   }
 ]
