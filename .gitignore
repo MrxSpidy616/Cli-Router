@@ -1,2 +1,5 @@
 .wrangler/
+.env
+.env.*
 node_modules/
+.DS_Store
