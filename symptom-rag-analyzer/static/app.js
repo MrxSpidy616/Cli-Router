@@ -26,46 +26,72 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const countRag = document.getElementById("count-rag");
   const countWeb = document.getElementById("count-web");
-  const caseIdBadge = document.getElementById("case-id-badge");
-  const badgeMode = document.getElementById("badge-mode");
-  
-  // Header Stats
-  const statKb = document.getElementById("stat-kb-count");
-  const statEvolving = document.getElementById("stat-evolving-count");
-  const statResearch = document.getElementById("stat-research-count");
-  const statKbTab = document.getElementById("stat-kb-tab");
-  const statCasesTab = document.getElementById("stat-cases-tab");
-  const statCacheTab = document.getElementById("stat-cache-tab");
-  const explorerContent = document.getElementById("explorer-content");
 
-  // Sample Presets
+  // View Switchers
+  const btnViewPatient = document.getElementById("btn-view-patient");
+  const btnViewDoctor = document.getElementById("btn-view-doctor");
+  const patientViewContainer = document.getElementById("patient-view-container");
+  const doctorViewContainer = document.getElementById("doctor-view-container");
+
+  // Font Resizer for Seniors
+  const btnFontNormal = document.getElementById("btn-font-normal");
+  const btnFontLarge = document.getElementById("btn-font-large");
+
+  btnFontNormal.addEventListener("click", () => {
+    document.body.classList.remove("large-text");
+    btnFontNormal.classList.add("active");
+    btnFontLarge.classList.remove("active");
+  });
+
+  btnFontLarge.addEventListener("click", () => {
+    document.body.classList.add("large-text");
+    btnFontLarge.classList.add("active");
+    btnFontNormal.classList.remove("active");
+  });
+
+  // View Toggle (Patient vs Doctor)
+  btnViewPatient.addEventListener("click", () => {
+    btnViewPatient.classList.add("active");
+    btnViewDoctor.classList.remove("active");
+    patientViewContainer.classList.remove("hidden");
+    doctorViewContainer.classList.add("hidden");
+  });
+
+  btnViewDoctor.addEventListener("click", () => {
+    btnViewDoctor.classList.add("active");
+    btnViewPatient.classList.remove("active");
+    patientViewContainer.classList.remove("hidden"); // keep text visible
+    doctorViewContainer.classList.remove("hidden");
+  });
+
+  // Sample Presets (Everyday Words)
   const PRESETS = {
     respiratory: {
-      symptoms: "Persistent productive cough with yellow-green phlegm for 6 days, low grade fever (37.9C), chest soreness when coughing, mild fatigue",
-      age: "38yo Female",
-      duration: "6 days",
+      symptoms: "I have had a deep wet cough with yellow phlegm for 5 days, a mild fever of 100.2°F, chest soreness when coughing, and feel tired.",
+      age: "62 years old",
+      duration: "5 days",
       history: "Seasonal allergies, Non-smoker",
       severity: 5
     },
     cardiac: {
-      symptoms: "Substernal pressure and tight squeezing chest pain radiating to left shoulder and jaw, cold sweat diaphoresis, shortness of breath on climbing stairs",
-      age: "59yo Male",
-      duration: "45 minutes, worsening",
-      history: "Hypertension (10 yrs), Hyperlipidemia, Ex-smoker",
+      symptoms: "Heavy pressure and squeezing in the center of my chest that spreads to my left arm and neck, broke into a cold sweat, short of breath.",
+      age: "65 years old",
+      duration: "45 minutes",
+      history: "High blood pressure, High cholesterol",
       severity: 9
     },
     abdominal: {
-      symptoms: "Dull periumbilical ache that migrated to the right lower quadrant over 16 hours, sharp pain on walking, loss of appetite, nausea",
-      age: "24yo Male",
-      duration: "16 hours",
-      history: "No significant prior history",
+      symptoms: "Ache around belly button that moved to the lower right side, hurts when I walk, lost my appetite and feel nauseous.",
+      age: "28 years old",
+      duration: "1 day",
+      history: "None",
       severity: 7
     },
     headache: {
-      symptoms: "Unilateral throbbing headache on right side, visual aura with shimmering zigzag lines, sensitivity to light (photophobia) and nausea",
-      age: "31yo Female",
-      duration: "8 hours",
-      history: "Prior episodic headaches, Oral contraceptive use",
+      symptoms: "Pounding headache on one side of my head, seeing shimmering zigzag lights, sensitive to bright sunlight and feel sick to my stomach.",
+      age: "45 years old",
+      duration: "6 hours",
+      history: "Occasional headaches",
       severity: 6
     }
   };
@@ -100,14 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
     severityVal.style.color = val >= 7 ? "#ef4444" : (val >= 4 ? "#f59e0b" : "#10b981");
   }
 
-  // Architecture Mode Toggle
-  document.querySelectorAll("input[name='mode-select']").forEach(radio => {
-    radio.addEventListener("change", (e) => {
-      document.querySelectorAll(".toggle-option").forEach(opt => opt.classList.remove("selected"));
-      e.target.closest(".toggle-option").classList.add("selected");
-    });
-  });
-
   // Quick Endpoint Chips
   document.querySelectorAll(".btn-chip").forEach(chip => {
     chip.addEventListener("click", () => {
@@ -141,20 +159,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Result Tabs
+  // Tabs for Doctor View
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
       document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
       btn.classList.add("active");
       const target = btn.dataset.tab;
-      document.getElementById(target).classList.add("active");
+      const targetEl = document.getElementById(target);
+      if (targetEl) targetEl.classList.add("active");
     });
   });
-
-  // Fetch initial stats & explorer data
-  loadStats();
-  loadKnowledgeBase();
 
   // Form Submission
   form.addEventListener("submit", async (e) => {
@@ -163,7 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const symptoms = symptomsInput.value.trim();
     if (!symptoms) return;
 
-    const mode = document.querySelector("input[name='mode-select']:checked").value;
+    const modeRadio = document.querySelector("input[name='mode-select']:checked");
+    const mode = modeRadio ? modeRadio.value : "rag";
     const provider = providerSelect.value;
     const model = modelSelect.value.trim();
     const apiKey = apikeyOverride.value.trim();
@@ -174,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultsContent.classList.add("hidden");
     resultsLoading.classList.remove("hidden");
 
-    let progressTimer = startLoadingAnimation(mode);
+    let progressTimer = startLoadingAnimation();
 
     try {
       const resp = await fetch("/api/analyze", {
@@ -202,21 +218,19 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       renderResults(data);
-      loadStats(); // refresh counts
     } catch (err) {
       clearInterval(progressTimer);
       resultsLoading.classList.add("hidden");
       resultsEmpty.classList.remove("hidden");
-      alert(`Error during analysis: ${err.message}`);
+      alert(`Could not complete review: ${err.message}`);
     }
   });
 
-  function startLoadingAnimation(mode) {
+  function startLoadingAnimation() {
     const stages = [
-      { main: "Retrieving Clinical Knowledge...", sub: mode === "rag" ? "BM25 semantic search across WHO/NIH guidelines & case memory." : "Compiling entire 1M token clinical catalog for prompt injection." },
-      { main: "Evaluating Symptoms & Reasoning...", sub: "Processing clinical presentation against authoritative medical records." },
-      { main: "Intercepting Web Research Triggers...", sub: "Scanning token stream for [WEB_SEARCH: url] external evidence requests." },
-      { main: "Synthesizing Probability Rankings...", sub: "Calculating differential percentages and indexing case into self-evolving loop." }
+      { main: "Reviewing Medical Knowledge...", sub: "Checking trusted guidelines from WHO, NIH, and doctors." },
+      { main: "Evaluating Symptoms & Patterns...", sub: "Looking at what is most likely causing how you feel." },
+      { main: "Preparing Clear Next Steps...", sub: "Organizing simple home care steps and safety alerts." }
     ];
     let idx = 0;
     loadingStage.textContent = stages[0].main;
@@ -226,240 +240,108 @@ document.addEventListener("DOMContentLoaded", () => {
       idx = (idx + 1) % stages.length;
       loadingStage.textContent = stages[idx].main;
       loadingSubtext.textContent = stages[idx].sub;
-    }, 2200);
+    }, 2000);
   }
 
   function renderResults(data) {
     resultsLoading.classList.add("hidden");
     resultsContent.classList.remove("hidden");
 
-    // Mode Badge
-    badgeMode.textContent = data.mode_used === "rag" ? "RAG TARGETED" : "LONG-CONTEXT STUFFING";
-    badgeMode.style.background = data.mode_used === "rag" ? "rgba(14, 165, 233, 0.2)" : "rgba(168, 85, 247, 0.2)";
-    badgeMode.style.color = data.mode_used === "rag" ? "#38bdf8" : "#c084fc";
-    badgeMode.style.borderColor = data.mode_used === "rag" ? "#38bdf8" : "#c084fc";
-
-    // 1. Percentage Rankings
+    // 1. Render Large, Accessible Percentage Cards
     rankingsList.innerHTML = "";
     if (data.rankings && data.rankings.length > 0) {
-      data.rankings.forEach(r => {
-        const item = document.createElement("div");
-        item.className = "rank-item";
+      data.rankings.forEach((r, idx) => {
+        const card = document.createElement("div");
+        card.className = "simple-rank-card" + (idx === 0 ? " top-pick" : "");
         
-        let colorClass = "low";
-        if (r.percentage >= 50) colorClass = "high";
-        else if (r.percentage >= 25) colorClass = "medium";
+        let pillClass = "low";
+        let labelText = `${r.percentage}% Possible`;
+        let barColor = "#64748b";
 
-        item.innerHTML = `
-          <div class="rank-label-row">
-            <span>${r.condition}</span>
-            <span class="rank-pct" style="color: ${colorClass === 'high' ? '#10b981' : (colorClass === 'medium' ? '#f59e0b' : '#94a3b8')}">${r.percentage}%</span>
+        if (r.percentage >= 50) {
+          pillClass = "high";
+          labelText = `${r.percentage}% Most Likely`;
+          barColor = "#10b981";
+        } else if (r.percentage >= 25) {
+          pillClass = "medium";
+          labelText = `${r.percentage}% Moderate`;
+          barColor = "#f59e0b";
+        }
+
+        card.innerHTML = `
+          <div class="rank-title-row">
+            <span class="rank-condition-name">${idx === 0 ? '⭐ ' : ''}${r.condition}</span>
+            <span class="rank-pct-pill ${pillClass}">${labelText}</span>
           </div>
-          <div class="progress-track">
-            <div class="progress-fill ${colorClass}" style="width: ${r.percentage}%"></div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" style="width: ${r.percentage}%; background-color: ${barColor};"></div>
           </div>
         `;
-        rankingsList.appendChild(item);
+        rankingsList.appendChild(card);
       });
     }
 
-    // 2. Full Markdown HTML
+    // 2. Render Patient-Friendly Main Explanation
     markdownOutput.innerHTML = data.analysis_html;
 
-    // 3. RAG Chunks
+    // 3. Populate Doctor Tab Chunks (for Clinicians)
     const kbChunks = data.retrieved_context?.kb_chunks || [];
     const evolvingChunks = data.retrieved_context?.evolving_cases || [];
     const totalChunks = kbChunks.length + evolvingChunks.length;
-    countRag.textContent = totalChunks;
+    if (countRag) countRag.textContent = totalChunks;
 
-    ragChunksContainer.innerHTML = "";
-    if (totalChunks === 0) {
-      ragChunksContainer.innerHTML = `<p class="helper-text">No isolated chunks retrieved (${data.mode_used} mode utilized full catalog).</p>`;
-    } else {
-      kbChunks.forEach(c => {
-        const div = document.createElement("div");
-        div.className = "chunk-card";
-        div.innerHTML = `
-          <div class="chunk-header">
-            <span class="chunk-title">📖 ${c.condition} (${c.icd10 || 'ICD-10'})</span>
-            <span class="chunk-tag">${c.system}</span>
-          </div>
-          <p><strong>Typical Symptoms:</strong> ${(c.typical_symptoms || []).join(', ')}</p>
-          <p><strong>Source:</strong> <em>${c.source}</em></p>
-        `;
-        ragChunksContainer.appendChild(div);
-      });
-
-      evolvingChunks.forEach(c => {
-        const div = document.createElement("div");
-        div.className = "chunk-card";
-        div.style.borderColor = "var(--purple)";
-        div.innerHTML = `
-          <div class="chunk-header">
-            <span class="chunk-title" style="color:#c084fc">🧠 Prior Case: ${c.case_id} (${c.demographics})</span>
-            <span class="chunk-tag" style="background:rgba(168,85,247,0.2)">Evolving Loop</span>
-          </div>
-          <p><strong>Presented:</strong> ${(c.presented_symptoms || []).join(', ')}</p>
-          <p><strong>Clinical Takeaway:</strong> <em>${c.clinical_takeaway || c.outcome}</em></p>
-        `;
-        ragChunksContainer.appendChild(div);
-      });
-    }
-
-    // 4. Web Research
-    const webRes = data.web_research || [];
-    countWeb.textContent = webRes.length;
-    webResearchContainer.innerHTML = "";
-    if (webRes.length === 0) {
-      webResearchContainer.innerHTML = `
-        <div class="callout-info">
-          ℹ️ No external web research triggers were fired for this standard presentation. When a rare condition or new guideline is required, the model emits <code>[WEB_SEARCH: &lt;URL&gt;]</code> which auto-fetches and saves markdown here.
-        </div>
-      `;
-    } else {
-      webRes.forEach(w => {
-        const div = document.createElement("div");
-        div.className = "research-card";
-        div.innerHTML = `
-          <div class="research-header">
-            <span class="chunk-title">🌐 ${w.url}</span>
-            <span class="chunk-tag">${w.authoritative ? '✅ Verified Authority' : 'External'}</span>
-          </div>
-          <p><strong>Cached Markdown File:</strong> <code>${w.filename}</code> (${w.char_count} chars)</p>
-          <div class="code-box">${w.markdown.substring(0, 500)}...</div>
-        `;
-        webResearchContainer.appendChild(div);
-      });
-    }
-
-    // 5. Evolving Case Loop
-    caseIdBadge.textContent = data.saved_case_id || "Saved";
-    evolvingDetails.textContent = JSON.stringify({
-      case_id: data.saved_case_id,
-      timestamp: new Date().toISOString(),
-      symptoms: symptomsInput.value.trim(),
-      ranked_differentials: data.rankings,
-      mode: data.mode_used,
-      status: "Persisted to data/evolving_knowledge.json"
-    }, null, 2);
-  }
-
-  // Stats Loader
-  async function loadStats() {
-    try {
-      const resp = await fetch("/api/stats");
-      const data = await resp.json();
-      statKb.textContent = data.kb_documents_count;
-      statEvolving.textContent = data.evolving_cases_count;
-      statResearch.textContent = data.research_cache_count;
-      statKbTab.textContent = data.kb_documents_count;
-      statCasesTab.textContent = data.evolving_cases_count;
-      statCacheTab.textContent = data.research_cache_count;
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  // Bottom Explorer Tabs
-  document.getElementById("btn-show-kb").addEventListener("click", (e) => {
-    setActiveSubtab(e.target);
-    loadKnowledgeBase();
-  });
-
-  document.getElementById("btn-show-cases").addEventListener("click", (e) => {
-    setActiveSubtab(e.target);
-    loadEvolvingCases();
-  });
-
-  document.getElementById("btn-show-cache").addEventListener("click", (e) => {
-    setActiveSubtab(e.target);
-    loadResearchCache();
-  });
-
-  function setActiveSubtab(btn) {
-    document.querySelectorAll(".btn-subtab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  }
-
-  async function loadKnowledgeBase() {
-    explorerContent.innerHTML = '<div class="loading-inline">Loading Clinical Guidelines...</div>';
-    try {
-      const resp = await fetch("/api/documents");
-      const data = await resp.json();
-      const kb = data.knowledge_base || [];
-
-      let html = '<div class="explorer-grid">';
-      kb.forEach(d => {
-        html += `
-          <div class="kb-card">
-            <h4>${d.condition} <span class="chunk-tag">${d.icd10 || ''}</span></h4>
-            <p><strong>System:</strong> ${d.system}</p>
-            <p><strong>Key Symptoms:</strong> ${(d.typical_symptoms || []).slice(0, 3).join(', ')}...</p>
-            <p><strong>Red Flags:</strong> ${(d.red_flags || []).slice(0, 2).join(', ')}</p>
-            <p><strong>Source:</strong> <em>${d.authoritative_source}</em></p>
-          </div>
-        `;
-      });
-      html += '</div>';
-      explorerContent.innerHTML = html;
-    } catch (e) {
-      explorerContent.innerHTML = '<p class="helper-text">Failed to load knowledge base.</p>';
-    }
-  }
-
-  async function loadEvolvingCases() {
-    explorerContent.innerHTML = '<div class="loading-inline">Loading Evolving Case History...</div>';
-    try {
-      const resp = await fetch("/api/history");
-      const data = await resp.json();
-      const cases = data.cases || [];
-
-      let html = '<div class="explorer-grid">';
-      cases.forEach(c => {
-        const topDiff = (c.differential_ranking || [])[0];
-        html += `
-          <div class="kb-card" style="border-color: var(--purple)">
-            <h4 style="color:#c084fc">🧠 ${c.case_id}</h4>
-            <p><strong>Demographics:</strong> ${c.patient_demographics}</p>
-            <p><strong>Symptoms:</strong> ${(c.presented_symptoms || []).join(', ')}</p>
-            <p><strong>Top Prediction:</strong> ${topDiff ? `${topDiff.condition} (${topDiff.percentage}%)` : 'Analyzed'}</p>
-            <p><strong>Takeaway:</strong> <em>${c.clinical_takeaway}</em></p>
-          </div>
-        `;
-      });
-      html += '</div>';
-      explorerContent.innerHTML = html;
-    } catch (e) {
-      explorerContent.innerHTML = '<p class="helper-text">Failed to load evolving cases.</p>';
-    }
-  }
-
-  async function loadResearchCache() {
-    explorerContent.innerHTML = '<div class="loading-inline">Loading Web Research Cache...</div>';
-    try {
-      const resp = await fetch("/api/research-cache");
-      const data = await resp.json();
-      const reports = data.cached_reports || [];
-
-      if (reports.length === 0) {
-        explorerContent.innerHTML = '<p class="helper-text" style="padding:1rem;">No web research reports cached yet. Run a query that triggers <code>[WEB_SEARCH: &lt;URL&gt;]</code> to populate.</p>';
-        return;
+    if (ragChunksContainer) {
+      ragChunksContainer.innerHTML = "";
+      if (totalChunks === 0) {
+        ragChunksContainer.innerHTML = `<p class="helper-text">No isolated chunks retrieved.</p>`;
+      } else {
+        kbChunks.forEach(c => {
+          const div = document.createElement("div");
+          div.className = "chunk-card";
+          div.innerHTML = `
+            <div class="chunk-header">
+              <span class="chunk-title">${c.condition}</span>
+              <span class="rank-pct-pill low">${c.icd10 || 'ICD-10'}</span>
+            </div>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 0.4rem;"><strong>Source:</strong> ${c.source || 'Medical Guidelines'}</p>
+            <p style="font-size: 0.88rem; color: #94a3b8;"><strong>Typical Symptoms:</strong> ${(c.typical_symptoms || []).join(', ')}</p>
+          `;
+          ragChunksContainer.appendChild(div);
+        });
       }
+    }
 
-      let html = '<div class="explorer-grid">';
-      reports.forEach(r => {
-        html += `
-          <div class="kb-card">
-            <h4>📄 ${r.filename}</h4>
-            <p><strong>Size:</strong> ${(r.size_bytes / 1024).toFixed(1)} KB</p>
-            <p><a href="/api/research-cache/${r.filename}" target="_blank" style="color:var(--primary-accent)">View Markdown Document ↗</a></p>
-          </div>
-        `;
-      });
-      html += '</div>';
-      explorerContent.innerHTML = html;
-    } catch (e) {
-      explorerContent.innerHTML = '<p class="helper-text">Failed to load research cache.</p>';
+    // 4. Web Research Interceptor Logs
+    const webItems = data.web_research || [];
+    if (countWeb) countWeb.textContent = webItems.length;
+    if (webResearchContainer) {
+      webResearchContainer.innerHTML = "";
+      if (webItems.length === 0) {
+        webResearchContainer.innerHTML = `<p class="helper-text">No external web search token was needed for this standard presentation.</p>`;
+      } else {
+        webItems.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "research-card";
+          div.innerHTML = `
+            <div class="research-header">
+              <span class="chunk-title">🌐 External Search: ${item.url}</span>
+              <span class="rank-pct-pill ${item.success ? 'high' : 'medium'}">${item.success ? 'Retrieved' : 'Cached'}</span>
+            </div>
+            <div class="code-box">${item.markdown ? item.markdown.substring(0, 400) + '...' : 'No content'}</div>
+          `;
+          webResearchContainer.appendChild(div);
+        });
+      }
+    }
+
+    // 5. Evolving Case Memory
+    if (evolvingDetails) {
+      evolvingDetails.textContent = JSON.stringify({
+        saved_case_id: data.saved_case_id,
+        mode: data.mode_used,
+        provider: data.provider_used,
+        timestamp: new Date().toISOString()
+      }, null, 2);
     }
   }
 });
