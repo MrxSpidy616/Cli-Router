@@ -1,144 +1,106 @@
-# 🩺 Health Assistant — AI Clinical Decision Support (CDS) System (India 108 Ambulance Focused)
+# Cli-Router
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-3.0%2B-green.svg)](https://flask.palletsprojects.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-A humane, senior-friendly **AI Clinical Decision Support (CDS)** and differential diagnosis system built with **Python + Flask**, designed with **radical minimalism** following the [Claude Design Principles](design.md) and focused on **India's Emergency & Healthcare Infrastructure (108 Ambulance, 112 Emergency, AIIMS/PHC/Jan Aushadhi locator)**.
+A collection of CLI tools, scrapers, Telegram bots, and cloud utilities for media automation and file management.
 
 ---
 
-## 🚨 India Emergency Response Integration
+## Projects
 
-* **🚑 108 Ambulance Service:** Free national emergency medical response across Indian states (toll-free: `tel:108`).
-* **👶 102 Maternity & Infant Ambulance:** Specialized emergency transport for pregnant women and newborns (`tel:102`).
-* **🚨 112 Unified Emergency Helpline:** Single unified number for all emergencies (Police, Fire, Medical) across India (`tel:112`).
-* **📞 104 Health Helpline:** 24x7 medical advice, blood bank status, and healthcare tele-consultation (`tel:104`).
+### beeg-scarper
 
----
+Flask web app + CLI tool for browsing and streaming beeg.com content. Provides search, homepage browsing, stream URL extraction (H264/H265/AV1), thumbnails, and video previews.
 
-## 📸 Minimalist UI Showcase & Test Cases
-
-### 1. 🌿 Minimalist Home & Input State
-*Spacious, serene layout with quick symptom pills, intuitive discomfort slider, and accessible text sizing.*
-
-![Minimalist Home State](docs/screenshots/ui_minimal_home.jpg)
-
----
-
-### 2. 🟢 Positive Test Case (Mild / Low-Risk Result)
-*Clear, reassuring explanation for common manageable ailments with practical home care checklists.*
-
-![Positive Low-Risk UI Result](docs/screenshots/ui_positive_low_risk.jpg)
-
----
-
-### 3. 🟡 Neutral Test Case (Moderate-Risk / Doctor Follow-Up)
-*Triple differential likelihood progress cards with clear diagnostic guidance and 48-hour consultation advice.*
-
-![Neutral Moderate-Risk UI Result](docs/screenshots/ui_neutral_moderate_risk.jpg)
-
----
-
-### 4. 🔴 Negative / Critical Test Case (Emergency Red Flag Alert)
-*High-contrast urgent alert banner with 1-click **"📞 Call 108 Ambulance"** action and emergency safety instructions.*
-
-![Negative Emergency Red Flag UI Result](docs/screenshots/ui_negative_emergency_alert.jpg)
-
----
-
-## 🌟 Key Capabilities & Features
-
-1. **Radical Minimalism & Human-Centric Design:**
-   - Designed strictly following [Claude Design System Principles](design.md) — zero developer clutter, zero technical badges, and no raw API forms exposed to patients.
-   - Senior-accessible high-contrast dark theme, large 17px/21px typography, and 1-click quick symptom presets.
-
-2. **📋 Personal Recovery Action Plan & Interactive To-Do List:**
-   - Automatically generates smart, condition-tailored recovery steps (e.g. ORS hydration, temperature tracking frequency, red-flag monitoring).
-   - Check off care steps as you complete them with persistent saving in local storage.
-   - Add your own custom personal reminders (e.g., *"Pick up medicine from Jan Aushadhi Kendra"*).
-
-3. **📍 Search Nearby Doctors, Hospitals & Clinics (India):**
-   - **Local Care Search:** 1-click query for nearby Government Civil Hospitals, AIIMS, PHCs, Private Clinics, or 24/7 Jan Aushadhi Pharmacies based on your Indian city or Pincode.
-   - **Phone Consultation Enquiry Script:** Pre-populated questions tailored to your exact reported symptoms to guide you when calling local medical offices.
-
-4. **Dual-Tier Output Architecture:**
-   - 👤 **Patient Summary:** Urgency badge (🟢 Mild, 🟡 Moderate, 🔴 Emergency), everyday condition names, 6th-grade reading level explanation, and home care steps.
-   - 🩺 **Clinical Notes:** Clean, discreet accordion with structured medical references and ICD-10 diagnostic coding.
-
-5. **Invisible Background Intelligence:**
-   - **RAG Mode:** Okapi BM25 semantic retrieval with medical synonym expansion over WHO, NIH, CDC, GLOBOCAN, and the NHS Inform Scotland directory (433 conditions).
-   - **Real-Time Web Research:** Deep clinical literature verification executes silently under the hood.
-
-6. **Self-Evolving Knowledge Loop:**
-   - Automatically archives evaluated cases into persistent memory (`data/evolving_knowledge.json`) to continually refine future differential calibration.
-
----
-
-## 📁 Repository Structure
-
-```
-.
-├── symptom-rag-analyzer/          # Master Clinical Decision Support Application
-│   ├── app.py                     # Flask Web Server & REST API
-│   ├── rag_engine.py              # BM25 Semantic Indexer & Synonym Expansion Engine
-│   ├── web_researcher.py          # Real-Time Clinical Literature Research Engine
-│   ├── llm_client.py              # Multi-Provider Gateway (CliProxy, Gemini, OpenAI, OpenRouter)
-│   ├── prompt.md                  # Master Clinical Knowledge Base & CDS Directives (108 India Focus)
-│   ├── requirements.txt           # Python Dependencies
-│   ├── data/
-│   │   ├── knowledge_base.json    # 46 Structured Clinical Profiles + Zenodo 13338116 Dataset
-│   │   ├── evolving_knowledge.json# Self-Evolving Case Memory Archive
-│   │   └── research_cache/        # Cached Markdown Web Research Reports
-│   ├── templates/index.html       # Minimalist Single-Page Application UI (India 108 Speed Dial)
-│   └── static/                    # Serene CSS Styles & Client Controller
-├── docs/screenshots/              # High-Resolution Minimalist UI Mockups & Test Cases
-├── design.md                      # Claude Minimalist Design System Architecture Guide
-├── index.js                       # Cloudflare Worker Backblaze B2 File Manager Router
-├── wrangler.toml                  # Cloudflare Worker Deployment Configuration
-└── README.md                      # Project Documentation
-```
-
----
-
-## 🚀 Quick Start
-
-### 1. Installation
+**Run:**
 ```bash
-cd symptom-rag-analyzer
+cd beeg-scarper/beeg-scarper
+pip install flask requests
+python app.py          # Web UI on port 5000
+python beeg.py         # CLI mode
+```
+
+**API:** `/api/home?offset=0`, `/api/search?q=query&offset=0`, `/proxy?url=...`
+
+---
+
+### eporner-scraper
+
+Telethon-based async downloader + uploader. Reads batch URLs, downloads via yt-dlp with aria2c, uploads to a Telegram channel, and tracks completed downloads in an archive file.
+
+**Run:**
+```bash
+cd eporner-scraper/eporner-scraper
+pip install telethon rich yt-dlp
+# Add links to adbatch.txt, then:
+python advanced.py
+```
+
+**Features:** Disk space checks, progress bars, auto-cleanup after upload, dedup via archive.
+
+---
+
+### Mega-Clonr
+
+Telegram bot that clones `mega.nz` links — sends previews, direct file URLs, and builds ZIP/CBZ/PDF archives. Includes a lightweight Cloudflare Worker variant.
+
+**Run (Python bot):**
+```bash
+cd Mega-Clonr
 pip install -r requirements.txt
+cp .env.example .env   # fill BOT_TOKEN, API_ID, API_HASH
+python bot.py
 ```
 
-### 2. Configure Environment Variables (Optional)
+**Run (CF Worker):** see `cf-worker` branch.
+
+**Commands:** `/start`, `/settings`, `/cancel`, `/multi`
+
+---
+
+### DriveBucket (B2 File Manager)
+
+Cloudflare Worker that provides a web-based file manager for a Backblaze B2 bucket. Browse, search, rename, move, delete, view, and download files through a dark-mode UI.
+
+**Deploy:**
 ```bash
-# Optional LLM Provider Overrides
-export CLIPROXY_API_KEY="aravind616"
-export GEMINI_API_KEY="your-gemini-key"
-export OPENAI_API_KEY="your-openai-key"
+npm install -g wrangler
+wrangler secret put B2_APPLICATION_KEY_ID
+wrangler secret put B2_APPLICATION_KEY
+# Edit wrangler.toml with your bucket ID/name
+wrangler deploy
 ```
 
-### 3. Start Application Server
+**API:** `GET /`, `GET /file/:name`, `POST /api/rename`, `POST /api/move`, `DELETE /api/delete`
+
+---
+
+### collector.py
+
+Telegram bot that collects download links from forwarded messages. Normalizes Unicode text, extracts download URLs from message entities, and stores them locally.
+
+**Run:**
 ```bash
-python app.py
+pip install requests
+python collector.py
 ```
-Open **`http://localhost:5000`** in your browser.
+
+**Commands (in Telegram):** `/send` (dump links), `/count`, `/clear`
 
 ---
 
-## 🔌 API Reference
+## Repository Structure
 
-### `POST /api/analyze`
-Executes symptom differential analysis with RAG retrieval and dual-layer output.
+```
+├── beeg-scarper/beeg-scarper/   # Video scraper (Flask + CLI)
+├── eporner-scraper/eporner-scraper/ # YT-DLP downloader + TG uploader
+├── Mega-Clonr/                  # MEGA.nz Telegram cloner bot
+├── Pichoose/                    # (placeholder)
+├── index.js                     # CF Worker B2 file manager
+├── collector.py                 # Telegram link collector bot
+├── wrangler.toml                # CF Worker config
+├── .env                         # Environment variables
+└── collected_data.json          # Collected link data
+```
 
-### `GET /api/health` & `GET /api/stats`
-Returns system health, document counts, and engine status.
+## License
 
----
-
-## ⚖️ Regulatory Compliance Notice
-This system operates strictly under **FDA Clinical Decision Support (CDS) Guidance** and **WHO AI Health Ethics Principles**. It is intended as an informational clinical support tool and does not issue binding medical diagnoses or replace an in-person evaluation by a licensed physician.
-
----
-
-## 📄 License
-MIT License.
+MIT
